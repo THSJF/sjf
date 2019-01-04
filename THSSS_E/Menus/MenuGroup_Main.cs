@@ -8,16 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace Shooting
-{
-  internal class MenuGroup_Main : BaseMenuGroup
-  {
-    public MenuGroup_Main(StageDataPackage StageData)
-      : base(StageData)
-    {
-      this.MenuSelectIndex = 0;
-      this.MenuItemList = new List<BaseMenuItem>()
-      {
+namespace Shooting {
+    internal class MenuGroup_Main:BaseMenuGroup {
+        public MenuGroup_Main(StageDataPackage StageData) : base(StageData) {
+            MenuSelectIndex=0;
+            MenuItemList=new List<BaseMenuItem>()
+           {
         new BaseMenuItem(StageData, "Menu_Start"),
         new BaseMenuItem(StageData, "Menu_Practice"),
         new BaseMenuItem(StageData, "Menu_Replay"),
@@ -27,99 +23,90 @@ namespace Shooting
         new BaseMenuItem(StageData, "Menu_Manual"),
         new BaseMenuItem(StageData, "Menu_Exit")
       };
-      if (StageData.PData.C_History.FindAll((Predicate<ClearHistory>) (a => a.NoContinueClearTimes > 0)).Count > 0)
-        this.MenuItemList.Insert(1, new BaseMenuItem(StageData, "Menu_ExtraStart"));
-      else
-        this.MenuItemList.Insert(1, new BaseMenuItem(StageData, "DMenu_ExtraStart"));
-      int num1 = 50;
-      int num2 = 190;
-      int num3 = -200;
-      foreach (BaseMenuItem menuItem in this.MenuItemList)
-      {
-        menuItem.Position = new PointF((float) (num1 + num3), 140f);
-        menuItem.DestPoint = new PointF((float) num1, (float) num2);
-        num2 += 24;
-        num1 = num1;
-        num3 -= 50;
-        menuItem.AngleDegree = 0.0;
-      }
-      this.MenuItemList[this.MenuSelectIndex].Selected = true;
-    }
+            if(StageData.PData.C_History.FindAll((a => a.NoContinueClearTimes>0)).Count>0) {
+                MenuItemList.Insert(1,new BaseMenuItem(StageData,"Menu_ExtraStart"));
+            } else {
+                MenuItemList.Insert(1,new BaseMenuItem(StageData,"DMenu_ExtraStart"));
+            } 
+            int num1 = 50;
+            int num2 = 190;
+            int num3 = -200;
+            foreach(BaseMenuItem menuItem in MenuItemList) {
+                menuItem.Position=new PointF(num1+num3,140f);
+                menuItem.DestPoint=new PointF(num1,num2);
+                num2+=24;
+                num1=num1;
+                num3-=50;
+                menuItem.AngleDegree=0.0;
+            }
+            MenuItemList[MenuSelectIndex].Selected=true;
+        }
 
-    public override void ProcessKeys()
-    {
-      base.ProcessKeys();
-      if (this.KClass.Key_Z && this.LastZ == 0)
-      {
-        this.MenuItemList[this.MenuSelectIndex].Click();
-        this.OnChangeMenu = this.TimeMain + 20;
-        this.StageData.SoundPlay("se_ok00.wav");
-      }
-      if (!this.KClass.Key_X && !this.KClass.Key_ESC || this.LastX != 0)
-        return;
-      this.MenuSelectIndex = this.MenuItemList.Count - 1;
-      this.SelectItemChanged();
-      this.StageData.SoundPlay("se_cancel00.wav");
-    }
+        public override void ProcessKeys() {
+            base.ProcessKeys();
+            if(KClass.Key_Z&&LastZ==0) {
+                MenuItemList[MenuSelectIndex].Click();
+                OnChangeMenu=TimeMain+20;
+                StageData.SoundPlay("se_ok00.wav");
+            }
+            if(!KClass.Key_X&&!KClass.Key_ESC||LastX!=0)
+                return;
+            MenuSelectIndex=MenuItemList.Count-1;
+            SelectItemChanged();
+            StageData.SoundPlay("se_cancel00.wav");
+        }
 
-    public override void ProcessZ()
-    {
-      switch (this.MenuItemList[this.MenuSelectIndex].Name)
-      {
-        case "Menu_Start":
-          this.StageData.StateSwitchData = new StateSwitchDataPackage()
-          {
-            SDPswitch = new StageDataPackage(this.StageData.GlobalData),
-            NeedInit = true
-          };
-          this.StageData.MenuGroupList.Add((BaseMenuGroup) new MenuGroup_RankSelect(this.StageData, false));
-          break;
-        case "Menu_ExtraStart":
-          this.StageData.StateSwitchData = new StateSwitchDataPackage()
-          {
-            SDPswitch = new StageDataPackage(this.StageData.GlobalData),
-            NeedInit = true
-          };
-          this.StageData.MenuGroupList.Add((BaseMenuGroup) new MenuGroup_RankSelectEx(this.StageData));
-          break;
-        case "Menu_Replay":
-          this.StageData.MenuGroupList.Add((BaseMenuGroup) new MenuGroup_ReplayLoader(this.StageData, new PointF(36f, 16f)));
-          break;
-        case "Menu_Practice":
-          this.StageData.StateSwitchData = new StateSwitchDataPackage()
-          {
-            SDPswitch = new StageDataPackage(this.StageData.GlobalData),
-            NeedInit = true
-          };
-          this.StageData.MenuGroupList.Add((BaseMenuGroup) new MenuGroup_RankSelect(this.StageData, true));
-          break;
-        case "Menu_SpellPractice":
-          this.StageData.StateSwitchData = new StateSwitchDataPackage()
-          {
-            SDPswitch = new StageDataPackage(this.StageData.GlobalData),
-            NeedInit = true
-          };
-          this.StageData.MenuGroupList.Add((BaseMenuGroup) new MenuGroup_SCPractice(this.StageData));
-          break;
-        case "Menu_MusicRoom":
-          this.StageData.MenuGroupList.Add((BaseMenuGroup) new MenuGroup_MusicRoom(this.StageData));
-          break;
-        case "Menu_PlayerData":
-          this.StageData.MenuGroupList.Add((BaseMenuGroup) new MenuGroup_PlayerData(this.StageData));
-          break;
-        case "Menu_Manual":
-          this.StageData.MenuGroupList.Add((BaseMenuGroup) new MenuGroup_Manual(this.StageData));
-          break;
-        case "Menu_Option":
-          this.StageData.MenuGroupList.Add((BaseMenuGroup) new MenuOption(this.StageData));
-          break;
-        case "Menu_Exit":
-          this.StageData.StateSwitchData = new StateSwitchDataPackage()
-          {
-            NextState = "GameExit"
-          };
-          break;
-      }
+        public override void ProcessZ() {
+            switch(MenuItemList[MenuSelectIndex].Name) {
+                case "Menu_Start":
+                    StageData.StateSwitchData=new StateSwitchDataPackage() {
+                        SDPswitch=new StageDataPackage(StageData.GlobalData),
+                        NeedInit=true
+                    };
+                    StageData.MenuGroupList.Add(new MenuGroup_RankSelect(StageData,false));
+                    break;
+                case "Menu_ExtraStart":
+                    StageData.StateSwitchData=new StateSwitchDataPackage() {
+                        SDPswitch=new StageDataPackage(StageData.GlobalData),
+                        NeedInit=true
+                    };
+                    StageData.MenuGroupList.Add(new MenuGroup_RankSelectEx(StageData));
+                    break;
+                case "Menu_Replay":
+                    StageData.MenuGroupList.Add(new MenuGroup_ReplayLoader(StageData,new PointF(36f,16f)));
+                    break;
+                case "Menu_Practice":
+                    StageData.StateSwitchData=new StateSwitchDataPackage() {
+                        SDPswitch=new StageDataPackage(StageData.GlobalData),
+                        NeedInit=true
+                    };
+                    StageData.MenuGroupList.Add(new MenuGroup_RankSelect(StageData,true));
+                    break;
+                case "Menu_SpellPractice":
+                    StageData.StateSwitchData=new StateSwitchDataPackage() {
+                        SDPswitch=new StageDataPackage(StageData.GlobalData),
+                        NeedInit=true
+                    };
+                    StageData.MenuGroupList.Add(new MenuGroup_SCPractice(StageData));
+                    break;
+                case "Menu_MusicRoom":
+                    StageData.MenuGroupList.Add(new MenuGroup_MusicRoom(StageData));
+                    break;
+                case "Menu_PlayerData":
+                    StageData.MenuGroupList.Add(new MenuGroup_PlayerData(StageData));
+                    break;
+                case "Menu_Manual":
+                    StageData.MenuGroupList.Add(new MenuGroup_Manual(StageData));
+                    break;
+                case "Menu_Option":
+                    StageData.MenuGroupList.Add(new MenuOption(StageData));
+                    break;
+                case "Menu_Exit":
+                    StageData.StateSwitchData=new StateSwitchDataPackage() {
+                        NextState="GameExit"
+                    };
+                    break;
+            }
+        }
     }
-  }
 }
