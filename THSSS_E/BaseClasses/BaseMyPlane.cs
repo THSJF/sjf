@@ -674,10 +674,10 @@ namespace Shooting {
 
         public override void Shoot() {
             if(Time%3==0) {
-                StageData.SoundPlay("se_plst00.wav",OriginalPosition.X/(float)BoundRect.Width);
+                StageData.SoundPlay("se_plst00.wav",OriginalPosition.X/BoundRect.Width);
                 float x = Position.X;
                 float y = Position.Y;
-                float num = 7f*(float)Math.Cos((double)Angle3D*Math.PI/180.0);
+                float num = 7f*(float)Math.Cos(Angle3D*Math.PI/180.0);
                 BaseMyBullet baseMyBullet1 = new BaseMyBullet(StageData,"自机子弹",new PointF(x-num,y),30f,-1.0*Math.PI/2.0);
                 BaseMyBullet baseMyBullet2 = new BaseMyBullet(StageData,"自机子弹",new PointF(x+num,y),30f,-1.0*Math.PI/2.0);
             }
@@ -703,7 +703,7 @@ namespace Shooting {
                 EnemyPlaneList.ForEach(x => {
                     if(!(x is BaseSpellCard)) {
                         return;
-                    } 
+                    }
                     ((BaseSpellCard)x).Missed=true;
                 });
             } else {
@@ -779,9 +779,8 @@ namespace Shooting {
                     new BulletRemover_Small(StageData,OriginalPosition).Region=500;
                     ChangeEnchantment(EnchantmentType.None);
                     EnemyPlaneList.ForEach(x => {
-                        if(!(x is BaseSpellCard)) {
-                            return;
-                        } ((BaseSpellCard)x).Bombed=true;
+                        if(!(x is BaseSpellCard)) return;
+                        ((BaseSpellCard)x).Bombed=true;
                     });
                 } else if(Spell>0&&SpellList.Count==0&&Time>30&&SpellEnabled) {
                     SpellShoot();

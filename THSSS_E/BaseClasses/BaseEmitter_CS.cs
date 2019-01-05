@@ -8,426 +8,339 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace Shooting
-{
-  [Serializable]
-  public class BaseEmitter_CS : BaseEnemyPlane
-  {
-    public bool BindingState { get; set; }
+namespace Shooting {
+    [Serializable]
+    public class BaseEmitter_CS:BaseEnemyPlane {
+        public bool BindingState { get; set; }
+        public int BindingID { get; set; }
+        public bool BindWithDirection { get; set; }
+        public int StartTime { get; set; }
+        public int Duration { get; set; }
+        public PointF EmitPoint { get; set; }
+        public float EmitRadius { get; set; }
+        public double RadiusDirection { get; set; }
+        public PointF RadiusDirectionPoint { get; set; }
+        public int Way { get; set; }
+        public int Circle { get; set; }
+        public double EmitDirection { get; set; }
+        public PointF EmitDirectionPoint { get; set; }
+        public double Range { get; set; }
+        public bool RDirectionWithDirection { get; set; }
+        public float RanX { get; set; }
+        public float RanY { get; set; }
+        public float RanRadius { get; set; }
+        public double RanRadiusDirection { get; set; }
+        public int RanWay { get; set; }
+        public int RanCircle { get; set; }
+        public double RanEmitDirection { get; set; }
+        public double RanRange { get; set; }
+        public bool DeepBinding { get; set; }
+        public bool RangeShoot { get; set; }
+        public bool MotionBinding { get; set; }
+        public string SoundName { get; set; }
+        public bool SpecifySE { get; set; }
+        public int EffectType { get; set; }
+        public int Count { get; set; }
+        public float DeltaV { get; set; }
+        public CS_Data CSData { get; set; }
+        private BaseBullet_CS CSBullet { get; set; }
+        private BaseStraightLaser_CS CSLaserS { get; set; }
+        private BaseRadialLaser_CS CSLaserR { get; set; }
+        private BaseBendLaser_CS CSLaserB { get; set; }
+        private BaseEnemyPlane_Touhou CSEnemy { get; set; }
+        private BaseEffect_CS CSEffect { get; set; }
+        public EmitterMode EmitterMode { get; set; }
 
-    public int BindingID { get; set; }
-
-    public bool BindWithDirection { get; set; }
-
-    public int StartTime { get; set; }
-
-    public int Duration { get; set; }
-
-    public PointF EmitPoint { get; set; }
-
-    public float EmitRadius { get; set; }
-
-    public double RadiusDirection { get; set; }
-
-    public PointF RadiusDirectionPoint { get; set; }
-
-    public int Way { get; set; }
-
-    public int Circle { get; set; }
-
-    public double EmitDirection { get; set; }
-
-    public PointF EmitDirectionPoint { get; set; }
-
-    public double Range { get; set; }
-
-    public bool RDirectionWithDirection { get; set; }
-
-    public float RanX { get; set; }
-
-    public float RanY { get; set; }
-
-    public float RanRadius { get; set; }
-
-    public double RanRadiusDirection { get; set; }
-
-    public int RanWay { get; set; }
-
-    public int RanCircle { get; set; }
-
-    public double RanEmitDirection { get; set; }
-
-    public double RanRange { get; set; }
-
-    public bool DeepBinding { get; set; }
-
-    public bool RangeShoot { get; set; }
-
-    public bool MotionBinding { get; set; }
-
-    public string SoundName { get; set; }
-
-    public bool SpecifySE { get; set; }
-
-    public int EffectType { get; set; }
-
-    public int Count { get; set; }
-
-    public float DeltaV { get; set; }
-
-    public CS_Data CSData { get; set; }
-
-    private BaseBullet_CS CSBullet { get; set; }
-
-    private BaseStraightLaser_CS CSLaserS { get; set; }
-
-    private BaseRadialLaser_CS CSLaserR { get; set; }
-
-    private BaseBendLaser_CS CSLaserB { get; set; }
-
-    private BaseEnemyPlane_Touhou CSEnemy { get; set; }
-
-    private BaseEffect_CS CSEffect { get; set; }
-
-    public EmitterMode EmitterMode { get; set; }
-
-    public BaseObject_CS SubBullet
-    {
-      get
-      {
-        if (this.EmitterMode == EmitterMode.Enemy)
-          return (BaseObject_CS) this.CSEnemy;
-        if (this.EmitterMode == EmitterMode.Effect)
-          return (BaseObject_CS) this.CSEffect;
-        if (this.EmitterMode == EmitterMode.StraightLaser)
-          return (BaseObject_CS) this.CSLaserS;
-        if (this.EmitterMode == EmitterMode.RadialLaser)
-          return (BaseObject_CS) this.CSLaserR;
-        if (this.EmitterMode == EmitterMode.BendLaser)
-          return (BaseObject_CS) this.CSLaserB;
-        return (BaseObject_CS) this.CSBullet;
-      }
-      set
-      {
-        if (this.EmitterMode == EmitterMode.Enemy)
-          this.CSEnemy = (BaseEnemyPlane_Touhou) value;
-        else if (this.EmitterMode == EmitterMode.Effect)
-          this.CSEffect = (BaseEffect_CS) value;
-        else if (this.EmitterMode == EmitterMode.StraightLaser)
-          this.CSLaserS = (BaseStraightLaser_CS) value;
-        else if (this.EmitterMode == EmitterMode.RadialLaser)
-          this.CSLaserR = (BaseRadialLaser_CS) value;
-        else if (this.EmitterMode == EmitterMode.BendLaser)
-          this.CSLaserB = (BaseBendLaser_CS) value;
-        else
-          this.CSBullet = (BaseBullet_CS) value;
-      }
-    }
-
-    public BaseEmitter_CS()
-    {
-    }
-
-    public BaseEmitter_CS(StageDataPackage StageData, CS_Data CSData, EmitterMode EmitterMode)
-    {
-      this.StageData = StageData;
-      this.CSData = CSData;
-      this.EventGroupList = new List<EventGroup>();
-      this.EventsExecutionList = new List<Execution>();
-      this.HealthPoint = 1000000f;
-      this.HitEnabled = false;
-      this.Region = 0;
-      this.Count = 1;
-      this.EmitterMode = EmitterMode;
-      switch (EmitterMode)
-      {
-        case EmitterMode.Bullet:
-          this.CSBullet = new BaseBullet_CS(StageData);
-          break;
-        case EmitterMode.StraightLaser:
-          this.CSLaserS = new BaseStraightLaser_CS(StageData);
-          break;
-        case EmitterMode.RadialLaser:
-          this.CSLaserR = new BaseRadialLaser_CS(StageData);
-          break;
-        case EmitterMode.BendLaser:
-          this.CSLaserB = new BaseBendLaser_CS(StageData);
-          break;
-        case EmitterMode.Effect:
-          this.CSEffect = new BaseEffect_CS(StageData);
-          break;
-      }
-    }
-
-    public override void Ctrl()
-    {
-      if (this.Time == this.StartTime)
-      {
-        this.Velocity += this.RanVelocity * (float) this.Ran.NextPMDouble();
-        this.DirectionDegree += this.RanDirection * this.Ran.NextPMDouble();
-        this.AccelerateCS += this.RanAccelerate * (float) this.Ran.NextPMDouble();
-        this.AccDirection += this.RanAccDirection * this.Ran.NextPMDouble();
-      }
-      if (this.LifeTime > this.StartTime + this.Duration)
-        this.LifeTime = this.StartTime + this.Duration;
-      if (this.Range != 360.0)
-        this.RangeShoot = true;
-      if (this.BindingObj != null && this.BindingObj is BaseEnemyPlane_Touhou && (double) this.BindingObj.HealthPoint <= 0.0)
-        this.EnemyPlaneList.Remove((BaseEnemyPlane) this);
-      base.Ctrl();
-    }
-
-    public override void EventCtrl()
-    {
-      this.EventGroupList.ForEach((Action<EventGroup>) (a => a.Update(this)));
-      this.EventsExecutionList.ForEach((Action<Execution>) (a => a.Update(this)));
-    }
-
-    public override void Shoot()
-    {
-      if (this.Time < this.StartTime || this.Time > this.StartTime + this.Duration)
-        return;
-      int num1 = this.Circle + (int) ((double) this.RanCircle * this.Ran.NextPMDouble());
-      int num2 = num1 < 1 ? 1 : num1;
-      if (!this.DeepBinding && (this.Time - this.StartTime + 1) % num2 == 0)
-      {
-        this.ShootBullet();
-      }
-      else
-      {
-        if (!this.DeepBinding || this.Time % num2 != 0)
-          return;
-        this.ShootBullet();
-      }
-    }
-
-    public void ShootBullet()
-    {
-      float x = this.EmitPoint.X;
-      float y = this.EmitPoint.Y;
-      PointF originalPosition;
-      float num1;
-      if ((double) x == -99999.0)
-      {
-        originalPosition = this.MyPlane.OriginalPosition;
-        num1 = originalPosition.X;
-      }
-      else if ((double) x == -99998.0)
-      {
-        originalPosition = this.OriginalPosition;
-        num1 = originalPosition.X;
-      }
-      else
-        num1 = (float) ((double) x - 320.0 + 192.0);
-      float num2;
-      if ((double) y == -99999.0)
-      {
-        originalPosition = this.MyPlane.OriginalPosition;
-        num2 = originalPosition.Y;
-      }
-      else if ((double) y == -99998.0)
-      {
-        originalPosition = this.OriginalPosition;
-        num2 = originalPosition.Y;
-      }
-      else
-        num2 = (float) ((double) y - 240.0 + 224.0);
-      if (this.EmitterMode == EmitterMode.StraightLaser || this.EmitterMode == EmitterMode.RadialLaser || this.EmitterMode == EmitterMode.BendLaser)
-      {
-        originalPosition = this.OriginalPosition;
-        num1 = originalPosition.X;
-        originalPosition = this.OriginalPosition;
-        num2 = originalPosition.Y;
-      }
-      PointF OriginalPosition = new PointF(num1 + this.RanX * (float) this.Ran.NextPMDouble(), num2 + this.RanY * (float) this.Ran.NextPMDouble());
-      double edi = this.EmitDirection != -99999.0 ? (this.EmitDirection + this.RanEmitDirection * this.Ran.NextPMDouble() + this.SubBullet.RanDirection * this.Ran.NextPMDouble()) * Math.PI / 180.0 : this.GetDirection((BaseObject) this.MyPlane) + (this.RanEmitDirection * this.Ran.NextPMDouble() + this.SubBullet.RanDirection * this.Ran.NextPMDouble()) * Math.PI / 180.0;
-      double num3 = this.RadiusDirection != -99999.0 ? (this.RadiusDirection + this.RanRadiusDirection * this.Ran.NextPMDouble()) * Math.PI / 180.0 : this.GetDirection((BaseObject) this.MyPlane) + this.RanRadiusDirection * this.Ran.NextPMDouble() * Math.PI / 180.0;
-      float num4 = this.EmitRadius + this.RanRadius * (float) this.Ran.NextPMDouble();
-      int num5 = this.Way + (int) ((double) this.RanWay * this.Ran.NextPMDouble());
-      float num6 = this.SubBullet.Velocity + this.SubBullet.RanVelocity * (float) this.Ran.NextPMDouble();
-      float num7 = this.SubBullet.AccelerateCS + this.SubBullet.RanAccelerate * (float) this.Ran.NextPMDouble();
-      double num8 = this.SubBullet.AccDirection + this.SubBullet.RanAccDirection;
-      double num9 = this.Range + this.RanRange * this.Ran.NextPMDouble();
-      if (this.RDirectionWithDirection)
-        num3 += edi;
-      double num10 = num9 * Math.PI / 180.0 / (double) num5;
-      edi -= (double) (num5 - 1) * num10 / 2.0;
-      double num11 = num3 - (double) (num5 - 1) * num10 / 2.0;
-      if (this.EffectType == 2)
-      {
-        EmitterSaveEnegy3D emitterSaveEnegy3D = new EmitterSaveEnegy3D(this.StageData, OriginalPosition, this.CSEffect.ColorValue);
-        this.StageData.SoundPlay("se_ch02.wav");
-      }
-      else if (this.EffectType == 3)
-      {
-        EmitterGiveOutEnegy3D emitterGiveOutEnegy3D = new EmitterGiveOutEnegy3D(this.StageData, OriginalPosition, this.CSEffect.ColorValue);
-        this.StageData.SoundPlay("se_cat00.wav");
-        this.StageData.SoundPlay("se_enep02.wav");
-      }
-      else
-      {
-        for (int index1 = 0; index1 < num5; ++index1)
-        {
-          PointF p = new PointF(OriginalPosition.X + num4 * (float) Math.Cos(num11), OriginalPosition.Y + num4 * (float) Math.Sin(num11));
-          for (int index2 = 0; index2 < this.Count; ++index2)
-          {
-            if (this.EmitterMode == EmitterMode.Bullet || this.EmitterMode == EmitterMode.StraightLaser || this.EmitterMode == EmitterMode.RadialLaser || this.EmitterMode == EmitterMode.BendLaser)
-            {
-              BaseBullet_Touhou b = new BaseBullet_Touhou(this.StageData);
-              if (this.CSBullet != null)
-              {
-                b = (BaseBullet_Touhou) this.CSBullet.Clone();
-                b.OriginalPosition = p;
-                b.GhostingCount = b.GhostingCount;
-                b.AngleDegree += this.CSBullet.RanAngle * this.Ran.NextPMDouble();
-              }
-              else if (this.CSLaserS != null)
-              {
-                b = (BaseBullet_Touhou) this.CSLaserS.Clone();
-                b.OriginalPosition = p;
-                b.Angle = -1.0 * Math.PI / 2.0;
-                b.Active = true;
-              }
-              else if (this.CSLaserR != null)
-              {
-                b = (BaseBullet_Touhou) this.CSLaserR.Clone();
-                b.OriginalPosition = p;
-                b.Angle = Math.PI / 2.0;
-                b.UnRemoveable = true;
-                b.Active = true;
-              }
-              else if (this.CSLaserB != null)
-              {
-                b = (BaseBullet_Touhou) this.CSLaserB.Clone();
-                b.OriginalPosition = p;
-                b.UnRemoveable = true;
-                b.Active = true;
-              }
-              b.GhostingCount = b.GhostingCount;
-              b.Velocity = num6 - (float) index2 * this.DeltaV;
-              b.Direction = edi;
-              b.AccelerateCS = num7;
-              b.AccDirection = num8;
-              b.ID = this.ID;
-              b.LayerID = this.LayerID;
-              if (this.MotionBinding)
-                b.SetBinding((BaseObject) this);
-              this.BulletList.Add(b);
-              if (this.EmitterMode == EmitterMode.Bullet)
-                this.CSData.EmitterList.ForEach((Action<BaseEmitter_CS>) (em =>
-                {
-                  if (em.BindingID != this.ID)
-                    return;
-                  b.UnRemoveable = true;
-                  BaseEmitter_CS baseEmitterCs = (BaseEmitter_CS) em.Clone();
-                  this.StageData.EnemyPlaneList.Add((BaseEnemyPlane) baseEmitterCs);
-                  baseEmitterCs.OriginalPosition = p;
-                  baseEmitterCs.LifeTime = this.SubBullet.LifeTime;
-                  baseEmitterCs.ColorValue = this.SubBullet.ColorValue;
-                  baseEmitterCs.TransparentValueF = this.SubBullet.TransparentValueF;
-                  baseEmitterCs.Direction = edi;
-                  baseEmitterCs.DestPoint = this.SubBullet.DestPoint;
-                  baseEmitterCs.Active = this.SubBullet.Active;
-                  baseEmitterCs.OutBound = this.SubBullet.OutBound;
-                  if (baseEmitterCs.BindWithDirection)
-                    baseEmitterCs.EmitDirection += edi * 180.0 / Math.PI;
-                  baseEmitterCs.SetBinding((BaseObject) b);
-                  if (!baseEmitterCs.DeepBinding)
-                  {
-                    baseEmitterCs.Time = this.Time;
-                    baseEmitterCs.LifeTime = Math.Min(this.SubBullet.LifeTime + this.Time, em.StartTime + em.Duration);
-                  }
-                }));
-            }
-            else if (this.EmitterMode == EmitterMode.Enemy)
-            {
-              BaseEnemyPlane_Touhou enemy = (BaseEnemyPlane_Touhou) this.SubBullet.Clone();
-              enemy.LifeTime = 0;
-              enemy.OriginalPosition = p;
-              enemy.GhostingCount = enemy.GhostingCount;
-              enemy.Velocity = num6 - (float) index2 * this.DeltaV;
-              enemy.Direction = edi;
-              enemy.AccelerateCS = num7;
-              enemy.AccDirection = num8;
-              enemy.ID = this.ID;
-              enemy.LayerID = this.LayerID;
-              if (this.MotionBinding)
-                enemy.SetBinding((BaseObject) this);
-              this.EnemyPlaneList.Add((BaseEnemyPlane) enemy);
-              this.CSData.EmitterList.ForEach((Action<BaseEmitter_CS>) (em =>
-              {
-                if (em.BindingID != this.ID)
-                  return;
-                BaseEmitter_CS baseEmitterCs = (BaseEmitter_CS) em.Clone();
-                this.StageData.EnemyPlaneList.Add((BaseEnemyPlane) baseEmitterCs);
-                baseEmitterCs.OriginalPosition = p;
-                baseEmitterCs.LifeTime = this.SubBullet.LifeTime;
-                baseEmitterCs.ColorValue = this.SubBullet.ColorValue;
-                baseEmitterCs.TransparentValueF = this.SubBullet.TransparentValueF;
-                baseEmitterCs.Direction = edi;
-                baseEmitterCs.DestPoint = this.SubBullet.DestPoint;
-                baseEmitterCs.Active = this.SubBullet.Active;
-                baseEmitterCs.OutBound = this.SubBullet.OutBound;
-                baseEmitterCs.SetBinding((BaseObject) enemy);
-                if (baseEmitterCs.BindWithDirection)
-                  baseEmitterCs.EmitDirection += edi * 180.0 / Math.PI;
-                if (!baseEmitterCs.DeepBinding)
-                {
-                  baseEmitterCs.Time = this.Time;
-                  baseEmitterCs.LifeTime = Math.Min(this.SubBullet.LifeTime + this.Time, em.StartTime + em.Duration);
+        public BaseObject_CS SubBullet {
+            get {
+                if(EmitterMode==EmitterMode.Enemy) {
+                    return CSEnemy;
                 }
-              }));
+                if(EmitterMode==EmitterMode.Effect) {
+                    return CSEffect;
+                }
+                if(EmitterMode==EmitterMode.StraightLaser) {
+                    return CSLaserS;
+                }
+                if(EmitterMode==EmitterMode.RadialLaser) {
+                    return CSLaserR;
+                }
+                if(EmitterMode==EmitterMode.BendLaser) {
+                    return CSLaserB;
+                }
+                return CSBullet;
             }
-            else if (this.EmitterMode == EmitterMode.Effect)
-            {
-              BaseEffect_CS baseEffectCs = (BaseEffect_CS) this.CSEffect.Clone();
-              baseEffectCs.OriginalPosition = p;
-              baseEffectCs.GhostingCount = baseEffectCs.GhostingCount;
-              baseEffectCs.AngleDegree += this.CSEffect.RanAngle * this.Ran.NextPMDouble();
-              baseEffectCs.Velocity = num6 - (float) index2 * this.DeltaV;
-              baseEffectCs.Direction = edi;
-              baseEffectCs.AccelerateCS = num7;
-              baseEffectCs.AccDirection = num8;
-              baseEffectCs.ID = this.ID;
-              baseEffectCs.LayerID = this.LayerID;
-              if (this.MotionBinding)
-                baseEffectCs.SetBinding((BaseObject) this);
-              this.EffectList.Add((BaseEffect) baseEffectCs);
+            set {
+                if(EmitterMode==EmitterMode.Enemy) {
+                    CSEnemy=(BaseEnemyPlane_Touhou)value;
+                } else if(EmitterMode==EmitterMode.Effect) {
+                    CSEffect=(BaseEffect_CS)value;
+                } else if(EmitterMode==EmitterMode.StraightLaser) {
+                    CSLaserS=(BaseStraightLaser_CS)value;
+                } else if(EmitterMode==EmitterMode.RadialLaser) {
+                    CSLaserR=(BaseRadialLaser_CS)value;
+                } else if(EmitterMode==EmitterMode.BendLaser) {
+                    CSLaserB=(BaseBendLaser_CS)value;
+                } else {
+                    CSBullet=(BaseBullet_CS)value;
+                }
             }
-          }
-          num11 += num10;
-          edi += num10;
-          if (this.SpecifySE)
-            this.StageData.SoundPlay(this.SoundName);
-          else if (this.EmitterMode == EmitterMode.Bullet)
-            this.StageData.SoundPlay("se_tan00a.wav", OriginalPosition.X / (float) this.BoundRect.Width);
-          else if (this.EmitterMode == EmitterMode.StraightLaser || this.EmitterMode == EmitterMode.RadialLaser)
-            this.StageData.SoundPlay("se_lazer00.wav", OriginalPosition.X / (float) this.BoundRect.Width);
         }
-      }
-    }
 
-    public override object Clone()
-    {
-      BaseEmitter_CS baseEmitterCs = (BaseEmitter_CS) base.Clone();
-      if (this.CSBullet != null)
-        baseEmitterCs.CSBullet = (BaseBullet_CS) this.CSBullet.Clone();
-      if (this.CSLaserS != null)
-        baseEmitterCs.CSLaserS = (BaseStraightLaser_CS) this.CSLaserS.Clone();
-      if (this.CSLaserR != null)
-        baseEmitterCs.CSLaserR = (BaseRadialLaser_CS) this.CSLaserR.Clone();
-      if (this.CSLaserB != null)
-        baseEmitterCs.CSLaserB = (BaseBendLaser_CS) this.CSLaserB.Clone();
-      if (this.CSEnemy != null)
-        baseEmitterCs.CSEnemy = (BaseEnemyPlane_Touhou) this.CSEnemy.Clone();
-      if (this.CSEffect != null)
-        baseEmitterCs.CSEffect = (BaseEffect_CS) this.CSEffect.Clone();
-      return (object) baseEmitterCs;
-    }
+        public BaseEmitter_CS() {
+        }
 
-    public override bool HitCheck(BaseObject MyPlane)
-    {
-      return false;
+        public BaseEmitter_CS(StageDataPackage StageData,CS_Data CSData,EmitterMode EmitterMode) {
+            this.StageData=StageData;
+            this.CSData=CSData;
+            EventGroupList=new List<EventGroup>();
+            EventsExecutionList=new List<Execution>();
+            HealthPoint=1000000f;
+            HitEnabled=false;
+            Region=0;
+            Count=1;
+            this.EmitterMode=EmitterMode;
+            switch(EmitterMode) {
+                case EmitterMode.Bullet:
+                    CSBullet=new BaseBullet_CS(StageData);
+                    break;
+                case EmitterMode.StraightLaser:
+                    CSLaserS=new BaseStraightLaser_CS(StageData);
+                    break;
+                case EmitterMode.RadialLaser:
+                    CSLaserR=new BaseRadialLaser_CS(StageData);
+                    break;
+                case EmitterMode.BendLaser:
+                    CSLaserB=new BaseBendLaser_CS(StageData);
+                    break;
+                case EmitterMode.Effect:
+                    CSEffect=new BaseEffect_CS(StageData);
+                    break;
+            }
+        }
+
+        public override void Ctrl() {
+            if(Time==StartTime) {
+                Velocity+=RanVelocity*(float)Ran.NextPMDouble();
+                DirectionDegree+=RanDirection*Ran.NextPMDouble();
+                AccelerateCS+=RanAccelerate*(float)Ran.NextPMDouble();
+                AccDirection+=RanAccDirection*Ran.NextPMDouble();
+            }
+            if(LifeTime>StartTime+Duration) {
+                LifeTime=StartTime+Duration;
+            }
+            if(Range!=360.0) {
+                RangeShoot=true;
+            }
+            if(BindingObj!=null&&BindingObj is BaseEnemyPlane_Touhou&&BindingObj.HealthPoint<=0.0) {
+                EnemyPlaneList.Remove(this);
+            }
+            base.Ctrl();
+        }
+
+        public override void EventCtrl() {
+            EventGroupList.ForEach(a => a.Update(this));
+            EventsExecutionList.ForEach(a => a.Update(this));
+        }
+
+        public override void Shoot() {
+            if(Time<StartTime||Time>StartTime+Duration) {
+                return;
+            }
+            int num1 = Circle+(int)(RanCircle*Ran.NextPMDouble());
+            int num2 = num1<1 ? 1 : num1;
+            if(!DeepBinding&&(Time-StartTime+1)%num2==0) {
+                ShootBullet();
+            } else {
+                if(!DeepBinding||Time%num2!=0) {
+                    return;
+                }
+                ShootBullet();
+            }
+        }
+
+        public void ShootBullet() {
+            float x = EmitPoint.X;
+            float y = EmitPoint.Y;
+            PointF originalPosition;
+            float num1;
+            if(x==-99999.0) {
+                originalPosition=MyPlane.OriginalPosition;
+                num1=originalPosition.X;
+            } else if(x==-99998.0) {
+                originalPosition=this.OriginalPosition;
+                num1=originalPosition.X;
+            } else {
+                num1=(float)(x-320.0+192.0);
+            }
+            float num2;
+            if(y==-99999.0) {
+                originalPosition=MyPlane.OriginalPosition;
+                num2=originalPosition.Y;
+            } else if(y==-99998.0) {
+                originalPosition=this.OriginalPosition;
+                num2=originalPosition.Y;
+            } else {
+                num2=(float)(y-240.0+224.0);
+            }
+            if(EmitterMode==EmitterMode.StraightLaser||EmitterMode==EmitterMode.RadialLaser||EmitterMode==EmitterMode.BendLaser) {
+                originalPosition=this.OriginalPosition;
+                num1=originalPosition.X;
+                originalPosition=this.OriginalPosition;
+                num2=originalPosition.Y;
+            }
+            PointF OriginalPosition = new PointF(num1+RanX*(float)Ran.NextPMDouble(),num2+RanY*(float)Ran.NextPMDouble());
+            double edi = EmitDirection!=-99999.0 ? (EmitDirection+RanEmitDirection*Ran.NextPMDouble()+SubBullet.RanDirection*Ran.NextPMDouble())*Math.PI/180.0 : GetDirection(MyPlane)+(RanEmitDirection*Ran.NextPMDouble()+SubBullet.RanDirection*Ran.NextPMDouble())*Math.PI/180.0;
+            double num3 = RadiusDirection!=-99999.0 ? (RadiusDirection+RanRadiusDirection*Ran.NextPMDouble())*Math.PI/180.0 : GetDirection(MyPlane)+RanRadiusDirection*Ran.NextPMDouble()*Math.PI/180.0;
+            float num4 = EmitRadius+RanRadius*(float)Ran.NextPMDouble();
+            int num5 = Way+(int)(RanWay*Ran.NextPMDouble());
+            float num6 = SubBullet.Velocity+SubBullet.RanVelocity*(float)Ran.NextPMDouble();
+            float num7 = SubBullet.AccelerateCS+SubBullet.RanAccelerate*(float)Ran.NextPMDouble();
+            double num8 = SubBullet.AccDirection+SubBullet.RanAccDirection;
+            double num9 = Range+RanRange*Ran.NextPMDouble();
+            if(RDirectionWithDirection) num3+=edi;
+            double num10 = num9*Math.PI/180.0/num5;
+            edi-=(num5-1)*num10/2.0;
+            double num11 = num3-(num5-1)*num10/2.0;
+            if(EffectType==2) {
+                EmitterSaveEnegy3D emitterSaveEnegy3D = new EmitterSaveEnegy3D(StageData,OriginalPosition,CSEffect.ColorValue);
+                StageData.SoundPlay("se_ch02.wav");
+            } else if(EffectType==3) {
+                EmitterGiveOutEnegy3D emitterGiveOutEnegy3D = new EmitterGiveOutEnegy3D(StageData,OriginalPosition,CSEffect.ColorValue);
+                StageData.SoundPlay("se_cat00.wav");
+                StageData.SoundPlay("se_enep02.wav");
+            } else {
+                for(int index1 = 0;index1<num5;++index1) {
+                    PointF p = new PointF(OriginalPosition.X+num4*(float)Math.Cos(num11),OriginalPosition.Y+num4*(float)Math.Sin(num11));
+                    for(int index2 = 0;index2<Count;++index2) {
+                        if(EmitterMode==EmitterMode.Bullet||EmitterMode==EmitterMode.StraightLaser||EmitterMode==EmitterMode.RadialLaser||EmitterMode==EmitterMode.BendLaser) {
+                            BaseBullet_Touhou b = new BaseBullet_Touhou(StageData);
+                            if(CSBullet!=null) {
+                                b=(BaseBullet_Touhou)CSBullet.Clone();
+                                b.OriginalPosition=p;
+                                b.GhostingCount=b.GhostingCount;
+                                b.AngleDegree+=CSBullet.RanAngle*Ran.NextPMDouble();
+                            } else if(CSLaserS!=null) {
+                                b=(BaseBullet_Touhou)CSLaserS.Clone();
+                                b.OriginalPosition=p;
+                                b.Angle=-1.0*Math.PI/2.0;
+                                b.Active=true;
+                            } else if(CSLaserR!=null) {
+                                b=(BaseBullet_Touhou)CSLaserR.Clone();
+                                b.OriginalPosition=p;
+                                b.Angle=Math.PI/2.0;
+                                b.UnRemoveable=true;
+                                b.Active=true;
+                            } else if(CSLaserB!=null) {
+                                b=(BaseBullet_Touhou)CSLaserB.Clone();
+                                b.OriginalPosition=p;
+                                b.UnRemoveable=true;
+                                b.Active=true;
+                            }
+                            b.GhostingCount=b.GhostingCount;
+                            b.Velocity=num6-index2*DeltaV;
+                            b.Direction=edi;
+                            b.AccelerateCS=num7;
+                            b.AccDirection=num8;
+                            b.ID=ID;
+                            b.LayerID=LayerID;
+                            if(MotionBinding) b.SetBinding(this);
+                            BulletList.Add(b);
+                            if(EmitterMode==EmitterMode.Bullet) {
+                                CSData.EmitterList.ForEach(em => {
+                                    if(em.BindingID!=ID) return;
+                                    b.UnRemoveable=true;
+                                    BaseEmitter_CS baseEmitterCs = (BaseEmitter_CS)em.Clone();
+                                    StageData.EnemyPlaneList.Add(baseEmitterCs);
+                                    baseEmitterCs.OriginalPosition=p;
+                                    baseEmitterCs.LifeTime=SubBullet.LifeTime;
+                                    baseEmitterCs.ColorValue=SubBullet.ColorValue;
+                                    baseEmitterCs.TransparentValueF=SubBullet.TransparentValueF;
+                                    baseEmitterCs.Direction=edi;
+                                    baseEmitterCs.DestPoint=SubBullet.DestPoint;
+                                    baseEmitterCs.Active=SubBullet.Active;
+                                    baseEmitterCs.OutBound=SubBullet.OutBound;
+                                    if(baseEmitterCs.BindWithDirection) baseEmitterCs.EmitDirection+=edi*180.0/Math.PI;
+                                    baseEmitterCs.SetBinding(b);
+                                    if(!baseEmitterCs.DeepBinding) {
+                                        baseEmitterCs.Time=Time;
+                                        baseEmitterCs.LifeTime=Math.Min(SubBullet.LifeTime+Time,em.StartTime+em.Duration);
+                                    }
+                                });
+                            }
+                        } else if(EmitterMode==EmitterMode.Enemy) {
+                            BaseEnemyPlane_Touhou enemy = (BaseEnemyPlane_Touhou)SubBullet.Clone();
+                            enemy.LifeTime=0;
+                            enemy.OriginalPosition=p;
+                            enemy.GhostingCount=enemy.GhostingCount;
+                            enemy.Velocity=num6-index2*DeltaV;
+                            enemy.Direction=edi;
+                            enemy.AccelerateCS=num7;
+                            enemy.AccDirection=num8;
+                            enemy.ID=ID;
+                            enemy.LayerID=LayerID;
+                            if(MotionBinding) enemy.SetBinding(this);
+                            EnemyPlaneList.Add(enemy);
+                            CSData.EmitterList.ForEach(em => {
+                                if(em.BindingID!=ID) return;
+                                BaseEmitter_CS baseEmitterCs = (BaseEmitter_CS)em.Clone();
+                                StageData.EnemyPlaneList.Add(baseEmitterCs);
+                                baseEmitterCs.OriginalPosition=p;
+                                baseEmitterCs.LifeTime=SubBullet.LifeTime;
+                                baseEmitterCs.ColorValue=SubBullet.ColorValue;
+                                baseEmitterCs.TransparentValueF=SubBullet.TransparentValueF;
+                                baseEmitterCs.Direction=edi;
+                                baseEmitterCs.DestPoint=SubBullet.DestPoint;
+                                baseEmitterCs.Active=SubBullet.Active;
+                                baseEmitterCs.OutBound=SubBullet.OutBound;
+                                baseEmitterCs.SetBinding(enemy);
+                                if(baseEmitterCs.BindWithDirection) baseEmitterCs.EmitDirection+=edi*180.0/Math.PI;
+                                if(!baseEmitterCs.DeepBinding) {
+                                    baseEmitterCs.Time=Time;
+                                    baseEmitterCs.LifeTime=Math.Min(SubBullet.LifeTime+Time,em.StartTime+em.Duration);
+                                }
+                            });
+                        } else if(EmitterMode==EmitterMode.Effect) {
+                            BaseEffect_CS baseEffectCs = (BaseEffect_CS)CSEffect.Clone();
+                            baseEffectCs.OriginalPosition=p;
+                            baseEffectCs.GhostingCount=baseEffectCs.GhostingCount;
+                            baseEffectCs.AngleDegree+=CSEffect.RanAngle*Ran.NextPMDouble();
+                            baseEffectCs.Velocity=num6-index2*DeltaV;
+                            baseEffectCs.Direction=edi;
+                            baseEffectCs.AccelerateCS=num7;
+                            baseEffectCs.AccDirection=num8;
+                            baseEffectCs.ID=ID;
+                            baseEffectCs.LayerID=LayerID;
+                            if(MotionBinding) baseEffectCs.SetBinding(this);
+                            EffectList.Add(baseEffectCs);
+                        }
+                    }
+                    num11+=num10;
+                    edi+=num10;
+                    if(SpecifySE) {
+                        StageData.SoundPlay(SoundName);
+                    } else if(EmitterMode==EmitterMode.Bullet) {
+                        StageData.SoundPlay("se_tan00a.wav",OriginalPosition.X/BoundRect.Width);
+                    } else if(EmitterMode==EmitterMode.StraightLaser||EmitterMode==EmitterMode.RadialLaser) {
+                        StageData.SoundPlay("se_lazer00.wav",OriginalPosition.X/BoundRect.Width);
+                    }
+                }
+            }
+        }
+
+        public override object Clone() {
+            BaseEmitter_CS baseEmitterCs = (BaseEmitter_CS)base.Clone();
+            if(CSBullet!=null) baseEmitterCs.CSBullet=(BaseBullet_CS)CSBullet.Clone();
+            if(CSLaserS!=null) baseEmitterCs.CSLaserS=(BaseStraightLaser_CS)CSLaserS.Clone();
+            if(CSLaserR!=null) baseEmitterCs.CSLaserR=(BaseRadialLaser_CS)CSLaserR.Clone();
+            if(CSLaserB!=null) baseEmitterCs.CSLaserB=(BaseBendLaser_CS)CSLaserB.Clone();
+            if(CSEnemy!=null) baseEmitterCs.CSEnemy=(BaseEnemyPlane_Touhou)CSEnemy.Clone();
+            if(CSEffect!=null) baseEmitterCs.CSEffect=(BaseEffect_CS)CSEffect.Clone();
+            return baseEmitterCs;
+        }
+
+        public override bool HitCheck(BaseObject MyPlane) {
+            return false;
+        }
     }
-  }
 }

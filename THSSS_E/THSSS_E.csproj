@@ -458,7 +458,7 @@
     </Compile>
     <Compile Include="Planes\Player\MyPlane_Koishi.cs" />
     <Compile Include="UI\ClearBonus.cs" />
-    <Compile Include="CSEmitterController.cs" />
+    <Compile Include="CrazyStorm\CSEmitterController.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSS05_04.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSS05_FSC.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSS04_02D.cs" />
@@ -474,7 +474,7 @@
     <Compile Include="Planes\Player\AutoPlane.cs" />
     <Compile Include="Planes\SubPlane_Reimu.cs" />
     <Compile Include="SpecialSystem\StarPointLineG.cs" />
-    <Compile Include="CS_Data.cs" />
+    <Compile Include="CrazyStorm\CS_Data.cs" />
     <Compile Include="BaseClasses\BaseEmitter_CS.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_03.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSS05_03.cs" />

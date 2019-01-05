@@ -13,7 +13,7 @@ namespace Shooting {
     internal class GameState_SSS01:BaseStage, IGameState {
         public GameState_SSS01(GlobalDataPackage GlobalData) : base(GlobalData) {
             StageName="St1";
-        } 
+        }
         public override void Drama() {
             base.Drama();
             int[] numArray = new int[3] { 3180,4000,6440 };
@@ -44,37 +44,25 @@ namespace Shooting {
                     Delay=200
                 }.LifeTime=320;
                 BackgroundGroupSSS01 backgroundGroupSsS01 = new BackgroundGroupSSS01(StageData);
-                if(testStartTime>TimeMain) {
-                    TimeMain=testStartTime;
-                }
+                if(testStartTime>TimeMain) TimeMain=testStartTime;
                 if(TimeMain<numArray[0]) {
                     string[] files;
                     switch(StageData.Difficulty) {
-                        case DifficultLevel.Easy:
-                            files=Directory.GetFiles(".\\CS\\St01\\A\\E\\","*.mbg");
-                            break;
-                        case DifficultLevel.Normal:
-                            files=Directory.GetFiles(".\\CS\\St01\\A\\N\\","*.mbg");
-                            break;
-                        case DifficultLevel.Hard:
-                            files=Directory.GetFiles(".\\CS\\St01\\A\\H\\","*.mbg");
-                            break;
-                        case DifficultLevel.Lunatic:
-                            files=Directory.GetFiles(".\\CS\\St01\\A\\L\\","*.mbg");
-                            break;
-                        default:
-                            files=Directory.GetFiles(".\\CS\\St01\\A\\L\\","*.mbg");
-                            break;
+                        case DifficultLevel.Easy: files=Directory.GetFiles(".\\CS\\St01\\A\\E\\","*.mbg"); break;
+                        case DifficultLevel.Normal: files=Directory.GetFiles(".\\CS\\St01\\A\\N\\","*.mbg"); break;
+                        case DifficultLevel.Hard: files=Directory.GetFiles(".\\CS\\St01\\A\\H\\","*.mbg"); break;
+                        case DifficultLevel.Lunatic: files=Directory.GetFiles(".\\CS\\St01\\A\\L\\","*.mbg"); break;
+                        default: files=Directory.GetFiles(".\\CS\\St01\\A\\L\\","*.mbg"); break;
                     }
-                    foreach(string FileName in files)
+                    foreach(string FileName in files) {
                         new CSEmitterController(StageData,StageData.LoadCS(FileName)) {
                             OnRoad=true
                         }.Time=TimeMain+60;
+                    }
                 }
                 PointF Position = new PointF(BoundRect.X+BoundRect.Width/2,BoundRect.Y+16);
                 new TextTwinkle(StageData,StageData.Difficulty.ToString(),Position,0.0f,Math.PI/2.0) {
-                    TwinkleColor=Color.Gray,
-                    Circle=10
+                    TwinkleColor=Color.Gray,Circle=10
                 }.LifeTime=150;
             } else if(TimeMain==30) {
                 new TextTwinkle(StageData,"ItemGetBorderLine",new PointF(BoundRect.X+BoundRect.Width/2,BoundRect.Y+130),0.0f,Math.PI/2.0).TwinkleColor=Color.OrangeRed;
@@ -121,7 +109,7 @@ namespace Shooting {
             } else {
                 if(numArray[2]!=TimeMain) {
                     return;
-                } 
+                }
                 StageData.RemoveBullets();
                 Boss_Ami02 bossAmi02 = new Boss_Ami02(StageData);
                 switch(MyPlane.Name) {
