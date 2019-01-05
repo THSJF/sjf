@@ -296,12 +296,14 @@ namespace Shooting {
                     PresentState.UpdateData();
                     for(int index = 1;index<presentInterval;++index) {
                         if(PresentState.StateSwitchData!=null) {
-                            if(PresentState.StateSwitchData.NextState==null)
+                            if(PresentState.StateSwitchData.NextState==null) {
                                 PresentState.UpdateData();
-                        } else
+                            }
+                        } else {
                             PresentState.UpdateData();
+                        }
                     }
-                    DeviceMain.Clear(ClearFlags.ZBuffer|ClearFlags.Target,(Color4)Color.Black,1f,0);
+                    DeviceMain.Clear(ClearFlags.ZBuffer|ClearFlags.Target,Color.Black,1f,0);
                     DeviceMain.BeginScene();
                     PresentState.Render();
                     DeviceMain.EndScene();
@@ -314,12 +316,13 @@ namespace Shooting {
                         deviceLost=true;
                     } else {
                         ErrorLog.SaveErrorLog(ex.Message,ex.ResultCode.Description);
-                        int num = (int)MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message);
                         Form_Main.Close();
                     }
                 }
-                if(verticalSync&&(presentInterval==1||fullWindow))
+                if(verticalSync&&(presentInterval==1||fullWindow)) {
                     return;
+                } 
                 float num1 = 16f*presentInterval-fpsTimer.GetDuration();
                 if(num1>0.0) {
                     Thread.Sleep((int)num1);

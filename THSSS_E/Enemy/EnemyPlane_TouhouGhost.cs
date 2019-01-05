@@ -62,7 +62,7 @@ namespace Shooting
         for (int index2 = 0; index2 < 5; ++index2)
         {
           int num1 = (int) this.ColorType * 3 + 2;
-          Bullet_Touhou_01 bulletTouhou01 = new Bullet_Touhou_01(this.StageData, "bullet2_" + (object) num1, this.OriginalPosition, (float) (1.5 + (double) index2 * 0.400000005960464), direction, (byte) num1);
+          Bullet_Touhou_01 bulletTouhou01 = new Bullet_Touhou_01(StageData, "bullet2_" +num1,OriginalPosition, (float) (1.5 +index2*0.400000005960464), direction, (byte) num1);
         }
         direction += 2.0 * Math.PI / (double) num3;
       }

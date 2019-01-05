@@ -6,135 +6,100 @@
 
 using System.Drawing;
 
-namespace Shooting
-{
-  public class EnemyFactory
-  {
-    private readonly string[] EnemyType0 = new string[10]
-    {
-      "EnemyA0",
-      "EnemyA1",
-      "EnemyA2",
-      "EnemyA3",
-      "EnemyA4",
-      "EnemyA5",
-      "EnemyA6",
-      "EnemyA7",
-      "EnemyC0",
-      "EnemyC1"
-    };
-    private readonly string[] EnemyType1 = new string[4]
-    {
-      "EnemyA8",
-      "EnemyB1",
-      "EnemyC2",
-      "EnemyC3"
-    };
-    private readonly string[] EnemyType2 = new string[4]
-    {
-      "EnemyGhost0",
-      "EnemyGhost1",
-      "EnemyGhost2",
-      "EnemyGhost3"
-    };
-    private readonly string[] EnemyType3 = new string[4]
-    {
-      "EnemyMaoYu00",
-      "EnemyMaoYu01",
-      "EnemyMaoYu02",
-      "EnemyMaoYu03"
-    };
-    private readonly string[] EnemyType4 = new string[4]
-    {
-      "EnemyYYY4",
-      "EnemyYYY5",
-      "EnemyYYY6",
-      "EnemyYYY7"
-    };
-    private int EnemyType = -1;
-    private string EnemyName;
-    public int HealthPoint;
-    public int RedCount;
-    public int BlueCount;
-    public int GreenCount;
-    public byte ColorType;
-    public bool BackFire;
-    public int ClearRadius;
-    public bool StarFall;
+namespace Shooting {
+    public class EnemyFactory {
+        private readonly string[] EnemyType0 = new string[10]{
+            "EnemyA0","EnemyA1","EnemyA2","EnemyA3","EnemyA4","EnemyA5","EnemyA6","EnemyA7","EnemyC0","EnemyC1"
+        };
+        private readonly string[] EnemyType1 = new string[4]{
+            "EnemyA8","EnemyB1","EnemyC2","EnemyC3"
+        };
+        private readonly string[] EnemyType2 = new string[4]{
+            "EnemyGhost0","EnemyGhost1","EnemyGhost2","EnemyGhost3"
+        };
+        private readonly string[] EnemyType3 = new string[4]{
+            "EnemyMaoYu00","EnemyMaoYu01","EnemyMaoYu02","EnemyMaoYu03"
+        };
+        private readonly string[] EnemyType4 = new string[4]{
+            "EnemyYYY4","EnemyYYY5","EnemyYYY6","EnemyYYY7"
+        };
+        private int EnemyType = -1;
+        private string EnemyName;
+        public int HealthPoint;
+        public int RedCount;
+        public int BlueCount;
+        public int GreenCount;
+        public byte ColorType;
+        public bool BackFire;
+        public int ClearRadius;
+        public bool StarFall;
 
-    public EnemyFactory(string EnemyName)
-    {
-      this.EnemyName = EnemyName;
-      if (this.ContainName(this.EnemyType0, EnemyName))
-        this.EnemyType = 0;
-      else if (this.ContainName(this.EnemyType1, EnemyName))
-        this.EnemyType = 1;
-      else if (this.ContainName(this.EnemyType2, EnemyName))
-        this.EnemyType = 2;
-      else if (this.ContainName(this.EnemyType3, EnemyName))
-      {
-        this.EnemyType = 3;
-      }
-      else
-      {
-        if (!this.ContainName(this.EnemyType4, EnemyName))
-          return;
-        this.EnemyType = 4;
-      }
-    }
+        public EnemyFactory(string EnemyName) {
+            this.EnemyName=EnemyName;
+            if(ContainName(EnemyType0,EnemyName)) {
+                EnemyType=0;
+            } else if(ContainName(EnemyType1,EnemyName)) {
+                EnemyType=1;
+            } else if(ContainName(EnemyType2,EnemyName)) {
+                EnemyType=2;
+            } else if(ContainName(EnemyType3,EnemyName)) {
+                EnemyType=3;
+            } else {
+                if(!ContainName(EnemyType4,EnemyName)) {
+                    return;
+                }
+                EnemyType=4;
+            }
+        }
 
-    private bool ContainName(string[] EnemyType, string EnemyName)
-    {
-      foreach (string str in EnemyType)
-      {
-        if (str == EnemyName)
-          return true;
-      }
-      return false;
-    }
+        private bool ContainName(string[] EnemyType,string EnemyName) {
+            foreach(string str in EnemyType) {
+                if(str==EnemyName) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
-    public BaseEnemyPlane_Touhou GenerateEnemy(StageDataPackage StageData)
-    {
-      BaseEnemyPlane_Touhou enemyPlaneTouhou;
-      switch (this.EnemyType)
-      {
-        case 0:
-          this.ColorType = byte.Parse(this.EnemyName.Replace("EnemyA", "").Replace("EnemyB", "").Replace("EnemyC", ""));
-          this.ColorType = this.ColorType > (byte) 3 ? (byte) ((uint) this.ColorType - 4U) : this.ColorType;
-          enemyPlaneTouhou = (BaseEnemyPlane_Touhou) new EnemyPlane_TouhouSmall(StageData, this.EnemyName, new PointF(0.0f, 0.0f), 0.0f, 0.0, this.ColorType);
-          if (this.BackFire)
-          {
-            ((EnemyPlane_TouhouSmall) enemyPlaneTouhou).SetBackFire();
-            break;
-          }
-          break;
-        case 1:
-          enemyPlaneTouhou = (BaseEnemyPlane_Touhou) new EnemyPlane_TouhouBig(StageData, this.EnemyName, new PointF(0.0f, 0.0f), 0.0f, 0.0, this.ColorType);
-          break;
-        case 2:
-          this.ColorType = byte.Parse(this.EnemyName.Replace("EnemyGhost", ""));
-          enemyPlaneTouhou = (BaseEnemyPlane_Touhou) new EnemyPlane_TouhouGhost(StageData, new PointF(0.0f, 0.0f), 0.0f, 0.0, this.ColorType);
-          break;
-        case 3:
-          this.ColorType = byte.Parse(this.EnemyName.Replace("EnemyMaoYu0", ""));
-          enemyPlaneTouhou = (BaseEnemyPlane_Touhou) new EnemyPlane_TouhouMaoYu(StageData, new PointF(0.0f, 0.0f), 0.0f, 0.0, this.ColorType);
-          break;
-        case 4:
-          this.ColorType = (byte) (int.Parse(this.EnemyName.Replace("EnemyYYY", "")) - 4);
-          enemyPlaneTouhou = (BaseEnemyPlane_Touhou) new EnemyPlane_TouhouYYY(StageData, new PointF(0.0f, 0.0f), 0.0f, 0.0, this.ColorType);
-          break;
-        default:
-          enemyPlaneTouhou = (BaseEnemyPlane_Touhou) new EnemyPlane_TouhouNormal(StageData, this.EnemyName, new PointF(0.0f, 0.0f), 0.0f, 0.0, this.ColorType);
-          break;
-      }
-      enemyPlaneTouhou.HealthPoint = (float) this.HealthPoint;
-      enemyPlaneTouhou.RedCount = this.RedCount;
-      enemyPlaneTouhou.BlueCount = this.BlueCount;
-      enemyPlaneTouhou.GreenCount = this.GreenCount;
-      enemyPlaneTouhou.ClearRadius = this.ClearRadius;
-      enemyPlaneTouhou.StarFall = this.StarFall;
-      StageData.EnemyPlaneList.Remove((BaseEnemyPlane) enemyPlaneTouhou);
-      return enemyPlaneTouhou;
+        public BaseEnemyPlane_Touhou GenerateEnemy(StageDataPackage StageData) {
+            BaseEnemyPlane_Touhou enemyPlaneTouhou;
+            switch(EnemyType) {
+                case 0:
+                    ColorType=byte.Parse(EnemyName.Replace("EnemyA","").Replace("EnemyB","").Replace("EnemyC",""));
+                    ColorType=ColorType>3 ? (byte)(ColorType-4U) : ColorType;
+                    enemyPlaneTouhou=new EnemyPlane_TouhouSmall(StageData,EnemyName,new PointF(0.0f,0.0f),0.0f,0.0,ColorType);
+                    if(BackFire) {
+                        ((EnemyPlane_TouhouSmall)enemyPlaneTouhou).SetBackFire();
+                        break;
+                    }
+                    break;
+                case 1:
+                    enemyPlaneTouhou=new EnemyPlane_TouhouBig(StageData,EnemyName,new PointF(0.0f,0.0f),0.0f,0.0,ColorType);
+                    break;
+                case 2:
+                    ColorType=byte.Parse(EnemyName.Replace("EnemyGhost",""));
+                    enemyPlaneTouhou=new EnemyPlane_TouhouGhost(StageData,new PointF(0.0f,0.0f),0.0f,0.0,ColorType);
+                    break;
+                case 3:
+                    ColorType=byte.Parse(EnemyName.Replace("EnemyMaoYu0",""));
+                    enemyPlaneTouhou=new EnemyPlane_TouhouMaoYu(StageData,new PointF(0.0f,0.0f),0.0f,0.0,ColorType);
+                    break;
+                case 4:
+                    ColorType=(byte)(int.Parse(EnemyName.Replace("EnemyYYY",""))-4);
+                    enemyPlaneTouhou=new EnemyPlane_TouhouYYY(StageData,new PointF(0.0f,0.0f),0.0f,0.0,ColorType);
+                    break;
+                default:
+                    enemyPlaneTouhou=new EnemyPlane_TouhouNormal(StageData,EnemyName,new PointF(0.0f,0.0f),0.0f,0.0,ColorType);
+                    break;
+            }
+            enemyPlaneTouhou.HealthPoint=HealthPoint;
+            enemyPlaneTouhou.RedCount=RedCount;
+            enemyPlaneTouhou.BlueCount=BlueCount;
+            enemyPlaneTouhou.GreenCount=GreenCount;
+            enemyPlaneTouhou.ClearRadius=ClearRadius;
+            enemyPlaneTouhou.StarFall=StarFall;
+            StageData.EnemyPlaneList.Remove(enemyPlaneTouhou);
+            return enemyPlaneTouhou;
+        }
     }
-  }
 }
