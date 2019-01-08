@@ -211,7 +211,7 @@ namespace Shooting
       int y1 = boundRect1.Bottom - 50;
       local = new Point(x1, y1);
       if (this.MyPlane == null)
-        this.MyPlane = (BaseMyPlane) new MyPlane_Aya(this.StageData, OriginalPosition1);
+        this.MyPlane = (BaseMyPlane) new MyPlane_Reimu(this.StageData, OriginalPosition1);
       this.Boss = (BaseBossTouhou) null;
       this.BulletList = new List<BaseBullet_Touhou>();
       this.EnemyPlaneList = new List<BaseEnemyPlane>();

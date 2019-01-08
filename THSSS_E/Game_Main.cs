@@ -1,11 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: Shooting.Game_Main
-// Assembly: THSSS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 9501F839-8E36-4763-8C1B-4AB9B7BE2AA4
-// Assembly location: E:\东方project\非官方游戏\东方夏夜祭 ～ Shining Shooting Star\THSSS.exe
-
-using SlimDX;
-using SlimDX.Direct3D9;
+﻿using SlimDX.Direct3D9;
 using SlimDX.DirectInput;
 using System;
 using System.Collections.Generic;
@@ -117,7 +110,7 @@ namespace Shooting {
                 LoadingThread.Start();
             }
             SourseForm sourseForm = new SourseForm();
-            sourseForm.Show();
+            //    sourseForm.Show();
         }
 
         public bool Direct3DInit() {
@@ -322,7 +315,7 @@ namespace Shooting {
                 }
                 if(verticalSync&&(presentInterval==1||fullWindow)) {
                     return;
-                } 
+                }
                 float num1 = 16f*presentInterval-fpsTimer.GetDuration();
                 if(num1>0.0) {
                     Thread.Sleep((int)num1);

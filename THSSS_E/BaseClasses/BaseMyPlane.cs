@@ -706,10 +706,11 @@ namespace Shooting {
                     }
                     ((BaseSpellCard)x).Missed=true;
                 });
-            } else {
+            } else { 
                 Emitter emitter = new Emitter(StageData,MyPlane.Position);
                 StageData.SoundPlay("se_pldead00.wav",OriginalPosition.X/BoundRect.Width);
                 DeadTime=Time+20;
+                SpellShoot();
             }
         }
 

@@ -1,243 +1,222 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: Shooting.MyPlane_Sanae
-// Assembly: THSSS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 9501F839-8E36-4763-8C1B-4AB9B7BE2AA4
-// Assembly location: E:\东方project\非官方游戏\东方夏夜祭 ～ Shining Shooting Star\THSSS.exe
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace Shooting
-{
-  public class MyPlane_Sanae : BaseMyPlane_Touhou
-  {
-    public MyPlane_Sanae(StageDataPackage StageData, Point OriginalPosition)
-      : base(StageData, OriginalPosition, "Sanae")
-    {
-      this.WeaponType = "A";
-      List<BaseSubPlane> baseSubPlaneList1 = new List<BaseSubPlane>();
-      baseSubPlaneList1.Add((BaseSubPlane) new SubPlane_Sanae(StageData, this.Position));
-      baseSubPlaneList1.Add((BaseSubPlane) new SubPlane_Sanae(StageData, this.Position));
-      List<BaseSubPlane> baseSubPlaneList2 = baseSubPlaneList1;
-      SubPlane_Sanae subPlaneSanae1 = new SubPlane_Sanae(StageData, this.Position);
-      subPlaneSanae1.Mirrored = true;
-      SubPlane_Sanae subPlaneSanae2 = subPlaneSanae1;
-      baseSubPlaneList2.Add((BaseSubPlane) subPlaneSanae2);
-      List<BaseSubPlane> baseSubPlaneList3 = baseSubPlaneList1;
-      SubPlane_Sanae subPlaneSanae3 = new SubPlane_Sanae(StageData, this.Position);
-      subPlaneSanae3.Mirrored = true;
-      SubPlane_Sanae subPlaneSanae4 = subPlaneSanae3;
-      baseSubPlaneList3.Add((BaseSubPlane) subPlaneSanae4);
-      this.SubPlaneList = baseSubPlaneList1;
-      this.HighSpeed = 4.5f;
-      this.LowSpeed = 2f;
-    }
-
-    public override void Shoot()
-    {
-      if (this.Time % 3 == 0)
-      {
-        this.StageData.SoundPlay("se_plst00.wav", this.OriginalPosition.X / (float) this.BoundRect.Width);
-        float x = this.OriginalPosition.X;
-        float y = this.OriginalPosition.Y;
-        BaseMyBullet_Touhou baseMyBulletTouhou1 = new BaseMyBullet_Touhou(this.StageData, "SanaeBullet00", new PointF(x + 7f, y), 30f, -1.0 * Math.PI / 2.0);
-        BaseMyBullet_Touhou baseMyBulletTouhou2 = new BaseMyBullet_Touhou(this.StageData, "SanaeBullet00", new PointF(x - 7f, y), 30f, -1.0 * Math.PI / 2.0);
-      }
-      if (this.Time % 4 != 0)
-        return;
-      for (int index = 0; index < this.PowerLevel; ++index)
-        this.SubPlaneList[index].Shoot();
-    }
-
-    public override void SpellShoot()
-    {
-      Spell_Sanae spellSanae = new Spell_Sanae(this.StageData);
-    }
-
-    public override void SubPlaneCtrl()
-    {
-      if (this.KClass.Key_Shift)
-      {
-        switch (this.PowerLevel)
-        {
-          case 1:
-            this.SubPlanePoint[0] = new PointF(this.OriginalPosition.X, this.OriginalPosition.Y - 30f);
-            this.SubPlaneList[0].ShootDirection = -1.0 * Math.PI / 2.0;
-            break;
-          case 2:
-            ref PointF local1 = ref this.SubPlanePoint[0];
-            double num1 = (double) this.OriginalPosition.X - 10.0;
-            PointF originalPosition1 = this.OriginalPosition;
-            double num2 = (double) originalPosition1.Y - 30.0;
-            PointF pointF1 = new PointF((float) num1, (float) num2);
-            local1 = pointF1;
-            ref PointF local2 = ref this.SubPlanePoint[1];
-            originalPosition1 = this.OriginalPosition;
-            double num3 = (double) originalPosition1.X + 10.0;
-            originalPosition1 = this.OriginalPosition;
-            double num4 = (double) originalPosition1.Y - 30.0;
-            PointF pointF2 = new PointF((float) num3, (float) num4);
-            local2 = pointF2;
-            this.SubPlaneList[0].ShootDirection = -1.0 * Math.PI / 2.0;
-            this.SubPlaneList[1].ShootDirection = -1.0 * Math.PI / 2.0;
-            break;
-          case 3:
-            ref PointF local3 = ref this.SubPlanePoint[2];
-            double x1 = (double) this.OriginalPosition.X;
-            PointF originalPosition2 = this.OriginalPosition;
-            double num5 = (double) originalPosition2.Y - 30.0;
-            PointF pointF3 = new PointF((float) x1, (float) num5);
-            local3 = pointF3;
-            ref PointF local4 = ref this.SubPlanePoint[1];
-            originalPosition2 = this.OriginalPosition;
-            double num6 = (double) originalPosition2.X - 7.0;
-            originalPosition2 = this.OriginalPosition;
-            double num7 = (double) originalPosition2.Y - 30.0;
-            PointF pointF4 = new PointF((float) num6, (float) num7);
-            local4 = pointF4;
-            ref PointF local5 = ref this.SubPlanePoint[0];
-            originalPosition2 = this.OriginalPosition;
-            double num8 = (double) originalPosition2.X + 7.0;
-            originalPosition2 = this.OriginalPosition;
-            double num9 = (double) originalPosition2.Y - 30.0;
-            PointF pointF5 = new PointF((float) num8, (float) num9);
-            local5 = pointF5;
-            this.SubPlaneList[2].ShootDirection = -1.0 * Math.PI / 2.0;
-            this.SubPlaneList[1].ShootDirection = -1.0 * Math.PI / 2.0;
-            this.SubPlaneList[0].ShootDirection = -1.0 * Math.PI / 2.0;
-            break;
-          case 4:
-            ref PointF local6 = ref this.SubPlanePoint[3];
-            double num10 = (double) this.OriginalPosition.X - 6.0;
-            PointF originalPosition3 = this.OriginalPosition;
-            double num11 = (double) originalPosition3.Y - 30.0;
-            PointF pointF6 = new PointF((float) num10, (float) num11);
-            local6 = pointF6;
-            ref PointF local7 = ref this.SubPlanePoint[2];
-            originalPosition3 = this.OriginalPosition;
-            double num12 = (double) originalPosition3.X + 6.0;
-            originalPosition3 = this.OriginalPosition;
-            double num13 = (double) originalPosition3.Y - 30.0;
-            PointF pointF7 = new PointF((float) num12, (float) num13);
-            local7 = pointF7;
-            ref PointF local8 = ref this.SubPlanePoint[1];
-            originalPosition3 = this.OriginalPosition;
-            double num14 = (double) originalPosition3.X - 12.0;
-            originalPosition3 = this.OriginalPosition;
-            double num15 = (double) originalPosition3.Y - 30.0;
-            PointF pointF8 = new PointF((float) num14, (float) num15);
-            local8 = pointF8;
-            ref PointF local9 = ref this.SubPlanePoint[0];
-            originalPosition3 = this.OriginalPosition;
-            double num16 = (double) originalPosition3.X + 12.0;
-            originalPosition3 = this.OriginalPosition;
-            double num17 = (double) originalPosition3.Y - 30.0;
-            PointF pointF9 = new PointF((float) num16, (float) num17);
-            local9 = pointF9;
-            this.SubPlaneList[3].ShootDirection = -1.0 * Math.PI / 2.0;
-            this.SubPlaneList[2].ShootDirection = -1.0 * Math.PI / 2.0;
-            this.SubPlaneList[1].ShootDirection = -1.0 * Math.PI / 2.0;
-            this.SubPlaneList[0].ShootDirection = -1.0 * Math.PI / 2.0;
-            break;
+namespace Shooting {
+    public class MyPlane_Sanae:BaseMyPlane_Touhou {
+        public MyPlane_Sanae(StageDataPackage StageData,Point OriginalPosition) : base(StageData,OriginalPosition,"Sanae") {
+            WeaponType="A";
+            List<BaseSubPlane> baseSubPlaneList1 = new List<BaseSubPlane> {
+                new SubPlane_Sanae(StageData,Position),
+                new SubPlane_Sanae(StageData,Position)
+            };
+            List<BaseSubPlane> baseSubPlaneList2 = baseSubPlaneList1;
+            SubPlane_Sanae subPlaneSanae1 = new SubPlane_Sanae(StageData,Position) {
+                Mirrored=true
+            };
+            SubPlane_Sanae subPlaneSanae2 = subPlaneSanae1;
+            baseSubPlaneList2.Add(subPlaneSanae2);
+            List<BaseSubPlane> baseSubPlaneList3 = baseSubPlaneList1;
+            SubPlane_Sanae subPlaneSanae3 = new SubPlane_Sanae(StageData,Position) {
+                Mirrored=true
+            };
+            SubPlane_Sanae subPlaneSanae4 = subPlaneSanae3;
+            baseSubPlaneList3.Add(subPlaneSanae4);
+            SubPlaneList=baseSubPlaneList1;
+            HighSpeed=4.5f;
+            LowSpeed=2f;
         }
-      }
-      else
-      {
-        switch (this.PowerLevel)
-        {
-          case 1:
-            this.SubPlanePoint[0] = new PointF(this.OriginalPosition.X, this.OriginalPosition.Y + 30f);
-            this.SubPlaneList[0].ShootDirection = -1.0 * Math.PI / 2.0;
-            break;
-          case 2:
-            ref PointF local10 = ref this.SubPlanePoint[0];
-            double num18 = (double) this.OriginalPosition.X - 36.0;
-            PointF originalPosition4 = this.OriginalPosition;
-            double num19 = (double) originalPosition4.Y + 0.0;
-            PointF pointF10 = new PointF((float) num18, (float) num19);
-            local10 = pointF10;
-            ref PointF local11 = ref this.SubPlanePoint[1];
-            originalPosition4 = this.OriginalPosition;
-            double num20 = (double) originalPosition4.X + 36.0;
-            originalPosition4 = this.OriginalPosition;
-            double num21 = (double) originalPosition4.Y - 0.0;
-            PointF pointF11 = new PointF((float) num20, (float) num21);
-            local11 = pointF11;
-            this.SubPlaneList[0].ShootDirection = -1.66079633037118;
-            this.SubPlaneList[1].ShootDirection = -1.48079632321862;
-            break;
-          case 3:
-            ref PointF local12 = ref this.SubPlanePoint[2];
-            double x2 = (double) this.OriginalPosition.X;
-            PointF originalPosition5 = this.OriginalPosition;
-            double num22 = (double) originalPosition5.Y + 30.0;
-            PointF pointF12 = new PointF((float) x2, (float) num22);
-            local12 = pointF12;
-            ref PointF local13 = ref this.SubPlanePoint[1];
-            originalPosition5 = this.OriginalPosition;
-            double num23 = (double) originalPosition5.X - 36.0;
-            originalPosition5 = this.OriginalPosition;
-            double num24 = (double) originalPosition5.Y + 0.0;
-            PointF pointF13 = new PointF((float) num23, (float) num24);
-            local13 = pointF13;
-            ref PointF local14 = ref this.SubPlanePoint[0];
-            originalPosition5 = this.OriginalPosition;
-            double num25 = (double) originalPosition5.X + 36.0;
-            originalPosition5 = this.OriginalPosition;
-            double num26 = (double) originalPosition5.Y + 0.0;
-            PointF pointF14 = new PointF((float) num25, (float) num26);
-            local14 = pointF14;
-            this.SubPlaneList[2].ShootDirection = -1.0 * Math.PI / 2.0;
-            this.SubPlaneList[1].ShootDirection = -1.66079633037118;
-            this.SubPlaneList[0].ShootDirection = -1.48079632321862;
-            break;
-          case 4:
-            ref PointF local15 = ref this.SubPlanePoint[3];
-            double num27 = (double) this.OriginalPosition.X - 36.0;
-            PointF originalPosition6 = this.OriginalPosition;
-            double num28 = (double) originalPosition6.Y + 0.0;
-            PointF pointF15 = new PointF((float) num27, (float) num28);
-            local15 = pointF15;
-            ref PointF local16 = ref this.SubPlanePoint[2];
-            originalPosition6 = this.OriginalPosition;
-            double num29 = (double) originalPosition6.X + 36.0;
-            originalPosition6 = this.OriginalPosition;
-            double num30 = (double) originalPosition6.Y + 0.0;
-            PointF pointF16 = new PointF((float) num29, (float) num30);
-            local16 = pointF16;
-            ref PointF local17 = ref this.SubPlanePoint[1];
-            originalPosition6 = this.OriginalPosition;
-            double num31 = (double) originalPosition6.X - 66.0;
-            originalPosition6 = this.OriginalPosition;
-            double num32 = (double) originalPosition6.Y + 0.0;
-            PointF pointF17 = new PointF((float) num31, (float) num32);
-            local17 = pointF17;
-            ref PointF local18 = ref this.SubPlanePoint[0];
-            originalPosition6 = this.OriginalPosition;
-            double num33 = (double) originalPosition6.X + 66.0;
-            originalPosition6 = this.OriginalPosition;
-            double num34 = (double) originalPosition6.Y + 0.0;
-            PointF pointF18 = new PointF((float) num33, (float) num34);
-            local18 = pointF18;
-            this.SubPlaneList[3].ShootDirection = -1.0 * Math.PI / 2.0;
-            this.SubPlaneList[2].ShootDirection = -1.0 * Math.PI / 2.0;
-            this.SubPlaneList[1].ShootDirection = -1.66079633037118;
-            this.SubPlaneList[0].ShootDirection = -1.48079632321862;
-            break;
+        public override void Shoot() {
+            if(Time%3==0) {
+                StageData.SoundPlay("se_plst00.wav",OriginalPosition.X/BoundRect.Width);
+                float x = OriginalPosition.X;
+                float y = OriginalPosition.Y;
+                BaseMyBullet_Touhou baseMyBulletTouhou1 = new BaseMyBullet_Touhou(StageData,"SanaeBullet00",new PointF(x+7f,y),30f,-1.0*Math.PI/2.0);
+                BaseMyBullet_Touhou baseMyBulletTouhou2 = new BaseMyBullet_Touhou(StageData,"SanaeBullet00",new PointF(x-7f,y),30f,-1.0*Math.PI/2.0);
+            }
+            if(Time%4!=0) return;
+            for(int index = 0;index<PowerLevel;++index) {
+                SubPlaneList[index].Shoot();
+            }
         }
-      }
-      for (int index = 0; index < this.PowerLevel; ++index)
-      {
-        this.SubPlaneList[index].Enabled = true;
-        this.SubPlaneList[index].DestPoint = this.SubPlanePoint[index];
-        this.SubPlaneList[index].Ctrl();
-      }
-      for (int powerLevel = this.PowerLevel; powerLevel < this.SubPlaneList.Count; ++powerLevel)
-      {
-        this.SubPlaneList[powerLevel].Enabled = false;
-        this.SubPlaneList[powerLevel].Position = this.Position;
-      }
+        public override void SpellShoot() {
+            Spell_Sanae spellSanae = new Spell_Sanae(StageData);
+        }
+        public override void SubPlaneCtrl() {
+            if(KClass.Key_Shift) {
+                switch(PowerLevel) {
+                    case 1:
+                        SubPlanePoint[0]=new PointF(OriginalPosition.X,OriginalPosition.Y-30f);
+                        SubPlaneList[0].ShootDirection=-1.0*Math.PI/2.0;
+                        break;
+                    case 2:
+                        ref PointF local1 = ref SubPlanePoint[0];
+                        double num1 = OriginalPosition.X-10.0;
+                        PointF originalPosition1 = OriginalPosition;
+                        double num2 = originalPosition1.Y-30.0;
+                        PointF pointF1 = new PointF((float)num1,(float)num2);
+                        local1=pointF1;
+                        ref PointF local2 = ref SubPlanePoint[1];
+                        originalPosition1=OriginalPosition;
+                        double num3 = originalPosition1.X+10.0;
+                        originalPosition1=OriginalPosition;
+                        double num4 = originalPosition1.Y-30.0;
+                        PointF pointF2 = new PointF((float)num3,(float)num4);
+                        local2=pointF2;
+                        SubPlaneList[0].ShootDirection=-1.0*Math.PI/2.0;
+                        SubPlaneList[1].ShootDirection=-1.0*Math.PI/2.0;
+                        break;
+                    case 3:
+                        ref PointF local3 = ref SubPlanePoint[2];
+                        double x1 = OriginalPosition.X;
+                        PointF originalPosition2 = OriginalPosition;
+                        double num5 = originalPosition2.Y-30.0;
+                        PointF pointF3 = new PointF((float)x1,(float)num5);
+                        local3=pointF3;
+                        ref PointF local4 = ref SubPlanePoint[1];
+                        originalPosition2=OriginalPosition;
+                        double num6 = originalPosition2.X-7.0;
+                        originalPosition2=OriginalPosition;
+                        double num7 = originalPosition2.Y-30.0;
+                        PointF pointF4 = new PointF((float)num6,(float)num7);
+                        local4=pointF4;
+                        ref PointF local5 = ref SubPlanePoint[0];
+                        originalPosition2=OriginalPosition;
+                        double num8 = originalPosition2.X+7.0;
+                        originalPosition2=OriginalPosition;
+                        double num9 = originalPosition2.Y-30.0;
+                        PointF pointF5 = new PointF((float)num8,(float)num9);
+                        local5=pointF5;
+                        SubPlaneList[2].ShootDirection=-1.0*Math.PI/2.0;
+                        SubPlaneList[1].ShootDirection=-1.0*Math.PI/2.0;
+                        SubPlaneList[0].ShootDirection=-1.0*Math.PI/2.0;
+                        break;
+                    case 4:
+                        ref PointF local6 = ref SubPlanePoint[3];
+                        double num10 = OriginalPosition.X-6.0;
+                        PointF originalPosition3 = OriginalPosition;
+                        double num11 = originalPosition3.Y-30.0;
+                        PointF pointF6 = new PointF((float)num10,(float)num11);
+                        local6=pointF6;
+                        ref PointF local7 = ref SubPlanePoint[2];
+                        originalPosition3=OriginalPosition;
+                        double num12 = originalPosition3.X+6.0;
+                        originalPosition3=OriginalPosition;
+                        double num13 = originalPosition3.Y-30.0;
+                        PointF pointF7 = new PointF((float)num12,(float)num13);
+                        local7=pointF7;
+                        ref PointF local8 = ref SubPlanePoint[1];
+                        originalPosition3=OriginalPosition;
+                        double num14 = originalPosition3.X-12.0;
+                        originalPosition3=OriginalPosition;
+                        double num15 = originalPosition3.Y-30.0;
+                        PointF pointF8 = new PointF((float)num14,(float)num15);
+                        local8=pointF8;
+                        ref PointF local9 = ref SubPlanePoint[0];
+                        originalPosition3=OriginalPosition;
+                        double num16 = originalPosition3.X+12.0;
+                        originalPosition3=OriginalPosition;
+                        double num17 = originalPosition3.Y-30.0;
+                        PointF pointF9 = new PointF((float)num16,(float)num17);
+                        local9=pointF9;
+                        SubPlaneList[3].ShootDirection=-1.0*Math.PI/2.0;
+                        SubPlaneList[2].ShootDirection=-1.0*Math.PI/2.0;
+                        SubPlaneList[1].ShootDirection=-1.0*Math.PI/2.0;
+                        SubPlaneList[0].ShootDirection=-1.0*Math.PI/2.0;
+                        break;
+                }
+            } else {
+                switch(PowerLevel) {
+                    case 1:
+                        SubPlanePoint[0]=new PointF(OriginalPosition.X,OriginalPosition.Y+30f);
+                        SubPlaneList[0].ShootDirection=-1.0*Math.PI/2.0;
+                        break;
+                    case 2:
+                        ref PointF local10 = ref SubPlanePoint[0];
+                        double num18 = OriginalPosition.X-36.0;
+                        PointF originalPosition4 = OriginalPosition;
+                        double num19 = originalPosition4.Y+0.0;
+                        PointF pointF10 = new PointF((float)num18,(float)num19);
+                        local10=pointF10;
+                        ref PointF local11 = ref SubPlanePoint[1];
+                        originalPosition4=OriginalPosition;
+                        double num20 = originalPosition4.X+36.0;
+                        originalPosition4=OriginalPosition;
+                        double num21 = originalPosition4.Y-0.0;
+                        PointF pointF11 = new PointF((float)num20,(float)num21);
+                        local11=pointF11;
+                        SubPlaneList[0].ShootDirection=-1.66079633037118;
+                        SubPlaneList[1].ShootDirection=-1.48079632321862;
+                        break;
+                    case 3:
+                        ref PointF local12 = ref SubPlanePoint[2];
+                        double x2 = OriginalPosition.X;
+                        PointF originalPosition5 = OriginalPosition;
+                        double num22 = originalPosition5.Y+30.0;
+                        PointF pointF12 = new PointF((float)x2,(float)num22);
+                        local12=pointF12;
+                        ref PointF local13 = ref SubPlanePoint[1];
+                        originalPosition5=OriginalPosition;
+                        double num23 = originalPosition5.X-36.0;
+                        originalPosition5=OriginalPosition;
+                        double num24 = originalPosition5.Y+0.0;
+                        PointF pointF13 = new PointF((float)num23,(float)num24);
+                        local13=pointF13;
+                        ref PointF local14 = ref SubPlanePoint[0];
+                        originalPosition5=OriginalPosition;
+                        double num25 = originalPosition5.X+36.0;
+                        originalPosition5=OriginalPosition;
+                        double num26 = originalPosition5.Y+0.0;
+                        PointF pointF14 = new PointF((float)num25,(float)num26);
+                        local14=pointF14;
+                        SubPlaneList[2].ShootDirection=-1.0*Math.PI/2.0;
+                        SubPlaneList[1].ShootDirection=-1.66079633037118;
+                        SubPlaneList[0].ShootDirection=-1.48079632321862;
+                        break;
+                    case 4:
+                        ref PointF local15 = ref SubPlanePoint[3];
+                        double num27 = OriginalPosition.X-36.0;
+                        PointF originalPosition6 = OriginalPosition;
+                        double num28 = originalPosition6.Y+0.0;
+                        PointF pointF15 = new PointF((float)num27,(float)num28);
+                        local15=pointF15;
+                        ref PointF local16 = ref SubPlanePoint[2];
+                        originalPosition6=OriginalPosition;
+                        double num29 = originalPosition6.X+36.0;
+                        originalPosition6=OriginalPosition;
+                        double num30 = originalPosition6.Y+0.0;
+                        PointF pointF16 = new PointF((float)num29,(float)num30);
+                        local16=pointF16;
+                        ref PointF local17 = ref SubPlanePoint[1];
+                        originalPosition6=OriginalPosition;
+                        double num31 = originalPosition6.X-66.0;
+                        originalPosition6=OriginalPosition;
+                        double num32 = originalPosition6.Y+0.0;
+                        PointF pointF17 = new PointF((float)num31,(float)num32);
+                        local17=pointF17;
+                        ref PointF local18 = ref SubPlanePoint[0];
+                        originalPosition6=OriginalPosition;
+                        double num33 = originalPosition6.X+66.0;
+                        originalPosition6=OriginalPosition;
+                        double num34 = originalPosition6.Y+0.0;
+                        PointF pointF18 = new PointF((float)num33,(float)num34);
+                        local18=pointF18;
+                        SubPlaneList[3].ShootDirection=-1.0*Math.PI/2.0;
+                        SubPlaneList[2].ShootDirection=-1.0*Math.PI/2.0;
+                        SubPlaneList[1].ShootDirection=-1.66079633037118;
+                        SubPlaneList[0].ShootDirection=-1.48079632321862;
+                        break;
+                }
+            }
+            for(int index = 0;index<PowerLevel;++index) {
+                SubPlaneList[index].Enabled=true;
+                SubPlaneList[index].DestPoint=SubPlanePoint[index];
+                SubPlaneList[index].Ctrl();
+            }
+            for(int powerLevel = PowerLevel;powerLevel<SubPlaneList.Count;++powerLevel) {
+                SubPlaneList[powerLevel].Enabled=false;
+                SubPlaneList[powerLevel].Position=Position;
+            }
+        }
     }
-  }
 }

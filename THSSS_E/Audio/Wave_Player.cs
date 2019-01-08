@@ -1,147 +1,80 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: Shooting.Wave_Player
-// Assembly: THSSS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 9501F839-8E36-4763-8C1B-4AB9B7BE2AA4
-// Assembly location: E:\东方project\非官方游戏\东方夏夜祭 ～ Shining Shooting Star\THSSS.exe
-
-namespace Shooting
-{
-  public class Wave_Player
-  {
-    private XAudio2_PlayerV2[] x2p = new XAudio2_PlayerV2[2];
-    private byte AudioIndex = 0;
-    private string[] fileName = new string[2];
-    private SlimDX.XAudio2.XAudio2 device;
-
-    public bool OnPause { get; set; }
-
-    public string FileName
-    {
-      get
-      {
-        return this.fileName[(int) this.AudioIndex];
-      }
-      set
-      {
-        if (this.fileName[1 - (int) this.AudioIndex] == value)
-        {
-          this.AudioIndex = (byte) (1U - (uint) this.AudioIndex);
+﻿namespace Shooting {
+    public class Wave_Player {
+        private XAudio2_PlayerV2[] x2p = new XAudio2_PlayerV2[2];
+        private byte AudioIndex = 0;
+        private string[] fileName = new string[2];
+        private SlimDX.XAudio2.XAudio2 device;
+        public bool OnPause { get; set; }
+        public string FileName {
+            get => fileName[AudioIndex];
+            set {
+                if(fileName[1-AudioIndex]==value) {
+                    AudioIndex=(byte)(1U-AudioIndex);
+                } else {
+                    int num = 100;
+                    fileName[AudioIndex]=value;
+                    if(x2p[AudioIndex]!=null) {
+                        num=x2p[AudioIndex].Volume;
+                        x2p[AudioIndex].Dispose();
+                    }
+                    x2p[AudioIndex]=new XAudio2_PlayerV2(fileName[AudioIndex],device) {
+                        Volume=num
+                    };
+                }
+            }
         }
-        else
-        {
-          int num = 100;
-          this.fileName[(int) this.AudioIndex] = value;
-          if (this.x2p[(int) this.AudioIndex] != null)
-          {
-            num = this.x2p[(int) this.AudioIndex].Volume;
-            this.x2p[(int) this.AudioIndex].Dispose();
-          }
-          this.x2p[(int) this.AudioIndex] = new XAudio2_PlayerV2(this.fileName[(int) this.AudioIndex], this.device);
-          this.x2p[(int) this.AudioIndex].Volume = num;
+        public long CurrentPosition => x2p[AudioIndex].Position;
+        public int Volume {
+            get {
+                if(x2p[AudioIndex]!=null) return x2p[AudioIndex].Volume;
+                return 100;
+            }
+            set {
+                if(x2p[AudioIndex]==null) return;
+                x2p[AudioIndex].Volume=value;
+            }
         }
-      }
+        public Wave_Player(SlimDX.XAudio2.XAudio2 device) {
+            Volume=100;
+            this.device=device;
+        }
+        public void Play() {
+            x2p[AudioIndex].Play();
+        }
+        public void PlayRepeat() {
+            x2p[AudioIndex].SetLoop(0,0);
+            x2p[AudioIndex].Play();
+        }
+        public void PlayRepeat(int LoopBegin,int LoopEnd) {
+            PlayRepeat(0,0,byte.MaxValue,LoopBegin,LoopEnd);
+        }
+        public void PlayRepeat(int PlayBegin,int PlayLength,int LoopCount,int LoopBegin,int LoopEnd) {
+            x2p[AudioIndex].Stop();
+            x2p[AudioIndex].SetLoop(PlayBegin,PlayLength,LoopCount,LoopBegin,LoopEnd);
+            x2p[AudioIndex].Play();
+        }
+        public void Stop() {
+            if(x2p[AudioIndex]==null) return;
+            x2p[AudioIndex].Stop();
+        }
+        public void Puase() {
+            OnPause=true;
+            Stop();
+        }
+        public void Resume() {
+            OnPause=false;
+            x2p[AudioIndex].Resume();
+        }
+        public void PreLoad(string FileName) {
+            this.FileName=FileName;
+            x2p[AudioIndex].Reset();
+        }
+        public void FilterON() => x2p[AudioIndex].FilterON();
+        public void FilterOFF() => x2p[AudioIndex].FilterOFF();
+        public void Dispose() {
+            for(int index = 0;index<x2p.Length;++index) {
+                if(x2p[AudioIndex]!=null) x2p[AudioIndex].Dispose();
+            }
+        }
     }
-
-    public long CurrentPosition
-    {
-      get
-      {
-        return this.x2p[(int) this.AudioIndex].Position;
-      }
-    }
-
-    public int Volume
-    {
-      get
-      {
-        if (this.x2p[(int) this.AudioIndex] != null)
-          return this.x2p[(int) this.AudioIndex].Volume;
-        return 100;
-      }
-      set
-      {
-        if (this.x2p[(int) this.AudioIndex] == null)
-          return;
-        this.x2p[(int) this.AudioIndex].Volume = value;
-      }
-    }
-
-    public Wave_Player(SlimDX.XAudio2.XAudio2 device)
-    {
-      this.Volume = 100;
-      this.device = device;
-    }
-
-    public void Play()
-    {
-      this.x2p[(int) this.AudioIndex].Play();
-    }
-
-    public void PlayRepeat()
-    {
-      this.x2p[(int) this.AudioIndex].SetLoop(0, 0);
-      this.x2p[(int) this.AudioIndex].Play();
-    }
-
-    public void PlayRepeat(int LoopBegin, int LoopEnd)
-    {
-      this.PlayRepeat(0, 0, (int) byte.MaxValue, LoopBegin, LoopEnd);
-    }
-
-    public void PlayRepeat(
-      int PlayBegin,
-      int PlayLength,
-      int LoopCount,
-      int LoopBegin,
-      int LoopEnd)
-    {
-      this.x2p[(int) this.AudioIndex].Stop();
-      this.x2p[(int) this.AudioIndex].SetLoop(PlayBegin, PlayLength, LoopCount, LoopBegin, LoopEnd);
-      this.x2p[(int) this.AudioIndex].Play();
-    }
-
-    public void Stop()
-    {
-      if (this.x2p[(int) this.AudioIndex] == null)
-        return;
-      this.x2p[(int) this.AudioIndex].Stop();
-    }
-
-    public void Puase()
-    {
-      this.OnPause = true;
-      this.Stop();
-    }
-
-    public void Resume()
-    {
-      this.OnPause = false;
-      this.x2p[(int) this.AudioIndex].Resume();
-    }
-
-    public void PreLoad(string FileName)
-    {
-      this.FileName = FileName;
-      this.x2p[(int) this.AudioIndex].Reset();
-    }
-
-    public void FilterON()
-    {
-      this.x2p[(int) this.AudioIndex].FilterON();
-    }
-
-    public void FilterOFF()
-    {
-      this.x2p[(int) this.AudioIndex].FilterOFF();
-    }
-
-    public void Dispose()
-    {
-      for (int index = 0; index < this.x2p.Length; ++index)
-      {
-        if (this.x2p[(int) this.AudioIndex] != null)
-          this.x2p[(int) this.AudioIndex].Dispose();
-      }
-    }
-  }
 }

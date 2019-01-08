@@ -12,14 +12,9 @@ namespace Shooting {
             Active=true;
             ColorValue=Color.Blue;
         }
-
         public override void HitCheckAll() {
-            if(HitCheck(MyPlane,48f)) {
-                Obtain=true;
-            } 
-            if(!HitCheck(MyPlane)) {
-                return;
-            } 
+            if(HitCheck(MyPlane,48f)) Obtain=true;
+            if(!HitCheck(MyPlane)) return;
             ItemList.Remove(this);
             if(ColorValue==Color.Red) {
                 MyPlane.LastColor=EnchantmentType.Red;
@@ -28,7 +23,6 @@ namespace Shooting {
             } else if(ColorValue==Color.Green) {
                 MyPlane.LastColor=EnchantmentType.Green;
             }
-
             MyPlane.StarPoint+=800;
             if(ColorValue==Color.Red) {
                 ++MyPlane.LifeChip;
@@ -37,8 +31,7 @@ namespace Shooting {
             } else if(ColorValue==Color.Green) {
                 ++MyPlane.SpellChip;
             }
-
-            StageData.SoundPlay("se_item00.wav",OriginalPosition.X/(float)BoundRect.Width);
+            StageData.SoundPlay("se_item00.wav",OriginalPosition.X/BoundRect.Width);
             for(int index = 0;index<50;++index) {
                 ParticleSmaller particleSmaller = new ParticleSmaller(StageData,"光点",Position,Ran.Next(20,200)/10,Ran.Next(360)/180.0*Math.PI) {
                     LifeTime=20,
@@ -48,7 +41,6 @@ namespace Shooting {
                 };
             }
         }
-
         public override void Ctrl() {
             base.Ctrl();
             if(Time==200) {
@@ -63,17 +55,15 @@ namespace Shooting {
                 AngularVelocityDegree=3f;
                 AngleDegree+=AngularVelocityDegree;
             }
-            if(Time%4!=0) {
-                return;
-            }
-            BaseEffect baseEffect = new BaseEffect(StageData,"StarShardW",Position,0.0f,0.0);
-            baseEffect.Angle=Angle;
-            baseEffect.ScaleVelocity=-0.0125f;
-            baseEffect.TransparentVelocity=-3f;
-            baseEffect.LifeTime=80;
-            baseEffect.ColorValue=ColorValue;
+            if(Time%4!=0) return;
+            BaseEffect baseEffect = new BaseEffect(StageData,"StarShardW",Position,0.0f,0.0) {
+                Angle=Angle,
+                ScaleVelocity=-0.0125f,
+                TransparentVelocity=-3f,
+                LifeTime=80,
+                ColorValue=ColorValue
+            };
         }
-
         public override void Show() {
             Color colorValue = ColorValue;
             ColorValue=Color.White;

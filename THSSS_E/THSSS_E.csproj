@@ -42,7 +42,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -152,7 +152,6 @@
     </Compile>
     <Compile Include="Menus\MenuGroup_GameOver.cs" />
     <Compile Include="Menus\MenuGroup_GameSet.cs" />
-    <Compile Include="Menus\MenuGroup_WeaponSelect.cs" />
     <Compile Include="UI\Item_Line_HiScore.cs" />
     <Compile Include="Enemy\EnemyPlane_TouhouMaoYu.cs" />
     <Compile Include="EndBoss\EndBoss_Touhou02.cs" />
@@ -161,7 +160,6 @@
     <Compile Include="UI\StageTitle.cs" />
     <Compile Include="CompareDepth.cs" />
     <Compile Include="Audio\XAudio2_PlayerV2.cs" />
-    <Compile Include="Planes\SubPlane_Aya.cs" />
     <Compile Include="Partical\ParticleColored.cs" />
     <Compile Include="FullPic.cs" />
     <Compile Include="BaseClasses\BaseBullet.cs" />
@@ -190,7 +188,6 @@
     </Compile>
     <Compile Include="BaseClasses\BaseMyBullet.cs" />
     <Compile Include="BaseClasses\BaseMyBullet_Touhou.cs" />
-    <Compile Include="Planes\Bullet\MyBullet_Aya.cs" />
     <Compile Include="Menus\MenuGroup_Manual.cs" />
     <Compile Include="BaseClasses\BaseMenuItem.cs" />
     <Compile Include="DescriptionMenuItem.cs" />
@@ -199,7 +196,6 @@
     <Compile Include="UI\StageTitle3D.cs" />
     <Compile Include="Backgrounds\BackgroundTouhouStage01C_3D.cs" />
     <Compile Include="Replay.cs" />
-    <Compile Include="Planes\SpellCard\Spell_AyaA.cs" />
     <Compile Include="Partical\Particle.cs" />
     <Compile Include="Effects\Emitter.cs" />
     <Compile Include="InputManager\MouseCtrl.cs" />
@@ -255,7 +251,6 @@
     <Compile Include="ReplayInfo.cs" />
     <Compile Include="MyPlaneInfo.cs" />
     <Compile Include="StoryBox.cs" />
-    <Compile Include="Planes\SubPlane_AyaB.cs" />
     <Compile Include="Backgrounds\BackgroundQB.cs" />
     <Compile Include="Audio\XAudio2_Player.cs" />
     <Compile Include="BaseClasses\BaseItem_Touhou.cs" />
@@ -295,7 +290,6 @@
     <Compile Include="InputManager\JoystickCapture.cs" />
     <Compile Include="Bullets\BulletGuidance.cs" />
     <Compile Include="EndBoss\EndBoss.cs" />
-    <Compile Include="Planes\Player\MyPlane_Aya.cs" />
     <Compile Include="Menus\MenuGroup_StageSelect.cs" />
     <Compile Include="DropItem\PowerItemBig_Touhou.cs" />
     <Compile Include="UI\HP_Line.cs" />
@@ -317,9 +311,6 @@
     <Compile Include="MapKey.cs" />
     <Compile Include="TextureObject.cs" />
     <Compile Include="CharacterName.cs" />
-    <Compile Include="Planes\Bullet\MyBullet_AyaSub.cs" />
-    <Compile Include="Planes\SpellCard\Spell_AyaB.cs" />
-    <Compile Include="Planes\SpellCard\Spell_AyaB_Laser.cs" />
     <Compile Include="TransitionIn.cs" />
     <Compile Include="UI\BossLife_Line.cs" />
     <Compile Include="UI\MySpell_Line.cs" />
@@ -341,8 +332,6 @@
     <Compile Include="Backgrounds\BackgroundSakura.cs" />
     <Compile Include="Model_Mesh.cs" />
     <Compile Include="Information.cs" />
-    <Compile Include="Planes\Player\MyPlane_PlaneB.cs" />
-    <Compile Include="Planes\Player\MyPlane_AyaB.cs" />
     <Compile Include="Menus\MenuOption.cs" />
     <Compile Include="InterfaceDifficulty.cs" />
     <Compile Include="EndBoss\EndBoss_Touhou06.cs" />

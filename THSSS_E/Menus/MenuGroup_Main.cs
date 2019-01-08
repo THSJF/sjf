@@ -1,33 +1,21 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: Shooting.MenuGroup_Main
-// Assembly: THSSS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 9501F839-8E36-4763-8C1B-4AB9B7BE2AA4
-// Assembly location: E:\东方project\非官方游戏\东方夏夜祭 ～ Shining Shooting Star\THSSS.exe
-
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 
 namespace Shooting {
     internal class MenuGroup_Main:BaseMenuGroup {
         public MenuGroup_Main(StageDataPackage StageData) : base(StageData) {
             MenuSelectIndex=0;
-            MenuItemList=new List<BaseMenuItem>()
-           {
-        new BaseMenuItem(StageData, "Menu_Start"),
-        new BaseMenuItem(StageData, "Menu_Practice"),
-        new BaseMenuItem(StageData, "Menu_Replay"),
-        new BaseMenuItem(StageData, "Menu_PlayerData"),
-        new BaseMenuItem(StageData, "Menu_MusicRoom"),
-        new BaseMenuItem(StageData, "Menu_Option"),
-        new BaseMenuItem(StageData, "Menu_Manual"),
-        new BaseMenuItem(StageData, "Menu_Exit")
-      };
-            if(StageData.PData.C_History.FindAll((a => a.NoContinueClearTimes>0)).Count>0) {
-                MenuItemList.Insert(1,new BaseMenuItem(StageData,"Menu_ExtraStart"));
-            } else {
-                MenuItemList.Insert(1,new BaseMenuItem(StageData,"DMenu_ExtraStart"));
-            } 
+            MenuItemList=new List<BaseMenuItem>(){
+                new BaseMenuItem(StageData, "Menu_Start"),
+                new BaseMenuItem(StageData, "Menu_Practice"),
+                new BaseMenuItem(StageData, "Menu_Replay"),
+                new BaseMenuItem(StageData, "Menu_PlayerData"),
+                new BaseMenuItem(StageData, "Menu_MusicRoom"),
+                new BaseMenuItem(StageData, "Menu_Option"),
+                new BaseMenuItem(StageData, "Menu_Manual"),
+                new BaseMenuItem(StageData, "Menu_Exit")
+              };
+            MenuItemList.Insert(1,new BaseMenuItem(StageData,StageData.PData.C_History.FindAll((a => a.NoContinueClearTimes>0)).Count>0 ? "Menu_ExtraStart" : "DMenu_ExtraStart"));
             int num1 = 50;
             int num2 = 190;
             int num3 = -200;
@@ -41,7 +29,6 @@ namespace Shooting {
             }
             MenuItemList[MenuSelectIndex].Selected=true;
         }
-
         public override void ProcessKeys() {
             base.ProcessKeys();
             if(KClass.Key_Z&&LastZ==0) {
@@ -49,13 +36,11 @@ namespace Shooting {
                 OnChangeMenu=TimeMain+20;
                 StageData.SoundPlay("se_ok00.wav");
             }
-            if(!KClass.Key_X&&!KClass.Key_ESC||LastX!=0)
-                return;
+            if(!KClass.Key_X&&!KClass.Key_ESC||LastX!=0) return;
             MenuSelectIndex=MenuItemList.Count-1;
             SelectItemChanged();
             StageData.SoundPlay("se_cancel00.wav");
         }
-
         public override void ProcessZ() {
             switch(MenuItemList[MenuSelectIndex].Name) {
                 case "Menu_Start":
