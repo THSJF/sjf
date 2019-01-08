@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+﻿ 
 // Type: Shooting.Planes.Story.Story_SSS01_01D
 // Assembly: THSSS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: 9501F839-8E36-4763-8C1B-4AB9B7BE2AA4
