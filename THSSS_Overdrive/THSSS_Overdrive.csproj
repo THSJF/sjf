@@ -1,0 +1,677 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: E:\东方project\非官方游戏\东方夏夜祭 ～ Shining Shooting Star\THSSS.exe-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0075A171-A5E8-4A63-B253-4CCE432629EC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>THSSS_Overdrive</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>Shooting</RootNamespace>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="SlimDX" />
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SourseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SourseForm.Designer.cs">
+      <DependentUpon>SourseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TexturedColoredVertex.cs" />
+    <Compile Include="BaseObject.cs" />
+    <Compile Include="BaseStory.cs" />
+    <Compile Include="BaseNum.cs" />
+    <Compile Include="BaseEffect.cs" />
+    <Compile Include="ParticleScore.cs" />
+    <Compile Include="GameTitle.cs" />
+    <Compile Include="BaseMenuGroup.cs" />
+    <Compile Include="MenuGroup_PlayerSelect.cs" />
+    <Compile Include="BaseItem.cs" />
+    <Compile Include="BaseInterface.cs" />
+    <Compile Include="Item_Line.cs" />
+    <Compile Include="BossMark.cs" />
+    <Compile Include="BaseEnemyPlane.cs" />
+    <Compile Include="BaseEnemyPlane_Touhou.cs" />
+    <Compile Include="EnemyPlane_TouhouYYY.cs" />
+    <Compile Include="EnemyPlane_TouhouBig.cs" />
+    <Compile Include="EnemyPlane_TouhouSmall.cs" />
+    <Compile Include="EndBoss_Touhou.cs" />
+    <Compile Include="EndBoss_Touhou04.cs" />
+    <Compile Include="ParticleBossFire.cs" />
+    <Compile Include="ParticleEndBullet.cs" />
+    <Compile Include="BaseBulleEmitter.cs" />
+    <Compile Include="BaseSpellCard.cs" />
+    <Compile Include="Background3DObject.cs" />
+    <Compile Include="Background3DParticle.cs" />
+    <Compile Include="BaseBackgroundTouhouStage_3D.cs" />
+    <Compile Include="BackgroundTouhouStage02_3D.cs" />
+    <Compile Include="BackgroundTouhouStage01_3D.cs" />
+    <Compile Include="IModel.cs" />
+    <Compile Include="Model.cs" />
+    <Compile Include="Model_Circle.cs" />
+    <Compile Include="BaseParticle3D.cs" />
+    <Compile Include="Particle3D2.cs" />
+    <Compile Include="xWMAStream.cs" />
+    <Compile Include="Form_Test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TexturedVertex.cs" />
+    <Compile Include="BaseSubPlane.cs" />
+    <Compile Include="SubPlane_PlaneB.cs" />
+    <Compile Include="BackgroundManager.cs" />
+    <Compile Include="BackgroundBlack.cs" />
+    <Compile Include="BaseMyPlane.cs" />
+    <Compile Include="BaseMyPlane_Touhou.cs" />
+    <Compile Include="MenuGroup_ReplayStageSelect.cs" />
+    <Compile Include="MenuGroup_RankSelect.cs" />
+    <Compile Include="MenuGroup_Main.cs" />
+    <Compile Include="EndBoss_Touhou03.cs" />
+    <Compile Include="ParticleEndAyaBullet.cs" />
+    <Compile Include="MusicTitle.cs" />
+    <Compile Include="EndStage.cs" />
+    <Compile Include="BaseBoss.cs" />
+    <Compile Include="BaseBossTouhou.cs" />
+    <Compile Include="BaseBullet_Touhou.cs" />
+    <Compile Include="Bullet_Touhou_01.cs" />
+    <Compile Include="BackgroundTree.cs" />
+    <Compile Include="Particle3D1.cs" />
+    <Compile Include="Wave_Player.cs" />
+    <Compile Include="IGameState.cs" />
+    <Compile Include="BaseGameState.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BaseStage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameState_testStage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BaseMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameState_ReplaySaveMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EnemyPlane_TouhouGhost.cs" />
+    <Compile Include="BaseSpell.cs" />
+    <Compile Include="ParticleBiger.cs" />
+    <Compile Include="BulletTitle.cs" />
+    <Compile Include="BackgroundSnow.cs" />
+    <Compile Include="GlobalDataPackage.cs" />
+    <Compile Include="RenderForm_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuGroup_GameOver.cs" />
+    <Compile Include="MenuGroup_GameSet.cs" />
+    <Compile Include="MenuGroup_WeaponSelect.cs" />
+    <Compile Include="Item_Line_HiScore.cs" />
+    <Compile Include="EnemyPlane_TouhouMaoYu.cs" />
+    <Compile Include="EndBoss_Touhou02.cs" />
+    <Compile Include="Background2DRemover.cs" />
+    <Compile Include="BulletRemover.cs" />
+    <Compile Include="StageTitle.cs" />
+    <Compile Include="CompareDepth.cs" />
+    <Compile Include="XAudio2_PlayerV2.cs" />
+    <Compile Include="SubPlane_Aya.cs" />
+    <Compile Include="ParticleColored.cs" />
+    <Compile Include="FullPic.cs" />
+    <Compile Include="BaseBullet.cs" />
+    <Compile Include="GameRegion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EmitterSaveEnegy3.cs" />
+    <Compile Include="MenuGroup_ReplaySaver.cs" />
+    <Compile Include="MenuGroup_ReplayLoader.cs" />
+    <Compile Include="EmitterGiveOutEnegy3D.cs" />
+    <Compile Include="EndBoss_Touhou01.cs" />
+    <Compile Include="SpellCardAttack.cs" />
+    <Compile Include="SpellCardBonus.cs" />
+    <Compile Include="Bullet_TouhouFire.cs" />
+    <Compile Include="BackgroundTouhouStage01B_3D.cs" />
+    <Compile Include="BackgroundRotate.cs" />
+    <Compile Include="BackgroundYoumu.cs" />
+    <Compile Include="BackgroundWing.cs" />
+    <Compile Include="Item_Line_Blue.cs" />
+    <Compile Include="BulletLaser.cs" />
+    <Compile Include="BaseStoryItem.cs" />
+    <Compile Include="BaseParticle.cs" />
+    <Compile Include="EmitterSaveEnegy2.cs" />
+    <Compile Include="GameState_MainMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BaseMyBullet.cs" />
+    <Compile Include="BaseMyBullet_Touhou.cs" />
+    <Compile Include="MyBullet_Aya.cs" />
+    <Compile Include="MenuGroup_Manual.cs" />
+    <Compile Include="BaseMenuItem.cs" />
+    <Compile Include="DescriptionMenuItem.cs" />
+    <Compile Include="SCMenuItem.cs" />
+    <Compile Include="Item_Line_Red.cs" />
+    <Compile Include="StageTitle3D.cs" />
+    <Compile Include="BackgroundTouhouStage01C_3D.cs" />
+    <Compile Include="Replay.cs" />
+    <Compile Include="Spell_AyaA.cs" />
+    <Compile Include="Particle.cs" />
+    <Compile Include="Emitter.cs" />
+    <Compile Include="MouseCtrl.cs" />
+    <Compile Include="Watch.cs" />
+    <Compile Include="MenuGroup_ScoreSaver.cs" />
+    <Compile Include="MenuGroup_ReplayNamer.cs" />
+    <Compile Include="CharacterMenuItem.cs" />
+    <Compile Include="Item_Line_Score.cs" />
+    <Compile Include="BossPetal.cs" />
+    <Compile Include="BossPetalEmitter01.cs" />
+    <Compile Include="ItemBonus.cs" />
+    <Compile Include="TextTwinkle.cs" />
+    <Compile Include="Bullet_Touhou_01_04.cs" />
+    <Compile Include="BackgroundPetal3D3.cs" />
+    <Compile Include="BackgroundLeaf3D.cs" />
+    <Compile Include="BackgroundMove.cs" />
+    <Compile Include="GameState_PauseMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PlayerData.cs" />
+    <Compile Include="SpellCardHistory.cs" />
+    <Compile Include="ScoreHistory.cs" />
+    <Compile Include="ClearHistory.cs" />
+    <Compile Include="CG.cs" />
+    <Compile Include="Life_Line.cs" />
+    <Compile Include="CharacterR.cs" />
+    <Compile Include="ParticleLongerByV.cs" />
+    <Compile Include="EmitterSaveEnegy.cs" />
+    <Compile Include="INI_RW.cs" />
+    <Compile Include="MenuGroup_PlayerData.cs" />
+    <Compile Include="BulletRemover2.cs" />
+    <Compile Include="Bullet_Touhou_01_03.cs" />
+    <Compile Include="BackgroundPetal3D.cs" />
+    <Compile Include="BackgroundStage1_3D.cs" />
+    <Compile Include="KeyboardCapture.cs" />
+    <Compile Include="GameState_GameOverMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Spell_PlaneB.cs" />
+    <Compile Include="PlaneSpark.cs" />
+    <Compile Include="MP3_Player.cs" />
+    <Compile Include="APIClass.cs" />
+    <Compile Include="GameState_SplashScreen.cs" />
+    <Compile Include="GameState_SplashScreen2.cs" />
+    <Compile Include="Bullet_Touhou_01_02.cs" />
+    <Compile Include="BulletYukaLaser.cs" />
+    <Compile Include="BulletPicEmitter.cs" />
+    <Compile Include="StageTitlePetal2.cs" />
+    <Compile Include="MapJoyStick.cs" />
+    <Compile Include="GameState_MusicLoading.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReplayInfo.cs" />
+    <Compile Include="MyPlaneInfo.cs" />
+    <Compile Include="StoryBox.cs" />
+    <Compile Include="SubPlane_AyaB.cs" />
+    <Compile Include="BackgroundQB.cs" />
+    <Compile Include="XAudio2_Player.cs" />
+    <Compile Include="BaseItem_Touhou.cs" />
+    <Compile Include="ScoreItem_Touhou2.cs" />
+    <Compile Include="ScoreItem_Touhou.cs" />
+    <Compile Include="PowerItem_Touhou.cs" />
+    <Compile Include="Bullet_Touhou_01_01.cs" />
+    <Compile Include="IEnvironment.cs" />
+    <Compile Include="BackgroundParticle3D2.cs" />
+    <Compile Include="GameState_ED.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CharacterR_Touhou.cs" />
+    <Compile Include="CharacterL_Touhou.cs" />
+    <Compile Include="ParticleWater.cs" />
+    <Compile Include="Emitter2.cs" />
+    <Compile Include="BackgroundSC.cs" />
+    <Compile Include="StageDataPackage.cs" />
+    <Compile Include="Bullet_StraightLaser.cs" />
+    <Compile Include="BackgroundParticle3D1.cs" />
+    <Compile Include="BackgroundManager3D.cs" />
+    <Compile Include="BackgroundFix.cs" />
+    <Compile Include="BackgroundUUZtree.cs" />
+    <Compile Include="ErrorLog.cs" />
+    <Compile Include="Encryption.cs" />
+    <Compile Include="ScreenTexture.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="MyLife_Line.cs" />
+    <Compile Include="ParticleFire.cs" />
+    <Compile Include="MySprite.cs" />
+    <Compile Include="MenuGroup_Pause.cs" />
+    <Compile Include="CompareLayer.cs" />
+    <Compile Include="BackgroundParticleEmitter.cs" />
+    <Compile Include="BackgroundGroup03.cs" />
+    <Compile Include="BackgroundMySC.cs" />
+    <Compile Include="BackgroundTransitionIn.cs" />
+    <Compile Include="JoystickCapture.cs" />
+    <Compile Include="BulletGuidance.cs" />
+    <Compile Include="EndBoss.cs" />
+    <Compile Include="MyPlane_Aya.cs" />
+    <Compile Include="MenuGroup_StageSelect.cs" />
+    <Compile Include="PowerItemBig_Touhou.cs" />
+    <Compile Include="HP_Line.cs" />
+    <Compile Include="EmitterBossFire.cs" />
+    <Compile Include="BackgroundGroup02.cs" />
+    <Compile Include="GameState_GameSetMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CharacterL.cs" />
+    <Compile Include="TransitionOut.cs" />
+    <Compile Include="ParticleBack.cs" />
+    <Compile Include="ParticleSmaller.cs" />
+    <Compile Include="Game_Main.cs" />
+    <Compile Include="LifeItem_Touhou.cs" />
+    <Compile Include="ItemGetter.cs" />
+    <Compile Include="EndBoss_Touhou_Small.cs" />
+    <Compile Include="ParticleBonusNum.cs" />
+    <Compile Include="BackgroundGroup01.cs" />
+    <Compile Include="MapKey.cs" />
+    <Compile Include="TextureObject.cs" />
+    <Compile Include="CharacterName.cs" />
+    <Compile Include="MyBullet_AyaSub.cs" />
+    <Compile Include="Spell_AyaB.cs" />
+    <Compile Include="Spell_AyaB_Laser.cs" />
+    <Compile Include="TransitionIn.cs" />
+    <Compile Include="BossLife_Line.cs" />
+    <Compile Include="MySpell_Line.cs" />
+    <Compile Include="EndEnemy.cs" />
+    <Compile Include="Item_Line_Gray.cs" />
+    <Compile Include="EDPetal_Emitter.cs" />
+    <Compile Include="EDPetal.cs" />
+    <Compile Include="Bullet_RadialLaser.cs" />
+    <Compile Include="BackgroundTouhouWater.cs" />
+    <Compile Include="DifficultLevel.cs" />
+    <Compile Include="Spell.cs" />
+    <Compile Include="SpellClock.cs" />
+    <Compile Include="MagicCircle.cs" />
+    <Compile Include="KeyClass.cs" />
+    <Compile Include="MenuGroup_MusicRoom.cs" />
+    <Compile Include="ParticleBossFire2.cs" />
+    <Compile Include="ParticleBeginBullet.cs" />
+    <Compile Include="BulletGroupCircle.cs" />
+    <Compile Include="BackgroundSakura.cs" />
+    <Compile Include="Model_Mesh.cs" />
+    <Compile Include="Information.cs" />
+    <Compile Include="MyPlane_PlaneB.cs" />
+    <Compile Include="MyPlane_AyaB.cs" />
+    <Compile Include="MenuOption.cs" />
+    <Compile Include="InterfaceDifficulty.cs" />
+    <Compile Include="EndBoss_Touhou06.cs" />
+    <Compile Include="EmitterSaveEnegy3D.cs" />
+    <Compile Include="ParticleScoreValue.cs" />
+    <Compile Include="Bullet_BendLaser.cs" />
+    <Compile Include="BulletPicEmitter01.cs" />
+    <Compile Include="Particle3D4.cs" />
+    <Compile Include="StateSwitchDataPackage.cs" />
+    <Compile Include="BackgroundTransitionOut.cs" />
+    <Compile Include="Item_Line_Green.cs" />
+    <Compile Include="EndBoss_Touhou05.cs" />
+    <Compile Include="Particle3D_BendLaser.cs" />
+    <Compile Include="Particle3D3.cs" />
+    <Compile Include="ParticleManager3D.cs" />
+    <Compile Include="MyRandom.cs" />
+    <Compile Include="ScreenTexManager.cs" />
+    <Compile Include="SubPlane_Sanae.cs" />
+    <Compile Include="BaseObject_CS.cs" />
+    <Compile Include="EndBoss_FSC03.cs" />
+    <Compile Include="EnchantmentMagicCircle.cs" />
+    <Compile Include="FullPic2.cs" />
+    <Compile Include="SpellCard_SSSEx_06C.cs" />
+    <Compile Include="SpellCard_SSSEx_05B.cs" />
+    <Compile Include="SpellCard_SSS06_02.cs" />
+    <Compile Include="SpellCard_SSS04_01.cs" />
+    <Compile Include="Boss_Koreirei01.cs" />
+    <Compile Include="Boss_Ami03.cs" />
+    <Compile Include="SpellCard_SSSEx_03A.cs" />
+    <Compile Include="EnchantmentType.cs" />
+    <Compile Include="MyBullet_MarisaSub.cs" />
+    <Compile Include="Item_Line_SpellChip.cs" />
+    <Compile Include="EndBoss_FSCEx.cs" />
+    <Compile Include="EndBoss_FSC02.cs" />
+    <Compile Include="BaseRadialLaser_CS.cs" />
+    <Compile Include="SpellCard_SSSEx_07C.cs" />
+    <Compile Include="SpellCard_SSSEx_06B.cs" />
+    <Compile Include="Boss_Rika02.cs" />
+    <Compile Include="SpellCard_SSS06_01.cs" />
+    <Compile Include="Boss_Rakukun02.cs" />
+    <Compile Include="BaseFSC.cs" />
+    <Compile Include="SpellCard_SSS04_FSC.cs" />
+    <Compile Include="Boss_Ami02.cs" />
+    <Compile Include="SpellCard_SSSEx_04A.cs" />
+    <Compile Include="BackgroundBoss04.cs" />
+    <Compile Include="GameState_SSS06.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Shinmyoumaru.cs" />
+    <Compile Include="MyPlane_Reimu.cs" />
+    <Compile Include="BeliefItem_Touhou.cs" />
+    <Compile Include="Item_Line_LifeChip.cs" />
+    <Compile Include="EndBoss_TouhouEx.cs" />
+    <Compile Include="EndBoss_FSC01.cs" />
+    <Compile Include="EmitterStageTitleStar.cs" />
+    <Compile Include="BaseBackground.cs" />
+    <Compile Include="BulletRemover_Small.cs" />
+    <Compile Include="BaseEffect_CS.cs" />
+    <Compile Include="SpellCard_SSSEx_07B.cs" />
+    <Compile Include="Boss_Rika01.cs" />
+    <Compile Include="Boss_Rakukun01.cs" />
+    <Compile Include="SpellCard_SSS01_FSC.cs" />
+    <Compile Include="Boss_Ami01.cs" />
+    <Compile Include="SpellCard_SSSEx_05A.cs" />
+    <Compile Include="BackgroundGroupSSS01.cs" />
+    <Compile Include="GameState_Boss06.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameState_SSS05.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Spell_Shinmyoumaru.cs" />
+    <Compile Include="MenuGroup_SCPractice.cs" />
+    <Compile Include="SpellCard_SSSEx_FSC.cs" />
+    <Compile Include="SpellCard_SSSEx_06A.cs" />
+    <Compile Include="EnvironmentSSS06.cs" />
+    <Compile Include="GameState_Boss05.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameState_SSS04.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BaseStraightLaser_CS.cs" />
+    <Compile Include="SpellCard_SSSEx_10.cs" />
+    <Compile Include="SpellCard_SSS03_05.cs" />
+    <Compile Include="SpellCard_SSSEx_07A.cs" />
+    <Compile Include="EnvironmentSSS05.cs" />
+    <Compile Include="StageTitle3D2.cs" />
+    <Compile Include="GameState_Boss04.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameState_SSS03.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EmitterTitleStarFall.cs" />
+    <Compile Include="EmitterStarFall01.cs" />
+    <Compile Include="ParticleTitleStar.cs" />
+    <Compile Include="EventGroup.cs" />
+    <Compile Include="SpellCard_SSS05_05.cs" />
+    <Compile Include="Boss_Rakuki04.cs" />
+    <Compile Include="SpellCard_SSS03_04.cs" />
+    <Compile Include="SpellCard_SSS01_03.cs" />
+    <Compile Include="EnvironmentSSS04.cs" />
+    <Compile Include="Model_Triangle.cs" />
+    <Compile Include="GameState_Boss03.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameState_SSSEx.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameState_SSS02.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyPlane_Koishi.cs" />
+    <Compile Include="ClearBonus.cs" />
+    <Compile Include="CSEmitterController.cs" />
+    <Compile Include="SpellCard_SSS05_04.cs" />
+    <Compile Include="SpellCard_SSS05_FSC.cs" />
+    <Compile Include="SpellCard_SSS04_02D.cs" />
+    <Compile Include="SpellCard_SSS03_03.cs" />
+    <Compile Include="SpellCard_SSS01_02.cs" />
+    <Compile Include="EnvironmentSSS03.cs" />
+    <Compile Include="GameState_Boss02.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GameState_SSS01.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AutoPlane.cs" />
+    <Compile Include="SubPlane_Reimu.cs" />
+    <Compile Include="StarPointLineG.cs" />
+    <Compile Include="CS_Data.cs" />
+    <Compile Include="BaseEmitter_CS.cs" />
+    <Compile Include="SpellCard_SSSEx_03.cs" />
+    <Compile Include="SpellCard_SSS05_03.cs" />
+    <Compile Include="SpellCard_SSS04_03D.cs" />
+    <Compile Include="SpellCard_SSS04_02C.cs" />
+    <Compile Include="SpellCard_SSS03_02.cs" />
+    <Compile Include="SpellCard_SSS02_FSC.cs" />
+    <Compile Include="SpellCard_SSS01_01.cs" />
+    <Compile Include="BackgroundBoss06.cs" />
+    <Compile Include="EnvironmentSSSEx.cs" />
+    <Compile Include="EnvironmentSSS02.cs" />
+    <Compile Include="GameState_Boss01.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Spell_Reimu.cs" />
+    <Compile Include="SubPlane_Koishi.cs" />
+    <Compile Include="MenuGroup_RankSelectEx.cs" />
+    <Compile Include="Execution.cs" />
+    <Compile Include="BaseBullet_CS.cs" />
+    <Compile Include="SpellCard_SSSEx_02.cs" />
+    <Compile Include="SpellCard_SSS05_02.cs" />
+    <Compile Include="SpellCard_SSS04_03C.cs" />
+    <Compile Include="SpellCard_SSS04_02B.cs" />
+    <Compile Include="SpellCard_SSS03_01.cs" />
+    <Compile Include="BaseTimeSC.cs" />
+    <Compile Include="SpellCard_SSS04_04D.cs" />
+    <Compile Include="EnvironmentSSS01.cs" />
+    <Compile Include="SpellCard_SSS06_FSC03.cs" />
+    <Compile Include="Spell_Sanae.cs" />
+    <Compile Include="EmitterMode.cs" />
+    <Compile Include="SpellCard_SSSEx_01.cs" />
+    <Compile Include="Boss_Tensei02.cs" />
+    <Compile Include="SpellCard_SSS05_01.cs" />
+    <Compile Include="SpellCard_SSS04_04C.cs" />
+    <Compile Include="SpellCard_SSS04_03B.cs" />
+    <Compile Include="SpellCard_SSS04_02A.cs" />
+    <Compile Include="SpellItem_Touhou.cs" />
+    <Compile Include="SpellDisable.cs" />
+    <Compile Include="EnchantmentBonus.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="SpellCard_SSSEx_01D.cs" />
+    <Compile Include="SpellCard_SSS06_FSC02.cs" />
+    <Compile Include="Boss_Tensei01.cs" />
+    <Compile Include="SpellCard_SSS05_00.cs" />
+    <Compile Include="SpellCard_SSS04_04B.cs" />
+    <Compile Include="SpellCard_SSS04_03A.cs" />
+    <Compile Include="Spell_Koishi.cs" />
+    <Compile Include="BossStar.cs" />
+    <Compile Include="BossStarEmitter01.cs" />
+    <Compile Include="SpellCard_SSSEx_02D.cs" />
+    <Compile Include="SpellCard_SSSEx_09.cs" />
+    <Compile Include="SpellCard_SSS06_FSC01.cs" />
+    <Compile Include="SpellCard_SSS04_04A.cs" />
+    <Compile Include="StarPointLineB.cs" />
+    <Compile Include="SelectBox.cs" />
+    <Compile Include="SpellCard_SSSEx_03D.cs" />
+    <Compile Include="SpellCard_SSSEx_01C.cs" />
+    <Compile Include="SpellCard_SSSEx_08.cs" />
+    <Compile Include="SubPlane_Marisa.cs" />
+    <Compile Include="MenuGroup_PlayerSelectEx.cs" />
+    <Compile Include="StarPointLineR.cs" />
+    <Compile Include="EnemyType.cs" />
+    <Compile Include="BaseCover_CS.cs" />
+    <Compile Include="SpellCard_SSSEx_04D.cs" />
+    <Compile Include="SpellCard_SSSEx_02C.cs" />
+    <Compile Include="SpellCard_SSSEx_01B.cs" />
+    <Compile Include="SpellCard_SSS06_06.cs" />
+    <Compile Include="SpellCard_SSS04_05.cs" />
+    <Compile Include="Boss_Kage02.cs" />
+    <Compile Include="Boss_Seiryuu02.cs" />
+    <Compile Include="SpellCard_SSS03_FSC.cs" />
+    <Compile Include="SpellCard_SSS02_04.cs" />
+    <Compile Include="BackgroundBoss05.cs" />
+    <Compile Include="BackgroundMove2.cs" />
+    <Compile Include="Dpi.cs" />
+    <Compile Include="MyPlane_Sanae.cs" />
+    <Compile Include="MarisaLaser.cs" />
+    <Compile Include="ShootingStarShard.cs" />
+    <Compile Include="EndBoss_FSC06.cs" />
+    <Compile Include="Hash.cs" />
+    <Compile Include="SpellCard_SSSEx_05D.cs" />
+    <Compile Include="SpellCard_SSSEx_03C.cs" />
+    <Compile Include="SpellCard_SSSEx_02B.cs" />
+    <Compile Include="SpellCard_SSS06_05.cs" />
+    <Compile Include="Boss_Kage01.cs" />
+    <Compile Include="Boss_Seiryuu01.cs" />
+    <Compile Include="SpellCard_SSS02_03.cs" />
+    <Compile Include="Boss_Rakuki03.cs" />
+    <Compile Include="Boss_Seiryuu03.cs" />
+    <Compile Include="BackgroundBossEx.cs" />
+    <Compile Include="Boss_Freya07.cs" />
+    <Compile Include="MyPlane_Marisa.cs" />
+    <Compile Include="StarItem_Touhou.cs" />
+    <Compile Include="EnemyPlane_TouhouNormal.cs" />
+    <Compile Include="EndBoss_FSC05.cs" />
+    <Compile Include="EnemyFactory.cs" />
+    <Compile Include="SpellCard_SSSEx_06D.cs" />
+    <Compile Include="SpellCard_SSSEx_04C.cs" />
+    <Compile Include="SpellCard_SSSEx_03B.cs" />
+    <Compile Include="SpellCard_SSSEx_01A.cs" />
+    <Compile Include="SpellCard_SSS06_04.cs" />
+    <Compile Include="Boss_Rakuki02.cs" />
+    <Compile Include="SpellCard_SSS02_02.cs" />
+    <Compile Include="TenseiWing.cs" />
+    <Compile Include="MyBorder_Line.cs" />
+    <Compile Include="EndBoss_FSC04.cs" />
+    <Compile Include="FullPic3.cs" />
+    <Compile Include="BaseBendLaser_CS.cs" />
+    <Compile Include="SpellCard_SSSEx_07D.cs" />
+    <Compile Include="SpellCard_SSSEx_05C.cs" />
+    <Compile Include="SpellCard_SSSEx_04B.cs" />
+    <Compile Include="SpellCard_SSS06_03.cs" />
+    <Compile Include="SpellCard_SSS02_01.cs" />
+    <Compile Include="Boss_Rakuki01.cs" />
+    <Compile Include="SpellCard_SSSEx_02A.cs" />
+    <Compile Include="Properties\Resources.cs" />
+    <Compile Include="Properties\Settings.cs" />
+    <Compile Include="Planes\Story\DescriptionBox.cs" />
+    <Compile Include="Planes\Story\StoryStar.cs" />
+    <Compile Include="Planes\Story\Conversation.cs" />
+    <Compile Include="Planes\Story\BaseStory_SSS.cs" />
+    <Compile Include="Planes\Story\Story_SSStaff.cs" />
+    <Compile Include="Planes\Story\StoryEmitterStar.cs" />
+    <Compile Include="Planes\Story\Story_SSS01_01X.cs" />
+    <Compile Include="Planes\Story\Story_SSSEx_02.cs" />
+    <Compile Include="Planes\Story\Story_SSS03_01X.cs" />
+    <Compile Include="Planes\Story\Story_SSS02_01X.cs" />
+    <Compile Include="Planes\Story\Story_SSS01_02X.cs" />
+    <Compile Include="Planes\Story\Story_SSSEx_01.cs" />
+    <Compile Include="Planes\Story\Story_SSS05_03.cs" />
+    <Compile Include="Planes\Story\Story_SSS03_02X.cs" />
+    <Compile Include="Planes\Story\Story_SSS02_02X.cs" />
+    <Compile Include="Planes\Story\Story_SSS02_02.cs" />
+    <Compile Include="Planes\Story\Story_SSS01_02.cs" />
+    <Compile Include="Planes\Story\Story_SSS05_02.cs" />
+    <Compile Include="Planes\Story\Story_SSS04_02.cs" />
+    <Compile Include="Planes\Story\Story_SSS03_02.cs" />
+    <Compile Include="Planes\Story\Story_SSS01_01D.cs" />
+    <Compile Include="Planes\Story\Story_SSS02_01.cs" />
+    <Compile Include="Planes\Story\Story_SSS01_01C.cs" />
+    <Compile Include="Planes\Story\Story_SSS01_01.cs" />
+    <Compile Include="Planes\Story\Story_SSS06_01.cs" />
+    <Compile Include="Planes\Story\Story_SSS05_01.cs" />
+    <Compile Include="Planes\Story\Story_SSS04_01.cs" />
+    <Compile Include="Planes\Story\Story_SSS03_01D.cs" />
+    <Compile Include="Planes\Story\Story_SSS03_01.cs" />
+    <Compile Include="Planes\Story\Story_SSS02_01D.cs" />
+    <Compile Include="Planes\Story\Story_SSS01_02D.cs" />
+    <Compile Include="Planes\Story\Story_SSS02_01C.cs" />
+    <Compile Include="Planes\Story\Story_SSS01_02C.cs" />
+    <Compile Include="Planes\Story\Story_SSS03_02D.cs" />
+    <Compile Include="Planes\Story\Story_SSS03_01C.cs" />
+    <Compile Include="Planes\Story\Story_SSS02_02D.cs" />
+    <Compile Include="Planes\Story\Story_SSS01_01B.cs" />
+    <Compile Include="Planes\Story\Story_SSS02_02C.cs" />
+    <Compile Include="Planes\Story\Story_SSS03_01B.cs" />
+    <Compile Include="Planes\Story\Story_SSS03_02C.cs" />
+    <Compile Include="Planes\Story\Story_SSS02_01B.cs" />
+    <Compile Include="Planes\Story\Story_SSS01_01A.cs" />
+    <Compile Include="Planes\Story\Story_SSS01_02B.cs" />
+    <Compile Include="Planes\Story\Story_SSS03_01A.cs" />
+    <Compile Include="Planes\Story\Story_SSS03_02B.cs" />
+    <Compile Include="Planes\Story\Story_SSS02_01A.cs" />
+    <Compile Include="Planes\Story\Story_SSS02_02B.cs" />
+    <Compile Include="Planes\Story\Story_SSS01_02A.cs" />
+    <Compile Include="Planes\Story\Story_SSS03_02A.cs" />
+    <Compile Include="Planes\Story\Story_SSS02_02A.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BaseGameState.resx" />
+    <EmbeddedResource Include="BaseMenu.resx" />
+    <EmbeddedResource Include="BaseStage.resx" />
+    <EmbeddedResource Include="Form_Test.resx" />
+    <EmbeddedResource Include="GameRegion.resx" />
+    <EmbeddedResource Include="GameState_GameOverMenu.resx" />
+    <EmbeddedResource Include="GameState_GameSetMenu.resx" />
+    <EmbeddedResource Include="GameState_MainMenu.resx" />
+    <EmbeddedResource Include="GameState_MusicLoading.resx" />
+    <EmbeddedResource Include="GameState_PauseMenu.resx" />
+    <EmbeddedResource Include="GameState_ReplaySaveMenu.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="RenderForm_Main.resx" />
+    <EmbeddedResource Include="SourseForm.resx">
+      <DependentUpon>SourseForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
