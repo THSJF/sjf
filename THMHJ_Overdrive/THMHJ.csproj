@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: F:\BaiduNetdiskDownload\thmhj 1.04\THMHJ.exe-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E8C845CC-8EE2-4EB9-BBF5-C9067C7055A9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>THMHJ_O</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>THMHJ</RootNamespace>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework.Game" />
+    <Reference Include="Microsoft.Xna.Framework" />
+    <Reference Include="SpriteFontX">
+      <HintPath>lib\SpriteFontX.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IniFiles.cs" />
+    <Compile Include="SourseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SourseForm.Designer.cs">
+      <DependentUpon>SourseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Watch.cs" />
+    <Compile Include="PracticeScore.cs" />
+    <Compile Include="PracticeData.cs" />
+    <Compile Include="PRACTICE.cs" />
+    <Compile Include="Sprite.cs" />
+    <Compile Include="Colors.cs" />
+    <Compile Include="ValueEvent.cs" />
+    <Compile Include="ChangeType.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="JOYBUTTONS.cs" />
+    <Compile Include="PadState.cs" />
+    <Compile Include="JOYKEYS.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Entrance.cs" />
+    <Compile Include="Difficulty.cs" />
+    <Compile Include="Cname.cs" />
+    <Compile Include="AchievementBase.cs" />
+    <Compile Include="SimpleAchievement.cs" />
+    <Compile Include="ConditionAchievement.cs" />
+    <Compile Include="PlayData.cs" />
+    <Compile Include="1PLAYDATA.cs" />
+    <Compile Include="PlayerData.cs" />
+    <Compile Include="SpellCardData.cs" />
+    <Compile Include="Modes.cs" />
+    <Compile Include="SpecialData.cs" />
+    <Compile Include="SpellCardChallenges.cs" />
+    <Compile Include="SpellCard.cs" />
+    <Compile Include="BGM.cs" />
+    <Compile Include="Music.cs" />
+    <Compile Include="Cry.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="EquipShoot.cs" />
+    <Compile Include="Time.cs" />
+    <Compile Include="SelfBarrage.cs" />
+    <Compile Include="Force.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="LayerManager.cs" />
+    <Compile Include="Layer.cs" />
+    <Compile Include="Center.cs" />
+    <Compile Include="Character.cs" />
+    <Compile Include="Barrage.cs" />
+    <Compile Include="Bonus.cs" />
+    <Compile Include="Dialog.cs" />
+    <Compile Include="Boss.cs" />
+    <Compile Include="PointF.cs" />
+    <Compile Include="Line.cs" />
+    <Compile Include="Sound.cs" />
+    <Compile Include="SelfBarrageManager.cs" />
+    <Compile Include="EnemyManager.cs" />
+    <Compile Include="Enemy.cs" />
+    <Compile Include="JOYFLAG.cs" />
+    <Compile Include="JOYINFOEX.cs" />
+    <Compile Include="ItemType.cs" />
+    <Compile Include="ItemManager.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="ItemTipManager.cs" />
+    <Compile Include="GameNumber.cs" />
+    <Compile Include="ItemTip.cs" />
+    <Compile Include="TipType.cs" />
+    <Compile Include="StageData.cs" />
+    <Compile Include="GameResource.cs" />
+    <Compile Include="Load2Trans.cs" />
+    <Compile Include="LoadReady.cs" />
+    <Compile Include="NSpriteBatch.cs" />
+    <Compile Include="_3DPraticleManager.cs" />
+    <Compile Include="SpecialSystem.cs" />
+    <Compile Include="ReplaySave.cs" />
+    <Compile Include="RecordSave.cs" />
+    <Compile Include="Praticle.cs" />
+    <Compile Include="StageManager.cs" />
+    <Compile Include="CSManager.cs" />
+    <Compile Include="RecordManager.cs" />
+    <Compile Include="PraticleManager.cs" />
+    <Compile Include="Code.cs" />
+    <Compile Include="CrazyStorm.cs" />
+    <Compile Include="PlayRanks.cs" />
+    <Compile Include="PlayRank.cs" />
+    <Compile Include="Effects.cs" />
+    <Compile Include="StageType.cs" />
+    <Compile Include="Attribute.cs" />
+    <Compile Include="Characters.cs" />
+    <Compile Include="AchievementManager.cs" />
+    <Compile Include="AchievementType.cs" />
+    <Compile Include="Stageclear.cs" />
+    <Compile Include="Cover.cs" />
+    <Compile Include="COExecution.cs" />
+    <Compile Include="EventRead.cs" />
+    <Compile Include="Batch.cs" />
+    <Compile Include="BSprite.cs" />
+    <Compile Include="BossBackground.cs" />
+    <Compile Include="NGame.cs" />
+    <Compile Include="Title.cs" />
+    <Compile Include="Lase.cs" />
+    <Compile Include="LExecution.cs" />
+    <Compile Include="CExecution.cs" />
+    <Compile Include="SaveData.cs" />
+    <Compile Include="RPYInfo.cs" />
+    <Compile Include="ActionRecord.cs" />
+    <Compile Include="BarrageType.cs" />
+    <Compile Include="ValueEventManager.cs" />
+    <Compile Include="ED.cs" />
+    <Compile Include="Execution.cs" />
+    <Compile Include="BExecution.cs" />
+    <Compile Include="BLExecution.cs" />
+    <Compile Include="PraticleUpdate.cs" />
+    <Compile Include="SimplePraticle.cs" />
+    <Compile Include="SimplePraticleActor.cs" />
+    <Compile Include="RecordType.cs" />
+    <Compile Include="PositionRecord.cs" />
+    <Compile Include="ScoreRecord.cs" />
+    <Compile Include="RandSeedRecord.cs" />
+    <Compile Include="Rebound.cs" />
+    <Compile Include="HardwareInfo.cs" />
+    <Compile Include="BarrageSet.cs" />
+    <Compile Include="CardDisplay.cs" />
+    <Compile Include="BossCard.cs" />
+    <Compile Include="Grazebox.cs" />
+    <Compile Include="Shadows.cs" />
+    <Compile Include="Launcher.cs" />
+    <Compile Include="_3DPraticle.cs" />
+    <Compile Include="ModelM.cs" />
+    <Compile Include="BackGround.cs" />
+    <Compile Include="CautionManager.cs" />
+    <Compile Include="EnemyEvent.cs" />
+    <Compile Include="Caution.cs" />
+    <Compile Include="Record.cs" />
+    <Compile Include="Equipment.cs" />
+    <Compile Include="SingleBomb.cs" />
+    <Compile Include="SPECIAL.cs" />
+    <Compile Include="AchievementList.cs" />
+    <Compile Include="Achievement.cs" />
+    <Compile Include="BlendTypes.cs" />
+    <Compile Include="GlobalEvent.cs" />
+    <Compile Include="REPLAY.cs" />
+    <Compile Include="Board.cs" />
+    <Compile Include="Achievements\感谢支持.cs" />
+    <Compile Include="Achievements\初次见面.cs" />
+    <Compile Include="Achievements\一周目.cs" />
+    <Compile Include="Achievements\全机体通关.cs" />
+    <Compile Include="Achievements\全难度通关.cs" />
+    <Compile Include="Achievements\幻想乡制霸.cs" />
+    <Compile Include="Achievements\见证银河的消失.cs" />
+    <Compile Include="Achievements\百发不中.cs" />
+    <Compile Include="Achievements\底力爆发.cs" />
+    <Compile Include="Achievements\恶魔的疯狂.cs" />
+    <Compile Include="Achievements\廿亿分突破.cs" />
+    <Compile Include="Achievements\无计可施.cs" />
+    <Compile Include="Achievements\毫发无伤.cs" />
+    <Compile Include="Achievements\绝好的时机.cs" />
+    <Compile Include="Achievements\风暴幸存者.cs" />
+    <Compile Include="Achievements\轻飘飘.cs" />
+    <Compile Include="Achievements\条件反射.cs" />
+    <Compile Include="Achievements\不惧风雨.cs" />
+    <Compile Include="Achievements\炸平幻想乡.cs" />
+    <Compile Include="Achievements\自信满满.cs" />
+    <Compile Include="Achievements\满载而归.cs" />
+    <Compile Include="Achievements\挑战符卡全收集.cs" />
+    <Compile Include="Achievements\可怕的毅力.cs" />
+    <Compile Include="Achievements\不屈不挠.cs" />
+    <Compile Include="Achievements\走投无路.cs" />
+    <Compile Include="Achievements\一个也不落.cs" />
+    <Compile Include="Achievements\擦弹有快感.cs" />
+    <Compile Include="Achievements\弹幕痴狂.cs" />
+    <Compile Include="Achievements\音乐就是生命.cs" />
+    <Compile Include="Achievements\铁杵磨成针.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Microsoft\Xna\Framework.RuntimeProfile" />
+    <EmbeddedResource Include="SourseForm.resx">
+      <DependentUpon>SourseForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
