@@ -35,17 +35,14 @@ namespace Shooting {
         private int bgmVolume;
         private int seVolume;
         private string fontType;
-
         public GlobalDataPackage GlobalData {
             get => GDP;
             set => GDP=value;
         }
-
         public SlimDX.Direct3D9.Device DeviceMain {
             set => GlobalData.DeviceMain=value;
             get => GlobalData.DeviceMain;
         }
-
         public Game_Main() {
             Form_Main=new RenderForm_Main();
             Form_Main.FormClosing+=new FormClosingEventHandler(Form_Main_FormClosing);
@@ -148,7 +145,6 @@ namespace Shooting {
                 return false;
             }
         }
-
         public void AddState() {
             Watch watch = new Watch();
             watch.Start();
@@ -194,16 +190,11 @@ namespace Shooting {
             dictionary1.Add("MusicLoading",new GameState_MusicLoading(GlobalData));
             GameStatesDictionary=dictionary1;
             GlobalData.Rep=new Replay();
-            if(!singleThreaded) {
-                watch.SleepTo(3000f);
-            }
-            if(antiAlias) {
-                DeviceMain.SetRenderState(RenderState.MultisampleAntialias,true);
-            }
+            if(!singleThreaded) watch.SleepTo(3000f);
+            if(antiAlias) DeviceMain.SetRenderState(RenderState.MultisampleAntialias,true);
             GlobalData.LastState=PresentState;
             InitFlag=true;
         }
-
         public void MainProcess() {
             if(firstFrame) {
                 fpsTimer.Start();
@@ -253,12 +244,10 @@ namespace Shooting {
                 KeyClass KClass2 = new KeyClass();
                 try {
                     KCapture.UpdateInput(ref KClass1);
-                } catch {
-                }
+                } catch { }
                 try {
                     JCapture.UpdateInput(ref KClass2);
-                } catch {
-                }
+                } catch { }
                 KeyClass.KeyMix(ref GlobalData.KClass,KClass1,KClass2);
                 if(KCapture.currentKeyboardState!=null) {
                     if(KCapture.currentKeyboardState.IsPressed(Key.LeftAlt)&&KCapture.currentKeyboardState.IsPressed(Key.F4)) {
@@ -275,9 +264,7 @@ namespace Shooting {
             }
             if(deviceLost) {
                 Thread.Sleep(15);
-                if(!(DeviceMain.TestCooperativeLevel()==SlimDX.Direct3D9.ResultCode.DeviceNotReset)) {
-                    return;
-                }
+                if(!(DeviceMain.TestCooperativeLevel()==SlimDX.Direct3D9.ResultCode.DeviceNotReset)) return;
                 GlobalData.OnResetDevice();
                 deviceLost=false;
                 firstFrame=true;
@@ -328,7 +315,6 @@ namespace Shooting {
                 }
             }
         }
-
         private void ToggleFullScreen() {
             fullWindow=!fullWindow;
             GlobalData.presentParams.Windowed=!fullWindow;
@@ -345,7 +331,6 @@ namespace Shooting {
             GlobalData.OnResetDevice();
             MouseCtrl.DrawCursor(!fullWindow);
         }
-
         private void WindowSwitch() {
             if(fullWindow) {
                 ToggleFullScreen();
@@ -367,34 +352,26 @@ namespace Shooting {
                 }
             }
         }
-
         private void Form_Main_Deactivate(object sender,EventArgs e) {
-            if(!initSuccess) {
-                return;
-            }
+            if(!initSuccess) return;
             OnPause=true;
         }
-
         private void Form_Main_Activated(object sender,EventArgs e) {
-            if(!initSuccess) {
-                return;
-            }
+            if(!initSuccess) return;
             OnPause=false;
             GlobalData.KClass.Key_ESC=false;
         }
-
         private void Form_Main_FormClosing(object sender,FormClosingEventArgs e) {
-            if(LoadingThread!=null&&LoadingThread.IsAlive) {
-                LoadingThread.Abort();
-            }
+            if(LoadingThread!=null&&LoadingThread.IsAlive) LoadingThread.Abort();
             GlobalData.PData.SaveData();
             GlobalData.Dispose();
             if(!useDirectInput) {
                 GlobalData.DeviceMain.Dispose();
             }
             if(GameStatesDictionary!=null) {
-                foreach(IGameState gameState in GameStatesDictionary.Values)
+                foreach(IGameState gameState in GameStatesDictionary.Values) {
                     gameState.Dispose();
+                }
             }
             try {
                 INI_RW iniRw = new INI_RW(".\\Setting.INI");
@@ -405,7 +382,6 @@ namespace Shooting {
             } catch {
             }
         }
-
         private void Form_Main_KeyDown(object sender,KeyEventArgs e) {
             GlobalData.KClass.ArrowLeft=e.KeyCode.ToString()==mapkey.Left||GlobalData.KClass.ArrowLeft;
             GlobalData.KClass.ArrowRight=e.KeyCode.ToString()==mapkey.Right||GlobalData.KClass.ArrowRight;
@@ -445,7 +421,6 @@ namespace Shooting {
                     break;
             }
         }
-
         private void Form_Main_KeyUp(object sender,KeyEventArgs e) {
             GlobalData.KClass.ArrowLeft=!(e.KeyCode.ToString()==mapkey.Left)&&GlobalData.KClass.ArrowLeft;
             GlobalData.KClass.ArrowRight=!(e.KeyCode.ToString()==mapkey.Right)&&GlobalData.KClass.ArrowRight;
@@ -479,17 +454,12 @@ namespace Shooting {
                     break;
             }
         }
-
         private void ScreenShot() {
             Surface backBuffer = DeviceMain.GetBackBuffer(0,0);
             int num = 0;
-            while(File.Exists(string.Format(".\\ScreenShot\\screen{0:0000}.jpg",num))) {
-                ++num;
-            }
+            while(File.Exists(string.Format(".\\ScreenShot\\screen{0:0000}.jpg",num))) ++num;
             Surface.ToFile(backBuffer,string.Format(".\\ScreenShot\\screen{0:0000}.jpg",num),ImageFileFormat.Jpg);
-            if(GlobalData==null||GlobalData.SoundDictionary==null||!GlobalData.SoundDictionary.ContainsKey("se_shutter.wav")) {
-                return;
-            }
+            if(GlobalData==null||GlobalData.SoundDictionary==null||!GlobalData.SoundDictionary.ContainsKey("se_shutter.wav")) return;
             GlobalData.SoundDictionary["se_shutter.wav"].Play();
         }
     }

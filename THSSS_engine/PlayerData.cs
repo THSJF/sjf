@@ -4,12 +4,9 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Shooting
-{
-  public class PlayerData
-  {
-    private static string[] SCNameEN = new string[37]
-    {
+namespace Shooting {
+    public class PlayerData {
+        private static string[] SCNameEN = new string[37]{
       "星符「夏夜的晚星」",
       "四叶「大自然之花环」",
       "魔矢「无限之箭」",
@@ -47,9 +44,8 @@ namespace Shooting
       "星图「宇宙棋盘」",
       "「弹幕之海」",
       "「流星神话」"
-    };
-    private static string[] SCNameHL = new string[46]
-    {
+        };
+        private static string[] SCNameHL = new string[46]{
       "微风「摇曳的三叶草」",
       "星符「夏夜的晚星」",
       "四叶「大自然之花环」",
@@ -96,9 +92,8 @@ namespace Shooting
       "第一个愿望「无尽之财」",
       "第二个愿望「无穷之力」",
       "第三个愿望「永生不灭」"
-    };
-    private static string[] SCNameEx = new string[35]
-    {
+        };
+        private static string[] SCNameEx = new string[35]{
       "青符「东之国度的树叶」",
       "柳符「新生的柳叶绿芽」",
       "蝶恋「千年之愿」",
@@ -134,241 +129,194 @@ namespace Shooting
       "仙蝶「无限的彩灵」",
       "「未定」",
       "「雾隐之蝶」"
-    };
-    private const string FileName = "Score.dat";
-    public List<SpellCardHistory> SC_History;
-
-    private FileStream ScoreFile { get; set; }
-
-    public bool PlaneAEnabled { get; set; }
-
-    public bool PlaneBEnabled { get; set; }
-
-    public bool UltraEnabled { get; set; }
-
-    public bool ExtraEnabled { get; set; }
-
-    public string PlayerName { get; set; }
-
-    public bool[] MusicState { get; set; }
-
-    public List<ScoreHistory> S_History { get; set; }
-
-    public List<ClearHistory> C_History { get; set; }
-
-    public PlayerData()
-    {
-      this.CreatNewData();
-      if (!File.Exists("Score.dat"))
-      {
-        this.SaveData();
-      }
-      else
-      {
-        try
-        {
-          this.LoadData();
-        }
-        catch
-        {
-          int num = (int) MessageBox.Show("读取分数记录错误。", "Score Error");
-        }
-      }
-    }
-
-    private void CreatNewData()
-    {
-      this.PlayerName = "";
-      this.MusicState = new bool[15];
-      this.S_History = new List<ScoreHistory>();
-      for (int index1 = 0; index1 < 6; ++index1)
-      {
-        for (int index2 = 0; index2 < 10; ++index2)
-        {
-          for (int index3 = 0; index3 < 5; ++index3)
-          {
-            string str;
-            switch (index3)
-            {
-              case 0:
-                str = "ReimuA";
-                break;
-              case 1:
-                str = "MarisaA";
-                break;
-              case 2:
-                str = "SanaeA";
-                break;
-              case 3:
-                str = "KoishiA";
-                break;
-              case 4:
-                str = "PlaneA";
-                break;
-              default:
-                str = "AyaA";
-                break;
+        };
+        private const string FileName = "Score.dat";
+        public List<SpellCardHistory> SC_History;
+        private FileStream ScoreFile { get; set; }
+        public bool PlaneAEnabled { get; set; }
+        public bool PlaneBEnabled { get; set; }
+        public bool UltraEnabled { get; set; }
+        public bool ExtraEnabled { get; set; }
+        public string PlayerName { get; set; }
+        public bool[] MusicState { get; set; }
+        public List<ScoreHistory> S_History { get; set; }
+        public List<ClearHistory> C_History { get; set; }
+        public PlayerData() {
+            CreatNewData();
+            if(!File.Exists("Score.dat")) {
+                SaveData();
+            } else {
+                try {
+                    LoadData();
+                } catch {
+                    int num = (int)MessageBox.Show("读取分数记录错误。","Score Error");
+                }
             }
-            this.S_History.Add(new ScoreHistory()
-            {
-              MyPlaneFullName = str,
-              Rank = (DifficultLevel) index1,
-              PlayerName = "-------",
-              Score = (long) ((10 - index2) * 100000),
-              Date = "----/--/--",
-              Time = "--:--",
-              Stage = "---",
-              SlowRate = "-.-%"
+        }
+        private void CreatNewData() {
+            PlayerName="";
+            MusicState=new bool[15];
+            S_History=new List<ScoreHistory>();
+            for(int index1 = 0;index1<6;++index1) {
+                for(int index2 = 0;index2<10;++index2) {
+                    for(int index3 = 0;index3<5;++index3) {
+                        string str;
+                        switch(index3) {
+                            case 0:
+                                str="ReimuA";
+                                break;
+                            case 1:
+                                str="MarisaA";
+                                break;
+                            case 2:
+                                str="SanaeA";
+                                break;
+                            case 3:
+                                str="KoishiA";
+                                break;
+                            case 4:
+                                str="PlaneA";
+                                break;
+                            default:
+                                str="AyaA";
+                                break;
+                        }
+                        S_History.Add(new ScoreHistory() {
+                            MyPlaneFullName=str,
+                            Rank=(DifficultLevel)index1,
+                            PlayerName="-------",
+                            Score=(10-index2)*100000,
+                            Date="----/--/--",
+                            Time="--:--",
+                            Stage="---",
+                            SlowRate="-.-%"
+                        });
+                    }
+                }
+            }
+            C_History=new List<ClearHistory>();
+            for(int index1 = 0;index1<6;++index1) {
+                for(int index2 = 0;index2<5;++index2) {
+                    string str;
+                    switch(index2) {
+                        case 0:
+                            str="ReimuA";
+                            break;
+                        case 1:
+                            str="MarisaA";
+                            break;
+                        case 2:
+                            str="SanaeA";
+                            break;
+                        case 3:
+                            str="KoishiA";
+                            break;
+                        case 4:
+                            str="PlaneA";
+                            break;
+                        default:
+                            str="AyaA";
+                            break;
+                    }
+                    C_History.Add(new ClearHistory() {
+                        MyPlaneFullName=str,
+                        Rank=(DifficultLevel)index1,
+                        StartTimes=0,
+                        PlayingTime=0L,
+                        ClearTimes=0,
+                        NoContinueClearTimes=0,
+                        PracticeLevel=1
+                    });
+                }
+            }
+            SC_History=new List<SpellCardHistory>();
+            for(int index1 = 0;index1<5;++index1) {
+                int num = 1;
+                string str;
+                switch(index1) {
+                    case 0:
+                        str="ReimuA";
+                        break;
+                    case 1:
+                        str="MarisaA";
+                        break;
+                    case 2:
+                        str="SanaeA";
+                        break;
+                    case 3:
+                        str="KoishiA";
+                        break;
+                    case 4:
+                        str="PlaneA";
+                        break;
+                    default:
+                        str="AyaA";
+                        break;
+                }
+                for(int index2 = 0;index2<6;++index2) {
+                    if(index2<2) {
+                        for(int index3 = 0;index3<SCNameEN.Length;++index3)
+                            SC_History.Add(new SpellCardHistory() {
+                                MyPlaneFullName=str,
+                                Rank=(DifficultLevel)index2,
+                                Name=SCNameEN[index3],
+                                Index=num++,
+                                Recorded=0,
+                                History=0
+                            });
+                    } else if(index2<5) {
+                        for(int index3 = 0;index3<SCNameHL.Length;++index3)
+                            SC_History.Add(new SpellCardHistory() {
+                                MyPlaneFullName=str,
+                                Rank=(DifficultLevel)index2,
+                                Name=SCNameHL[index3],
+                                Index=num++,
+                                Recorded=0,
+                                History=0
+                            });
+                    } else {
+                        for(int index3 = 0;index3<SCNameEx.Length;++index3)
+                            SC_History.Add(new SpellCardHistory() {
+                                MyPlaneFullName=str,
+                                Rank=(DifficultLevel)index2,
+                                Name=SCNameEx[index3],
+                                Index=num++,
+                                Recorded=0,
+                                History=0
+                            });
+                    }
+                }
+            }
+        }
+        public void SaveData() {
+            ScoreFile=new FileStream("Score.dat",FileMode.Create);
+            string tmp = null;
+            tmp=tmp+PlayerName+"\r\n";
+            SC_History.ForEach(x => tmp+=x.Data2String());
+            S_History.ForEach(x => tmp+=x.Data2String());
+            C_History.ForEach(x => tmp+=x.Data2String());
+            tmp=Encryption.Encrypt(tmp);
+            StreamWriter streamWriter = new StreamWriter(ScoreFile);
+            streamWriter.Write(tmp);
+            streamWriter.Close();
+        }
+        public void LoadData() {
+            string[] strArray = File.ReadAllLines("Score.dat",Encoding.Default);
+            strArray[0]=Encryption.Decrypt(strArray[0]);
+            strArray[0]=strArray[0].Replace("\r\n","\n");
+            string[] stringList = strArray[0].Split('\n');
+            int i = 0;
+            PlayerName=stringList[i++];
+            SC_History.ForEach(x => x.String2Data(stringList[i++]));
+            S_History.ForEach(x => x.String2Data(stringList[i++]));
+            C_History.ForEach(x => x.String2Data(stringList[i++]));
+            CheckEnable();
+        }
+        public void CheckEnable() {
+            C_History.ForEach(x => {
+                if(x.NoContinueClearTimes<=0) return;
+                ExtraEnabled=true;
             });
-          }
         }
-      }
-      this.C_History = new List<ClearHistory>();
-      for (int index1 = 0; index1 < 6; ++index1)
-      {
-        for (int index2 = 0; index2 < 5; ++index2)
-        {
-          string str;
-          switch (index2)
-          {
-            case 0:
-              str = "ReimuA";
-              break;
-            case 1:
-              str = "MarisaA";
-              break;
-            case 2:
-              str = "SanaeA";
-              break;
-            case 3:
-              str = "KoishiA";
-              break;
-            case 4:
-              str = "PlaneA";
-              break;
-            default:
-              str = "AyaA";
-              break;
-          }
-          this.C_History.Add(new ClearHistory()
-          {
-            MyPlaneFullName = str,
-            Rank = (DifficultLevel) index1,
-            StartTimes = 0,
-            PlayingTime = 0L,
-            ClearTimes = 0,
-            NoContinueClearTimes = 0,
-            PracticeLevel = 1
-          });
-        }
-      }
-      this.SC_History = new List<SpellCardHistory>();
-      for (int index1 = 0; index1 < 5; ++index1)
-      {
-        int num = 1;
-        string str;
-        switch (index1)
-        {
-          case 0:
-            str = "ReimuA";
-            break;
-          case 1:
-            str = "MarisaA";
-            break;
-          case 2:
-            str = "SanaeA";
-            break;
-          case 3:
-            str = "KoishiA";
-            break;
-          case 4:
-            str = "PlaneA";
-            break;
-          default:
-            str = "AyaA";
-            break;
-        }
-        for (int index2 = 0; index2 < 6; ++index2)
-        {
-          if (index2 < 2)
-          {
-            for (int index3 = 0; index3 < PlayerData.SCNameEN.Length; ++index3)
-              this.SC_History.Add(new SpellCardHistory()
-              {
-                MyPlaneFullName = str,
-                Rank = (DifficultLevel) index2,
-                Name = PlayerData.SCNameEN[index3],
-                Index = num++,
-                Recorded = 0,
-                History = 0
-              });
-          }
-          else if (index2 < 5)
-          {
-            for (int index3 = 0; index3 < PlayerData.SCNameHL.Length; ++index3)
-              this.SC_History.Add(new SpellCardHistory()
-              {
-                MyPlaneFullName = str,
-                Rank = (DifficultLevel) index2,
-                Name = PlayerData.SCNameHL[index3],
-                Index = num++,
-                Recorded = 0,
-                History = 0
-              });
-          }
-          else
-          {
-            for (int index3 = 0; index3 < PlayerData.SCNameEx.Length; ++index3)
-              this.SC_History.Add(new SpellCardHistory()
-              {
-                MyPlaneFullName = str,
-                Rank = (DifficultLevel) index2,
-                Name = PlayerData.SCNameEx[index3],
-                Index = num++,
-                Recorded = 0,
-                History = 0
-              });
-          }
-        }
-      }
     }
-
-    public void SaveData()
-    {
-      this.ScoreFile = new FileStream("Score.dat", FileMode.Create);
-      string tmp = (string) null;
-      tmp = tmp + this.PlayerName + "\r\n"; 
-      this.SC_History.ForEach((Action<SpellCardHistory>) (x =>  tmp += x.Data2String())); 
-      this.S_History.ForEach((Action<ScoreHistory>) (x =>  tmp += x.Data2String())); 
-      this.C_History.ForEach((Action<ClearHistory>) (x =>  tmp += x.Data2String()));
-      tmp = Encryption.Encrypt(tmp);
-      StreamWriter streamWriter = new StreamWriter((Stream) this.ScoreFile);
-      streamWriter.Write(tmp);
-      streamWriter.Close();
-    }
-
-    public void LoadData()
-    {
-      string[] strArray = File.ReadAllLines("Score.dat", Encoding.Default);
-      strArray[0] = Encryption.Decrypt(strArray[0]);
-      strArray[0] = strArray[0].Replace("\r\n", "\n");
-      string[] stringList = strArray[0].Split('\n');
-      int i = 0;
-      this.PlayerName = stringList[i++];
-      this.SC_History.ForEach((Action<SpellCardHistory>) (x => x.String2Data(stringList[i++])));
-      this.S_History.ForEach((Action<ScoreHistory>) (x => x.String2Data(stringList[i++])));
-      this.C_History.ForEach((Action<ClearHistory>) (x => x.String2Data(stringList[i++])));
-      this.CheckEnable();
-    }
-
-    public void CheckEnable()
-    {
-      this.C_History.ForEach((Action<ClearHistory>) (x =>
-      {
-        if (x.NoContinueClearTimes <= 0)
-          return;
-        this.ExtraEnabled = true;
-      }));
-    }
-  }
 }

@@ -13,9 +13,7 @@ namespace Shooting {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Game_Main gameMain = new Game_Main();
-                if(!gameMain.initSuccess) {
-                    return;
-                }
+                if(!gameMain.initSuccess) return;
                 MessagePump.Run(gameMain.Form_Main,new MainLoop(gameMain.MainProcess));
             } else {
                 MessageBox.Show("东方白丝祭(误)已启动，\r\n程序不允许双开。","程序已启动");

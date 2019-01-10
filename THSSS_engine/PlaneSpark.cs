@@ -1,44 +1,31 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Shooting
-{
-  internal class PlaneSpark : BaseEffect
-  {
-    public PlaneSpark(
-      StageDataPackage StageData,
-      string textureName,
-      PointF OriginalPosition,
-      float Velocity,
-      double Direction)
-      : base(StageData, textureName, OriginalPosition, Velocity, Direction)
-    {
-      this.OriginalPosition = OriginalPosition;
-      this.ScaleWidth = 0.05f;
-      this.Active = true;
-      this.LifeTime = 300;
-      this.ColorValue = Color.FromArgb(85, 140, (int) byte.MaxValue);
-      this.UnRemoveable = true;
-      this.Angle = 0.0;
-      this.ScaleVL = 0.1f;
-      this.ScaleVW = 0.1f;
+namespace Shooting {
+    internal class PlaneSpark:BaseEffect {
+        public PlaneSpark(StageDataPackage StageData,string textureName,PointF OriginalPosition,float Velocity,double Direction) : base(StageData,textureName,OriginalPosition,Velocity,Direction) {
+            this.OriginalPosition=OriginalPosition;
+            ScaleWidth=0.05f;
+            Active=true;
+            LifeTime=300;
+            ColorValue=Color.FromArgb(85,140,byte.MaxValue);
+            UnRemoveable=true;
+            Angle=0.0;
+            ScaleVL=0.1f;
+            ScaleVW=0.1f;
+        }
+        public override void Ctrl() {
+            base.Ctrl();
+            Region=(int)(TxtureObject.Width/2.0*0.699999988079071);
+            if(Time<LifeTime-50) {
+                TransparentValueF=150+Ran.Next(40);
+            } else {
+                TransparentValueF=(LifeTime-Time)*2-20+Ran.Next(40);
+            }
+        }
+        public override void Show() {
+            if(TxtureObject==null) return;
+            SpriteMain.Draw2D(TxtureObject.TXTure,TxtureObject.PosRect,new SizeF(TxtureObject.Width*ScaleWidth,TxtureObject.Height*ScaleLength),new PointF(TxtureObject.Width/2,0.0f),(float)(Direction-Math.PI/2.0+Angle),Position,Color.FromArgb(TransparentValue,ColorValue));
+        }
     }
-
-    public override void Ctrl()
-    {
-      base.Ctrl();
-      this.Region = (int) ((double) this.TxtureObject.Width / 2.0 * 0.699999988079071);
-      if (this.Time < this.LifeTime - 50)
-        this.TransparentValueF = (float) (150 + this.Ran.Next(40));
-      else
-        this.TransparentValueF = (float) ((this.LifeTime - this.Time) * 2 - 20 + this.Ran.Next(40));
-    }
-
-    public override void Show()
-    {
-      if (this.TxtureObject == null)
-        return;
-      this.SpriteMain.Draw2D(this.TxtureObject.TXTure, this.TxtureObject.PosRect, new SizeF((float) this.TxtureObject.Width * this.ScaleWidth, (float) this.TxtureObject.Height * this.ScaleLength), new PointF((float) (this.TxtureObject.Width / 2), 0.0f), (float) (this.Direction - Math.PI / 2.0 + this.Angle), this.Position, Color.FromArgb(this.TransparentValue, this.ColorValue));
-    }
-  }
 }

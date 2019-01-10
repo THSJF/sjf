@@ -3,49 +3,40 @@ using SlimDX.Direct3D9;
 using System;
 using System.Drawing;
 
-namespace Shooting
-{
-  public class Model_Circle : Model, IModel
-  {
-    private int Length = 64;
-    private int Width = 16;
-    private int Radius = 100;
-
-    public Model_Circle(Device DeviceMain, TextureObject TxtureObject, string Name)
-    {
-      this.TransparentValue = (int) byte.MaxValue;
-      this.ColorValue = Color.White;
-      this.DeviceMain = DeviceMain;
-      this.TxtureObject = TxtureObject;
-      this.Name = Name;
-      this.vertexDecl = new VertexDeclaration(DeviceMain, TexturedVertex.VertexElements);
-      this.vertexBuffer = new VertexBuffer(DeviceMain, 2 * (this.Length + 1) * TexturedVertex.SizeBytes, Usage.WriteOnly, VertexFormat.None, Pool.Managed);
-      this.material = new Material();
-      this.SetupVertex();
+namespace Shooting {
+    public class Model_Circle:Model, IModel {
+        private int Length = 64;
+        private int Width = 16;
+        private int Radius = 100;
+        public Model_Circle(Device DeviceMain,TextureObject TxtureObject,string Name) {
+            TransparentValue=byte.MaxValue;
+            ColorValue=Color.White;
+            this.DeviceMain=DeviceMain;
+            this.TxtureObject=TxtureObject;
+            this.Name=Name;
+            vertexDecl=new VertexDeclaration(DeviceMain,TexturedVertex.VertexElements);
+            vertexBuffer=new VertexBuffer(DeviceMain,2*(Length+1)*TexturedVertex.SizeBytes,Usage.WriteOnly,VertexFormat.None,Pool.Managed);
+            material=new Material();
+            SetupVertex();
+        }
+        public override void SetupVertex() {
+            float x1 = TxtureObject.PosRect.X/(float)TxtureObject.SrcWidth;
+            float x2 = (TxtureObject.PosRect.X+TxtureObject.Width)/(float)TxtureObject.SrcWidth;
+            TexturedVertex[] data = new TexturedVertex[2*(Length+1)];
+            for(int index = 0;index<=Length;++index) {
+                double num1 = (index*2)*Math.PI/Length;
+                int num2 = Radius-Width/2;
+                float y = index%(Length/3)/(float)(Length/3);
+                data[2*index]=new TexturedVertex(new Vector3(num2*(float)Math.Cos(num1),num2*(float)Math.Sin(num1),0.0f),new Vector2(x1,y));
+                int num3 = Radius+Width/2;
+                data[2*index+1]=new TexturedVertex(new Vector3(num3*(float)Math.Cos(num1),num3*(float)Math.Sin(num1),0.0f),new Vector2(x2,y));
+            }
+            vertexBuffer.Lock(0,0,LockFlags.Discard).WriteRange(data);
+            vertexBuffer.Unlock();
+        }
+        public override void Draw() {
+            SetupMaterial();
+            DeviceMain.DrawPrimitives(PrimitiveType.TriangleStrip,0,2*Length);
+        }
     }
-
-    public override void SetupVertex()
-    {
-      float x1 = (float) this.TxtureObject.PosRect.X / (float) this.TxtureObject.SrcWidth;
-      float x2 = (float) (this.TxtureObject.PosRect.X + this.TxtureObject.Width) / (float) this.TxtureObject.SrcWidth;
-      TexturedVertex[] data = new TexturedVertex[2 * (this.Length + 1)];
-      for (int index = 0; index <= this.Length; ++index)
-      {
-        double num1 = (double) (index * 2) * Math.PI / (double) this.Length;
-        int num2 = this.Radius - this.Width / 2;
-        float y = (float) (index % (this.Length / 3)) / (float) (this.Length / 3);
-        data[2 * index] = new TexturedVertex(new Vector3((float) num2 * (float) Math.Cos(num1), (float) num2 * (float) Math.Sin(num1), 0.0f), new Vector2(x1, y));
-        int num3 = this.Radius + this.Width / 2;
-        data[2 * index + 1] = new TexturedVertex(new Vector3((float) num3 * (float) Math.Cos(num1), (float) num3 * (float) Math.Sin(num1), 0.0f), new Vector2(x2, y));
-      }
-      this.vertexBuffer.Lock(0, 0, LockFlags.Discard).WriteRange<TexturedVertex>(data);
-      this.vertexBuffer.Unlock();
-    }
-
-    public override void Draw()
-    {
-      this.SetupMaterial();
-      this.DeviceMain.DrawPrimitives(PrimitiveType.TriangleStrip, 0, 2 * this.Length);
-    }
-  }
 }

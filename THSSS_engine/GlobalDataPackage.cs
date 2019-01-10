@@ -36,7 +36,6 @@ namespace Shooting {
         public ScreenTexManager ScreenTexMan;
         public IGameState LastState;
         private bool SoundInitSuccess;
-
         public GlobalDataPackage() {
             TextureObjectDictionary=new Dictionary<string,TextureObject>();
             try {
@@ -48,14 +47,12 @@ namespace Shooting {
                 MessageBox.Show("音频设备故障","Sound Initial Error");
             }
         }
-
         public void LoadResources1() {
             ScreenTexMan=new ScreenTexManager(DeviceMain);
             do { } while(!LoadEffect());
             LoadingList=new List<string>();
             LoadFolderTextureList(".\\Image");
         }
-
         public void LoadResources() {
             PData=new PlayerData();
             LoadSound();
@@ -65,7 +62,6 @@ namespace Shooting {
             }
             Hash.Init();
         }
-
         public void LoadFolderTextureList(string Path) {
             if(Path==".\\Image\\NowLoading")
                 return;
@@ -76,7 +72,6 @@ namespace Shooting {
                 LoadFolderTextureList(directory);
             }
         }
-
         private bool LoadEffect() {
             EffectDictionary=new Dictionary<string,Effect>();
             try {
@@ -88,7 +83,6 @@ namespace Shooting {
                 return false;
             }
         }
-
         public void LoadModelDictionary() {
             ModelDictionary=new Dictionary<string,IModel>();
             LoadModel("Petal00",0);
@@ -135,7 +129,6 @@ namespace Shooting {
             LoadModel("Stair",2);
             LoadModel("祭坛",2);
         }
-
         private void LoadModel(string Name,int ModelType) {
             bool flag = false;
             int num1 = 0;
@@ -163,12 +156,9 @@ namespace Shooting {
                     ++num1;
                 }
             }
-            if(num1!=20) {
-                return;
-            }
+            if(num1!=20) return;
             MessageBox.Show(Name+"模型生成时出错","LoadModel Error");
         }
-
         private void LoadBulletPic() {
             try {
                 BulletPicDictionary=new Dictionary<string,bool[,]>();
@@ -186,11 +176,8 @@ namespace Shooting {
                 MessageBox.Show("图像读取错误","LoadBPic Error");
             }
         }
-
         public void LoadSound() {
-            if(!SoundInitSuccess) {
-                return;
-            }
+            if(!SoundInitSuccess) return;
             SoundDictionary=new Dictionary<string,XAudio2_Player>();
             for(int index = 0;index<Directory.GetFiles(".\\Sound","*.wav").Length;++index) {
                 FileInfo fileInfo = new FileInfo(Directory.GetFiles(".\\Sound","*.wav")[index]);
@@ -202,22 +189,16 @@ namespace Shooting {
                 }
             }
         }
-
         public void TextureObjectLoader(string imageFileName) => TextureObjectLoader(imageFileName,0);
-
         public void TextureObjectLoader(string imageFileName,int colorKey) {
-            if(!File.Exists(imageFileName)) {
-                return;
-            }
+            if(!File.Exists(imageFileName)) return;
             Bitmap bitmap = (Bitmap)Image.FromFile(imageFileName);
             Rectangle Rect = new Rectangle(0,0,bitmap.Width,bitmap.Height);
             bitmap.Dispose();
             int num1 = 0;
             Texture texture;
             do { } while(!SetTexture(imageFileName,colorKey,Rect,out texture)&&num1++<20);
-            if(num1>=20) {
-                MessageBox.Show(imageFileName+"纹理读取错误","LoadTexture Error");
-            }
+            if(num1>=20) MessageBox.Show(imageFileName+"纹理读取错误","LoadTexture Error");
             FileInfo fileInfo = new FileInfo(imageFileName);
             string path = fileInfo.FullName.Replace(fileInfo.Extension,".txt");
             if(File.Exists(path)) {
@@ -233,15 +214,15 @@ namespace Shooting {
                         SrcHeight=Rect.Height
                     });
                 }
-            } else
+            } else {
                 TextureObjectDictionary.Add(fileInfo.Name.Replace(".png",""),new TextureObject() {
                     TXTure=texture,
                     PosRect=new Rectangle(0,0,Rect.Width,Rect.Height),
                     SrcWidth=Rect.Width,
                     SrcHeight=Rect.Height
                 });
+            }
         }
-
         private bool SetTexture(string imageFileName,int colorKey,Rectangle Rect,out Texture texture) {
             try {
                 texture=Texture.FromFile(DeviceMain,imageFileName,Rect.Width,Rect.Height,0,Usage.None,Format.Unknown,Pool.Managed,Filter.Linear,Filter.None,colorKey);
@@ -251,7 +232,6 @@ namespace Shooting {
                 return false;
             }
         }
-
         public void BGM_Play(string FileName) {
             try {
                 int bgmVolume = BGMVolume;
@@ -261,47 +241,29 @@ namespace Shooting {
             } catch {
             }
         }
-
         public void BGM_OFF() => BGM_Player.Stop();
-
         public void BGM_Pause() => BGM_Player.Puase();
-
         public void BGM_Resume() {
-            if(BGM_Player==null) {
-                return;
-            }
+            if(BGM_Player==null) return;
             BGM_Player.Resume();
         }
-
         public void OnLostDevice() {
-            if(SpriteMain!=null) {
-                SpriteMain.sprite.OnLostDevice();
-            }
-            if(ScreenTexMan!=null) {
-                ScreenTexMan.Dispose();
-            }
-            if(EffectDictionary==null) {
-                return;
-            }
+            if(SpriteMain!=null) SpriteMain.sprite.OnLostDevice();
+            if(ScreenTexMan!=null) ScreenTexMan.Dispose();
+            if(EffectDictionary==null) return;
             foreach(Effect effect in EffectDictionary.Values) {
                 effect.OnLostDevice();
             }
         }
-
         public void OnResetDevice() {
             SpriteMain.sprite.OnResetDevice();
             DeviceMain.Reset(presentParams);
-            if(ScreenTexMan!=null) {
-                ScreenTexMan.Reset();
-            }
-            if(EffectDictionary==null) {
-                return;
-            }
+            if(ScreenTexMan!=null) ScreenTexMan.Reset();
+            if(EffectDictionary==null) return;
             foreach(Effect effect in EffectDictionary.Values) {
                 effect.OnResetDevice();
             }
         }
-
         public void Dispose() {
             DeviceMain.Direct3D.Dispose();
             SpriteMain.Dispose();
@@ -315,12 +277,8 @@ namespace Shooting {
                     xaudio2Player.Dispose();
                 }
             }
-            if(BGM_Player!=null) {
-                BGM_Player.Dispose();
-            }
-            if(ScreenTexMan!=null) {
-                ScreenTexMan.Dispose();
-            }
+            if(BGM_Player!=null) BGM_Player.Dispose();
+            if(ScreenTexMan!=null) ScreenTexMan.Dispose();
             if(EffectDictionary!=null) {
                 foreach(ComObject comObject in EffectDictionary.Values) {
                     comObject.Dispose();
@@ -330,9 +288,7 @@ namespace Shooting {
                 foreach(Model model in ModelDictionary.Values)
                     model.Dispose();
             }
-            if(DeviceXaudio2==null) {
-                return;
-            }
+            if(DeviceXaudio2==null) return;
             DeviceXaudio2.Dispose();
         }
     }

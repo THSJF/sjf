@@ -129,7 +129,7 @@ label_15:
       Texture txTure = textureObject.TXTure;
       Rectangle posRect = textureObject.PosRect;
       SizeF destinationSize = new SizeF((float) textureObject.Width * this.Scale, (float) textureObject.Height * this.Scale);
-      PointF rightTop = textureObject.RightTop;
+      PointF rightTop = textureObject.GetRightTop();
       PointF position1 = this.Position;
       double x = (double) position1.X;
       position1 = this.Position;

@@ -1,218 +1,165 @@
 ﻿using SlimDX.Direct3D9;
 using System.Drawing;
 
-namespace Shooting
-{
-  internal class StoryBox : BaseStoryItem
-  {
-    private string text;
-    private Texture StringTexture;
-    private System.Drawing.Font sysfont;
-    private char[] TextArray;
-    private string text2;
-    private Texture StringTexture2;
-    public Color FontColor2 = new Color();
+namespace Shooting {
+    internal class StoryBox:BaseStoryItem {
+        private string text;
+        private Texture StringTexture;
+        private System.Drawing.Font sysfont;
+        private char[] TextArray;
+        private string text2;
+        private Texture StringTexture2;
+        public Color FontColor2 = new Color();
         public string DrawText2;
-    private char[] TextArray2;
-
-    private SlimDX.Direct3D9.Font DXfont { get; set; }
-
-    public Color FontColor { get; set; }
-
-    public int OffsetX { get; set; }
-
-    public int OffsetY { get; set; }
-
-    public bool Shadowed { get; set; }
-
-    public string DrawText { get; set; }
-
-    public string Text
-    {
-      get
-      {
-        return this.text;
-      }
-      set
-      {
-        if (!(value != this.text))
-          return;
-        this.text = value;
-        this.TextArray = this.text.ToCharArray();
-        this.DrawText = "";
-        this.Time = 0;
-      }
-    }
-
-    public string Text2
-    {
-      get
-      {
-        return this.text2;
-      }
-      set
-      {
-        if (!(value != this.text2))
-          return;
-        this.text2 = value;
-        this.TextArray2 = this.text2.ToCharArray();
-        this.DrawText2 = "";
-        this.Time = 0;
-      }
-    }
-
-    public StoryBox(StageDataPackage StageData)
-      : base(StageData)
-    {
-      this.TxtureObject = this.TextureObjectDictionary["对话框"];
-      Rectangle boundRect = this.BoundRect;
-      double left = (double) boundRect.Left;
-      boundRect = this.BoundRect;
-      int bottom = boundRect.Bottom;
-      int height = this.TxtureObject.Height;
-      boundRect = this.BoundRect;
-      int width = boundRect.Width;
-      int num1 = height * width / this.TxtureObject.Width;
-      double num2 = (double) (bottom - num1 - 8);
-      this.Position = new PointF((float) left, (float) num2);
-      this.Velocity = 0.0f;
-      this.Direction = 0.0;
-      this.TransparentValueF = 0.0f;
-      this.TransparentVelocity = 10f;
-      this.OffsetX = 20;
-      this.OffsetY = 21;
-      this.Shadowed = true;
-      this.sysfont = new System.Drawing.Font(StageData.GlobalData.FontType, 1536f / (float) Dpi.PixelsPerXLogicalInch, FontStyle.Bold);
-      this.DXfont = new SlimDX.Direct3D9.Font(StageData.DeviceMain, this.sysfont);
-      this.FontColor = Color.White;
-    }
-
-    public override void Ctrl()
-    {
-      if (this.DrawText != null && this.DrawText.Replace("\r\n", "") == this.text)
-      {
-        this.TransparentValueF = (float) this.MaxTransparent;
-      }
-      else
-      {
-        if (this.TextArray != null && this.Time < this.TextArray.Length)
-        {
-          if ((double) this.DXfont.MeasureString(this.SpriteMain.sprite, this.DrawText + this.TextArray[this.Time].ToString(), DrawTextFormat.Left).Width / 1.14999997615814 > (double) (this.TxtureObject.Width - this.OffsetX))
-            this.DrawText += "\r\n";
-          this.DrawText += this.TextArray[this.Time].ToString();
+        private char[] TextArray2;
+        private SlimDX.Direct3D9.Font DXfont { get; set; }
+        public Color FontColor { get; set; }
+        public int OffsetX { get; set; }
+        public int OffsetY { get; set; }
+        public bool Shadowed { get; set; }
+        public string DrawText { get; set; }
+        public string Text {
+            get => text;
+            set {
+                if(!(value!=text)) return;
+                text=value;
+                TextArray=text.ToCharArray();
+                DrawText="";
+                Time=0;
+            }
         }
-        if (this.StringTexture != null)
-          this.StringTexture.Dispose();
-        this.StringTexture = this.StageData.DrawString(this.DrawText, this.sysfont, Brushes.White, 512, 256);
-        if (this.TextArray2 != null && this.Time < this.TextArray2.Length)
-        {
-          if ((double) this.DXfont.MeasureString(this.SpriteMain.sprite, this.DrawText2 + this.TextArray2[this.Time].ToString(), DrawTextFormat.Left).Width / 1.14999997615814 > (double) (this.TxtureObject.Width - this.OffsetX))
-            this.DrawText2 += "\r\n";
-          this.DrawText2 += this.TextArray2[this.Time].ToString();
+        public string Text2 {
+            get => text2;
+            set {
+                if(!(value!=text2)) return;
+                text2=value;
+                TextArray2=text2.ToCharArray();
+                DrawText2="";
+                Time=0;
+            }
         }
-        if (this.StringTexture2 != null)
-          this.StringTexture2.Dispose();
-        this.StringTexture2 = this.StageData.DrawString(this.DrawText2, this.sysfont, Brushes.White, 512, 256);
-        base.Ctrl();
-      }
-    }
-
-    public void DrawFullText()
-    {
-      StoryBox storyBox1;
-      if (this.TextArray != null)
-      {
-        for (; this.Time < this.TextArray.Length; ++storyBox1.Time)
-        {
-          if ((double) this.DXfont.MeasureString(this.SpriteMain.sprite, this.DrawText + this.TextArray[this.Time].ToString(), DrawTextFormat.Left).Width / 1.14999997615814 > (double) (this.TxtureObject.Width - this.OffsetX))
-            this.DrawText += "\r\n";
-          this.DrawText += this.TextArray[this.Time].ToString();
-          storyBox1 = this;
+        public StoryBox(StageDataPackage StageData) : base(StageData) {
+            TxtureObject=TextureObjectDictionary["对话框"];
+            Rectangle boundRect = BoundRect;
+            double left = boundRect.Left;
+            boundRect=BoundRect;
+            int bottom = boundRect.Bottom;
+            int height = TxtureObject.Height;
+            boundRect=BoundRect;
+            int width = boundRect.Width;
+            int num1 = height*width/TxtureObject.Width;
+            double num2 = bottom-num1-8;
+            Position=new PointF((float)left,(float)num2);
+            Velocity=0.0f;
+            Direction=0.0;
+            TransparentValueF=0.0f;
+            TransparentVelocity=10f;
+            OffsetX=20;
+            OffsetY=21;
+            Shadowed=true;
+            sysfont=new System.Drawing.Font(StageData.GlobalData.FontType,1536f/Dpi.PixelsPerXLogicalInch,FontStyle.Bold);
+            DXfont=new SlimDX.Direct3D9.Font(StageData.DeviceMain,sysfont);
+            FontColor=Color.White;
         }
-      }
-      if (this.StringTexture != null)
-        this.StringTexture.Dispose();
-      this.StringTexture = this.StageData.DrawString(this.DrawText, this.sysfont, Brushes.White, 512, 256);
-      StoryBox storyBox2;
-      if (this.TextArray2 != null)
-      {
-        for (; this.Time < this.TextArray2.Length; ++storyBox2.Time)
-        {
-          if ((double) this.DXfont.MeasureString(this.SpriteMain.sprite, this.DrawText2 + this.TextArray2[this.Time].ToString(), DrawTextFormat.Left).Width / 1.14999997615814 > (double) (this.TxtureObject.Width - this.OffsetX))
-            this.DrawText2 += "\r\n";
-          this.DrawText2 += this.TextArray2[this.Time].ToString();
-          storyBox2 = this;
+        public override void Ctrl() {
+            if(DrawText!=null&&DrawText.Replace("\r\n","")==text) {
+                TransparentValueF=MaxTransparent;
+            } else {
+                if(TextArray!=null&&Time<TextArray.Length) {
+                    if(DXfont.MeasureString(SpriteMain.sprite,DrawText+TextArray[Time].ToString(),DrawTextFormat.Left).Width/1.14999997615814>(double)(TxtureObject.Width-OffsetX))
+                        DrawText+="\r\n";
+                    DrawText+=TextArray[Time].ToString();
+                }
+                if(StringTexture!=null) StringTexture.Dispose();
+                StringTexture=StageData.DrawString(DrawText,sysfont,Brushes.White,512,256);
+                if(TextArray2!=null&&Time<TextArray2.Length) {
+                    if(DXfont.MeasureString(SpriteMain.sprite,DrawText2+TextArray2[Time].ToString(),DrawTextFormat.Left).Width/1.14999997615814>(double)(TxtureObject.Width-OffsetX))
+                        DrawText2+="\r\n";
+                    DrawText2+=TextArray2[Time].ToString();
+                }
+                if(StringTexture2!=null)
+                    StringTexture2.Dispose();
+                StringTexture2=StageData.DrawString(DrawText2,sysfont,Brushes.White,512,256);
+                base.Ctrl();
+            }
         }
-      }
-      if (this.StringTexture2 != null)
-        this.StringTexture2.Dispose();
-      this.StringTexture2 = this.StageData.DrawString(this.DrawText2, this.sysfont, Brushes.White, 512, 256);
+        public void DrawFullText() {
+            StoryBox storyBox1;
+            if(TextArray!=null) {
+                for(;Time<TextArray.Length;++storyBox1.Time) {
+                    if(DXfont.MeasureString(SpriteMain.sprite,DrawText+TextArray[Time].ToString(),DrawTextFormat.Left).Width/1.14999997615814>(double)(TxtureObject.Width-OffsetX))
+                        DrawText+="\r\n";
+                    DrawText+=TextArray[Time].ToString();
+                    storyBox1=this;
+                }
+            }
+            if(StringTexture!=null) StringTexture.Dispose();
+            StringTexture=StageData.DrawString(DrawText,sysfont,Brushes.White,512,256);
+            StoryBox storyBox2;
+            if(TextArray2!=null) {
+                for(;Time<TextArray2.Length;++storyBox2.Time) {
+                    if(DXfont.MeasureString(SpriteMain.sprite,DrawText2+TextArray2[Time].ToString(),DrawTextFormat.Left).Width/1.14999997615814>(double)(TxtureObject.Width-OffsetX))
+                        DrawText2+="\r\n";
+                    DrawText2+=TextArray2[Time].ToString();
+                    storyBox2=this;
+                }
+            }
+            if(StringTexture2!=null) StringTexture2.Dispose();
+            StringTexture2=StageData.DrawString(DrawText2,sysfont,Brushes.White,512,256);
+        }
+        public void SetFont(float FontSize) {
+            if(sysfont==null) return;
+            FontSize=FontSize*96f/Dpi.PixelsPerXLogicalInch;
+            if((double)sysfont.Size==FontSize) return;
+            sysfont=new System.Drawing.Font(StageData.GlobalData.FontType,FontSize,FontStyle.Bold);
+            DXfont=new SlimDX.Direct3D9.Font(StageData.DeviceMain,sysfont);
+        }
+        public override void Show() {
+            SizeF destinationSize1 = new SizeF(TxtureObject.Width,116f);
+            SpriteMain.Draw2D(TxtureObject.TXTure,TxtureObject.PosRect,destinationSize1,TxtureObject.LeftTop,0.0f,Position,Color.FromArgb(TransparentValue,Color.White));
+            if(Text==null||StringTexture==null) return;
+            PointF position1;
+            if(Shadowed) {
+                MySprite spriteMain = SpriteMain;
+                Texture stringTexture = StringTexture;
+                Rectangle srcRectangle = new Rectangle(0,0,512,256);
+                SizeF destinationSize2 = new SizeF(512f,256f);
+                position1=Position;
+                double num1 = (int)position1.X+2+OffsetX;
+                position1=Position;
+                double num2 = (int)position1.Y+2+(int)(OffsetY*(double)destinationSize1.Height/90.0);
+                PointF position2 = new PointF((float)num1,(float)num2);
+                Color color = Color.FromArgb(150,0,0,0);
+                spriteMain.Draw2D(stringTexture,srcRectangle,destinationSize2,position2,color);
+            }
+            MySprite spriteMain1 = SpriteMain;
+            Texture stringTexture1 = StringTexture;
+            Rectangle srcRectangle1 = new Rectangle(0,0,512,256);
+            SizeF destinationSize3 = new SizeF(512f,256f);
+            position1=Position;
+            double num3 = (int)position1.X+OffsetX;
+            position1=Position;
+            double num4 = (int)position1.Y+(int)(OffsetY*(double)destinationSize1.Height/90.0);
+            PointF position3 = new PointF((float)num3,(float)num4);
+            Color fontColor = FontColor;
+            spriteMain1.Draw2D(stringTexture1,srcRectangle1,destinationSize3,position3,fontColor);
+            if(StringTexture2==null) return;
+            MySprite spriteMain2 = SpriteMain;
+            Texture stringTexture2 = StringTexture2;
+            Rectangle srcRectangle2 = new Rectangle(0,0,512,256);
+            SizeF destinationSize4 = new SizeF(512f,256f);
+            position1=Position;
+            double num5 = (int)position1.X+OffsetX;
+            position1=Position;
+            double num6 = (int)position1.Y+(int)(OffsetY*(double)destinationSize1.Height/90.0);
+            PointF position4 = new PointF((float)num5,(float)num6);
+            Color fontColor2 = FontColor2;
+            spriteMain2.Draw2D(stringTexture2,srcRectangle2,destinationSize4,position4,fontColor2);
+        }
+        public override void Dispose() {
+            DXfont.Dispose();
+            if(StringTexture==null) return;
+            StringTexture.Dispose();
+        }
     }
-
-    public void SetFont(float FontSize)
-    {
-      if (this.sysfont == null)
-        return;
-      FontSize = FontSize * 96f / (float) Dpi.PixelsPerXLogicalInch;
-      if ((double) this.sysfont.Size == (double) FontSize)
-        return;
-      this.sysfont = new System.Drawing.Font(this.StageData.GlobalData.FontType, FontSize, FontStyle.Bold);
-      this.DXfont = new SlimDX.Direct3D9.Font(this.StageData.DeviceMain, this.sysfont);
-    }
-
-    public override void Show()
-    {
-      SizeF destinationSize1 = new SizeF((float) this.TxtureObject.Width, 116f);
-      this.SpriteMain.Draw2D(this.TxtureObject.TXTure, this.TxtureObject.PosRect, destinationSize1, this.TxtureObject.LeftTop, 0.0f, this.Position, Color.FromArgb(this.TransparentValue, Color.White));
-      if (this.Text == null || this.StringTexture == null)
-        return;
-      PointF position1;
-      if (this.Shadowed)
-      {
-        MySprite spriteMain = this.SpriteMain;
-        Texture stringTexture = this.StringTexture;
-        Rectangle srcRectangle = new Rectangle(0, 0, 512, 256);
-        SizeF destinationSize2 = new SizeF(512f, 256f);
-        position1 = this.Position;
-        double num1 = (double) ((int) position1.X + 2 + this.OffsetX);
-        position1 = this.Position;
-        double num2 = (double) ((int) position1.Y + 2 + (int) ((double) this.OffsetY * (double) destinationSize1.Height / 90.0));
-        PointF position2 = new PointF((float) num1, (float) num2);
-        Color color = Color.FromArgb(150, 0, 0, 0);
-        spriteMain.Draw2D(stringTexture, srcRectangle, destinationSize2, position2, color);
-      }
-      MySprite spriteMain1 = this.SpriteMain;
-      Texture stringTexture1 = this.StringTexture;
-      Rectangle srcRectangle1 = new Rectangle(0, 0, 512, 256);
-      SizeF destinationSize3 = new SizeF(512f, 256f);
-      position1 = this.Position;
-      double num3 = (double) ((int) position1.X + this.OffsetX);
-      position1 = this.Position;
-      double num4 = (double) ((int) position1.Y + (int) ((double) this.OffsetY * (double) destinationSize1.Height / 90.0));
-      PointF position3 = new PointF((float) num3, (float) num4);
-      Color fontColor = this.FontColor;
-      spriteMain1.Draw2D(stringTexture1, srcRectangle1, destinationSize3, position3, fontColor);
-      if (this.StringTexture2 == null)
-        return;
-      MySprite spriteMain2 = this.SpriteMain;
-      Texture stringTexture2 = this.StringTexture2;
-      Rectangle srcRectangle2 = new Rectangle(0, 0, 512, 256);
-      SizeF destinationSize4 = new SizeF(512f, 256f);
-      position1 = this.Position;
-      double num5 = (double) ((int) position1.X + this.OffsetX);
-      position1 = this.Position;
-      double num6 = (double) ((int) position1.Y + (int) ((double) this.OffsetY * (double) destinationSize1.Height / 90.0));
-      PointF position4 = new PointF((float) num5, (float) num6);
-      Color fontColor2 = this.FontColor2;
-      spriteMain2.Draw2D(stringTexture2, srcRectangle2, destinationSize4, position4, fontColor2);
-    }
-
-    public override void Dispose()
-    {
-      this.DXfont.Dispose();
-      if (this.StringTexture == null)
-        return;
-      this.StringTexture.Dispose();
-    }
-  }
 }

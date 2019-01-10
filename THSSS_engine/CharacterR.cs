@@ -1,68 +1,47 @@
 ﻿using System.Drawing;
 
-namespace Shooting
-{
-  internal class CharacterR : BaseStoryItem
-  {
-    public CharacterR(StageDataPackage StageData, string textureName)
-      : base(StageData)
-    {
-      Rectangle boundRect = this.BoundRect;
-      double num1 = (double) (boundRect.Right - 100);
-      boundRect = this.BoundRect;
-      double num2 = (double) (boundRect.Top + 200);
-      this.Position = new PointF((float) num1, (float) num2);
-      this.Velocity = 0.0f;
-      this.Direction = 0.0;
-      this.TxtureObject = this.TextureObjectDictionary[textureName];
-      this.Active = false;
-      this.TransparentValueF = 0.0f;
+namespace Shooting {
+    internal class CharacterR:BaseStoryItem {
+        public CharacterR(StageDataPackage StageData,string textureName) : base(StageData) {
+            Rectangle boundRect = BoundRect;
+            double num1 = boundRect.Right-100;
+            boundRect=BoundRect;
+            double num2 = boundRect.Top+200;
+            Position=new PointF((float)num1,(float)num2);
+            Velocity=0.0f;
+            Direction=0.0;
+            TxtureObject=TextureObjectDictionary[textureName];
+            Active=false;
+            TransparentValueF=0.0f;
+        }
+        public override void Move() {
+            if(Active) {
+                if((double)Position.X<=BoundRect.Right-130) return;
+                PointF originalPosition = OriginalPosition;
+                double num = originalPosition.X-2.0;
+                originalPosition=OriginalPosition;
+                double y = originalPosition.Y;
+                OriginalPosition=new PointF((float)num,(float)y);
+            } else if(Position.X<(double)(BoundRect.Right-100)) {
+                PointF originalPosition = OriginalPosition;
+                double num = originalPosition.X+2.0;
+                originalPosition=OriginalPosition;
+                double y = originalPosition.Y;
+                OriginalPosition=new PointF((float)num,(float)y);
+            }
+        }
+        public override void Ctrl() {
+            base.Ctrl();
+            if(Time<=1) {
+                TransparentValueF=0.0f;
+            } else {
+                if(Time>=26) return;
+                TransparentValueF+=10f;
+            }
+        }
+        public override void Show() {
+            SizeF destinationSize = new SizeF(TxtureObject.Width*Scale,TxtureObject.Height*Scale);
+            SpriteMain.Draw2D(TxtureObject.TXTure,TxtureObject.PosRect,destinationSize,TxtureObject.RotatingCenter,0.0f,Position,Color.FromArgb(TransparentValue,Active ? Color.White : Color.Gray));
+        }
     }
-
-    public override void Move()
-    {
-      if (this.Active)
-      {
-        if ((double) this.Position.X <= (double) (this.BoundRect.Right - 130))
-          return;
-        PointF originalPosition = this.OriginalPosition;
-        double num = (double) originalPosition.X - 2.0;
-        originalPosition = this.OriginalPosition;
-        double y = (double) originalPosition.Y;
-        this.OriginalPosition = new PointF((float) num, (float) y);
-      }
-      else if ((double) this.Position.X < (double) (this.BoundRect.Right - 100))
-      {
-        PointF originalPosition = this.OriginalPosition;
-        double num = (double) originalPosition.X + 2.0;
-        originalPosition = this.OriginalPosition;
-        double y = (double) originalPosition.Y;
-        this.OriginalPosition = new PointF((float) num, (float) y);
-      }
-    }
-
-    public override void Ctrl()
-    {
-      base.Ctrl();
-      if (this.Time <= 1)
-      {
-        this.TransparentValueF = 0.0f;
-      }
-      else
-      {
-        if (this.Time >= 26)
-          return;
-        this.TransparentValueF += 10f;
-      }
-    }
-
-    public override void Show()
-    {
-      SizeF destinationSize = new SizeF((float) this.TxtureObject.Width * this.Scale, (float) this.TxtureObject.Height * this.Scale);
-      if (this.Active)
-        this.SpriteMain.Draw2D(this.TxtureObject.TXTure, this.TxtureObject.PosRect, destinationSize, this.TxtureObject.RotatingCenter, 0.0f, this.Position, Color.FromArgb(this.TransparentValue, Color.White));
-      else
-        this.SpriteMain.Draw2D(this.TxtureObject.TXTure, this.TxtureObject.PosRect, destinationSize, this.TxtureObject.RotatingCenter, 0.0f, this.Position, Color.FromArgb(this.TransparentValue, Color.Gray));
-    }
-  }
 }

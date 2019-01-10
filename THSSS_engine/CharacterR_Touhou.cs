@@ -1,63 +1,46 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Shooting
-{
-  internal class CharacterR_Touhou : BaseStoryItem
-  {
-    public TextureObject TxtureObject2 { get; set; }
-
-    public CharacterR_Touhou(StageDataPackage StageData, string textureName)
-      : base(StageData)
-    {
-      this.OriginalPosition = new PointF((float) (this.BoundRect.Width - 70), 128f);
-      this.Velocity = 0.0f;
-      this.Direction = 0.0;
-      this.TxtureObject = this.TextureObjectDictionary[textureName];
-      this.Active = false;
-      this.TransparentValueF = 0.0f;
+namespace Shooting {
+    internal class CharacterR_Touhou:BaseStoryItem {
+        public TextureObject TxtureObject2 { get; set; }
+        public CharacterR_Touhou(StageDataPackage StageData,string textureName) : base(StageData) {
+            OriginalPosition=new PointF(BoundRect.Width-70,128f);
+            Velocity=0.0f;
+            Direction=0.0;
+            TxtureObject=TextureObjectDictionary[textureName];
+            Active=false;
+            TransparentValueF=0.0f;
+        }
+        public override void Move() {
+            if(Active) {
+                if((double)OriginalPosition.X<=BoundRect.Width-100) return;
+                PointF originalPosition = OriginalPosition;
+                double num = originalPosition.X-2.0;
+                originalPosition=OriginalPosition;
+                double y = originalPosition.Y;
+                OriginalPosition=new PointF((float)num,(float)y);
+            } else if((double)OriginalPosition.X<BoundRect.Width-70) {
+                PointF originalPosition = OriginalPosition;
+                double num = originalPosition.X+2.0;
+                originalPosition=OriginalPosition;
+                double y = originalPosition.Y;
+                OriginalPosition=new PointF((float)num,(float)y);
+            }
+        }
+        public override void Ctrl() {
+            base.Ctrl();
+            Angle=-(Direction-Math.PI/2.0);
+            if(Active) {
+                TransparentValueF+=10f;
+                ColorValue=Color.White;
+            } else {
+                ColorValue=Color.Gray;
+            }
+        }
+        public override void Show() {
+            if(TxtureObject2!=null) SpriteMain.Draw2D(TxtureObject2,ScaleWidth,ScaleLength,(float)(Direction-Math.PI/2.0+Angle),Position,Color.FromArgb(TransparentValue,ColorValue),Mirrored);
+            base.Show();
+        }
     }
-
-    public override void Move()
-    {
-      if (this.Active)
-      {
-        if ((double) this.OriginalPosition.X <= (double) (this.BoundRect.Width - 100))
-          return;
-        PointF originalPosition = this.OriginalPosition;
-        double num = (double) originalPosition.X - 2.0;
-        originalPosition = this.OriginalPosition;
-        double y = (double) originalPosition.Y;
-        this.OriginalPosition = new PointF((float) num, (float) y);
-      }
-      else if ((double) this.OriginalPosition.X < (double) (this.BoundRect.Width - 70))
-      {
-        PointF originalPosition = this.OriginalPosition;
-        double num = (double) originalPosition.X + 2.0;
-        originalPosition = this.OriginalPosition;
-        double y = (double) originalPosition.Y;
-        this.OriginalPosition = new PointF((float) num, (float) y);
-      }
-    }
-
-    public override void Ctrl()
-    {
-      base.Ctrl();
-      this.Angle = -(this.Direction - Math.PI / 2.0);
-      if (this.Active)
-      {
-        this.TransparentValueF += 10f;
-        this.ColorValue = Color.White;
-      }
-      else
-        this.ColorValue = Color.Gray;
-    }
-
-    public override void Show()
-    {
-      if (this.TxtureObject2 != null)
-        this.SpriteMain.Draw2D(this.TxtureObject2, this.ScaleWidth, this.ScaleLength, (float) (this.Direction - Math.PI / 2.0 + this.Angle), this.Position, Color.FromArgb(this.TransparentValue, this.ColorValue), this.Mirrored);
-      base.Show();
-    }
-  }
 }

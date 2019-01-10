@@ -80,7 +80,7 @@ namespace Shooting
 
     public override void Show()
     {
-      this.SpriteMain.Draw2D(this.TxtureObject.TXTure, this.TxtureObject.PosRect, new SizeF((float) this.TxtureObject.Width * this.Scale, (float) this.TxtureObject.Height * this.Scale), this.TxtureObject.RightTop, 0.0f, this.Position, Color.FromArgb(this.TransparentValue, Color.White));
+      this.SpriteMain.Draw2D(this.TxtureObject.TXTure, this.TxtureObject.PosRect, new SizeF((float) this.TxtureObject.Width * this.Scale, (float) this.TxtureObject.Height * this.Scale), this.TxtureObject.GetRightTop(), 0.0f, this.Position, Color.FromArgb(this.TransparentValue, Color.White));
     }
   }
 }
