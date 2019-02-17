@@ -110,7 +110,7 @@ namespace Shooting {
                 LoadingThread.Start();
             }
             SourseForm sourseForm = new SourseForm();
-            //    sourseForm.Show();
+                sourseForm.Show();
         }
 
         public bool Direct3DInit() {

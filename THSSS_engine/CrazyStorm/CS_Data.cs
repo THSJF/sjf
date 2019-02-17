@@ -70,16 +70,29 @@ namespace Shooting {
                                 }
                             }
                             BaseEmitter_CS baseEmitterCs = new BaseEmitter_CS(StageData,this,EmitterMode);
-                            if(baseEmitterCs.EmitterMode==EmitterMode.Enemy) baseEmitterCs.SubBullet=new EnemyFactory(strArray[82]) {
-                                HealthPoint=int.Parse(strArray[83]),
-                                RedCount=int.Parse(strArray[84]),
-                                BlueCount=int.Parse(strArray[85]),
-                                ColorType=byte.Parse(strArray[86]),
-                                BackFire=bool.Parse(strArray[87]),
-                                ClearRadius=int.Parse(strArray[88]),
-                                GreenCount=int.Parse(strArray[89]),
-                                StarFall=(strArray[90]!="0")
-                            }.GenerateEnemy(StageData);
+                            if(baseEmitterCs.EmitterMode==EmitterMode.Enemy) {
+                                /*  baseEmitterCs.SubBullet=new EnemyFactory(strArray[82]) {
+                                      HealthPoint=int.Parse(strArray[83]),
+                                      RedCount=int.Parse(strArray[84]),
+                                      BlueCount=int.Parse(strArray[85]),
+                                      ColorType=byte.Parse(strArray[86]),
+                                      BackFire=bool.Parse(strArray[87]),
+                                      ClearRadius=int.Parse(strArray[88]),
+                                      GreenCount=int.Parse(strArray[89]),
+                                      StarFall=(strArray[90]!="0")
+                                  }.GenerateEnemy(StageData);*/
+                                EnemyFactory ef = new EnemyFactory(strArray[82]);
+                                ef.HealthPoint=int.Parse(strArray[83]);
+                                ef.RedCount=int.Parse(strArray[84]);
+                                ef.BlueCount=int.Parse(strArray[85]);
+                                ef.ColorType=byte.Parse(strArray[86]);
+                                ef.BackFire=bool.Parse(strArray[87]);
+                                ef.ClearRadius=int.Parse(strArray[88]);
+                                ef.GreenCount=int.Parse(strArray[89]);
+                                ef.StarFall=(strArray[90]!="0");
+                                baseEmitterCs.SubBullet=ef.GenerateEnemy(StageData);
+                            }
+
                             baseEmitterCs.ID=int.Parse(strArray[0]);
                             baseEmitterCs.LayerID=int.Parse(strArray[1]);
                             baseEmitterCs.BindingState=bool.Parse(strArray[2]);
@@ -131,12 +144,12 @@ namespace Shooting {
                             while(true) {
                                 if(index6<str6.Split('&').Length-1) {
                                     string str7 = str6.Split('&')[index6];
-                                    EventGroup eventGroup = new EventGroup {
-                                        index=index6,
-                                        tag=str7.Split('|')[0],
-                                        t=int.Parse(str7.Split('|')[1]),
-                                        addtime=int.Parse(str7.Split('|')[2])
-                                    };
+                                    EventGroup eventGroup = new EventGroup();
+                                    eventGroup.index=index6;
+                                    eventGroup.tag=str7.Split('|')[0];
+                                    eventGroup.t=int.Parse(str7.Split('|')[1]);
+                                    eventGroup.addtime=int.Parse(str7.Split('|')[2]);
+
                                     int index7 = 0;
                                     while(true) {
                                         if(index7<str7.Split('|')[3].Split(';').Length-1) {

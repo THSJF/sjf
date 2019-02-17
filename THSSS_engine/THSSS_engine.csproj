@@ -350,7 +350,7 @@
     <Compile Include="MyRandom.cs" />
     <Compile Include="ScreenTexManager.cs" />
     <Compile Include="Planes\SubPlane_Sanae.cs" />
-    <Compile Include="BaseClasses\BaseObject_CS.cs" />
+    <Compile Include="CrazyStorm\BaseObject_CS.cs" />
     <Compile Include="EndBoss\EndBoss_FSC03.cs" />
     <Compile Include="SpecialSystem\EnchantmentMagicCircle.cs" />
     <Compile Include="FullPic2.cs" />
@@ -366,7 +366,7 @@
     <Compile Include="UI\Item_Line_SpellChip.cs" />
     <Compile Include="EndBoss\EndBoss_FSCEx.cs" />
     <Compile Include="EndBoss\EndBoss_FSC02.cs" />
-    <Compile Include="BaseClasses\BaseRadialLaser_CS.cs" />
+    <Compile Include="CrazyStorm\BaseRadialLaser_CS.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_07C.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_06B.cs" />
     <Compile Include="Boss\Character\Boss_Rika02.cs" />
@@ -389,7 +389,7 @@
     <Compile Include="Effects\EmitterStageTitleStar.cs" />
     <Compile Include="BaseClasses\BaseBackground.cs" />
     <Compile Include="Bullets\BulletRemover_Small.cs" />
-    <Compile Include="BaseClasses\BaseEffect_CS.cs" />
+    <Compile Include="CrazyStorm\BaseEffect_CS.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_07B.cs" />
     <Compile Include="Boss\Character\Boss_Rika01.cs" />
     <Compile Include="Boss\Character\Boss_Rakukun01.cs" />
@@ -414,7 +414,7 @@
     <Compile Include="UserComponents\GameState_SSS04.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="BaseClasses\BaseStraightLaser_CS.cs" />
+    <Compile Include="CrazyStorm\BaseStraightLaser_CS.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_10.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSS03_05.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_07A.cs" />
@@ -464,7 +464,7 @@
     <Compile Include="Planes\SubPlane_Reimu.cs" />
     <Compile Include="SpecialSystem\StarPointLineG.cs" />
     <Compile Include="CrazyStorm\CS_Data.cs" />
-    <Compile Include="BaseClasses\BaseEmitter_CS.cs" />
+    <Compile Include="CrazyStorm\BaseEmitter_CS.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_03.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSS05_03.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSS04_03D.cs" />
@@ -526,7 +526,7 @@
     <Compile Include="Menus\MenuGroup_PlayerSelectEx.cs" />
     <Compile Include="SpecialSystem\StarPointLineR.cs" />
     <Compile Include="Enemy\EnemyType.cs" />
-    <Compile Include="BaseClasses\BaseCover_CS.cs" />
+    <Compile Include="CrazyStorm\BaseCover_CS.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_04D.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_02C.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_01B.cs" />
@@ -571,7 +571,7 @@
     <Compile Include="UI\MyBorder_Line.cs" />
     <Compile Include="EndBoss\EndBoss_FSC04.cs" />
     <Compile Include="FullPic3.cs" />
-    <Compile Include="BaseClasses\BaseBendLaser_CS.cs" />
+    <Compile Include="CrazyStorm\BaseBendLaser_CS.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_07D.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_05C.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_04B.cs" />

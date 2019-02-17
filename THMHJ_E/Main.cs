@@ -356,7 +356,7 @@ namespace THMHJ {
                 Main.MKeys=new bool[RecordManager.used.Length];
                 Main.preMKeys=new bool[RecordManager.used.Length];
                 sourseForm=new SourseForm();
-                sourseForm.Show();
+             //   sourseForm.Show();
             } catch(Exception ex) {
                 StreamWriter streamWriter = new StreamWriter("Error.txt");
                 DateTime now = DateTime.Now;

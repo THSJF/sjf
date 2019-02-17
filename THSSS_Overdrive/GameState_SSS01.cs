@@ -86,11 +86,15 @@ namespace Shooting
               files = Directory.GetFiles(".\\CS\\St01\\A\\L\\", "*.mbg");
               break;
           }
-          foreach (string FileName in files)
-            new CSEmitterController(this.StageData, this.StageData.LoadCS(FileName))
-            {
-              OnRoad = true
-            }.Time = this.TimeMain + 60;
+                    foreach(string FileName in files) {
+                        CSEmitterController csec = new CSEmitterController(StageData,StageData.LoadCS(FileName));
+                        csec.OnRoad=true;
+                        csec.Time=TimeMain+60;
+                    }
+          //  new CSEmitterController(this.StageData, this.StageData.LoadCS(FileName))
+         //   {
+         //     OnRoad = true
+         //   }.Time = this.TimeMain + 60;
         }
         StageDataPackage stageData2 = this.StageData;
         string textureName = this.StageData.Difficulty.ToString();

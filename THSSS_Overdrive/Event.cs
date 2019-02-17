@@ -34,7 +34,7 @@ namespace Shooting
 
     public void String2EmitterEvent()
     {
-      string eventString = this.EventString;
+      string eventString =  EventString;
       string str1 = eventString.Split('：')[0];
       string str2 = "";
       string str3 = "";
@@ -115,26 +115,26 @@ namespace Shooting
           num1 = float.Parse(strArray[0].Replace("化到", ""));
         string str9 = strArray[1];
         int num4 = int.Parse(strArray[2].Split("帧".ToCharArray())[0]);
-        this.condition = str1;
-        this.result = str7;
-        this.condition2 = str2;
-        this.contype = (int) Hash.conditions[(object) str3];
-        this.contype2 = (int) Hash.conditions[(object) str3];
-        this.opreator = str4;
-        this.opreator2 = str5;
-        this.collector = str6;
-        this.change = num3;
-        this.changetype = (int) Hash.type[(object) str9];
-        this.changevalue = result;
-        this.changename = (int) Hash.results[(object) str8];
-        this.res = num1;
-        this.special = num2;
+         condition = str1;
+                this.result = str7;
+         condition2 = str2;
+         contype = (int) Hash.conditions[(object) str3];
+         contype2 = (int) Hash.conditions[(object) str3];
+         opreator = str4;
+         opreator2 = str5;
+         collector = str6;
+         change = num3;
+         changetype = (int) Hash.type[(object) str9];
+         changevalue = result;
+         changename = (int) Hash.results[(object) str8];
+         res = num1;
+         special = num2;
         if (strArray[0].Replace("化到", "").Contains("+"))
-          this.rand = float.Parse(strArray[0].Replace("化到", "").Split('+')[1]);
-        this.times = num4;
+           rand = float.Parse(strArray[0].Replace("化到", "").Split('+')[1]);
+         times = num4;
         if (!strArray[2].Contains("("))
           return;
-        this.time = int.Parse(strArray[2].Split('(')[1].Split(')')[0]);
+         time = int.Parse(strArray[2].Split('(')[1].Split(')')[0]);
       }
       else if (eventString.Contains("增加"))
       {
@@ -160,26 +160,26 @@ namespace Shooting
           num1 = float.Parse(strArray[0]);
         string str9 = strArray[1];
         int num4 = int.Parse(strArray[2].Split("帧".ToCharArray())[0]);
-        this.condition = str1;
-        this.result = str7;
-        this.condition2 = str2;
-        this.contype = (int) Hash.conditions[(object) str3];
-        this.contype2 = (int) Hash.conditions[(object) str3];
-        this.opreator = str4;
-        this.opreator2 = str5;
-        this.collector = str6;
-        this.change = num3;
-        this.changetype = (int) Hash.type[(object) str9];
-        this.changevalue = result;
-        this.changename = (int) Hash.results[(object) str8];
-        this.res = num1;
-        this.special = num2;
+         condition = str1;
+         this.result = str7;
+         condition2 = str2;
+         contype = (int) Hash.conditions[(object) str3];
+         contype2 = (int) Hash.conditions[(object) str3];
+         opreator = str4;
+         opreator2 = str5;
+         collector = str6;
+         change = num3;
+         changetype = (int) Hash.type[(object) str9];
+         changevalue = result;
+         changename = (int) Hash.results[(object) str8];
+         res = num1;
+         special = num2;
         if (strArray[0].Contains("+"))
-          this.rand = float.Parse(strArray[0].Split('+')[1]);
-        this.times = num4;
+           rand = float.Parse(strArray[0].Split('+')[1]);
+         times = num4;
         if (!strArray[2].Contains("("))
           return;
-        this.time = int.Parse(strArray[2].Split('(')[1].Split(')')[0]);
+         time = int.Parse(strArray[2].Split('(')[1].Split(')')[0]);
       }
       else if (eventString.Contains("减少"))
       {
@@ -204,54 +204,54 @@ namespace Shooting
           num1 = float.Parse(strArray[0]);
         string str9 = strArray[1];
         int num4 = int.Parse(strArray[2].Split("帧".ToCharArray())[0]);
-        this.condition = str1;
-        this.result = str7;
-        this.condition2 = str2;
-        this.contype = (int) Hash.conditions[(object) str3];
-        this.contype2 = (int) Hash.conditions[(object) str3];
-        this.opreator = str4;
-        this.opreator2 = str5;
-        this.collector = str6;
-        this.change = num3;
-        this.changetype = (int) Hash.type[(object) str9];
-        this.changevalue = result;
-        this.changename = (int) Hash.results[(object) str8];
-        this.res = num1;
-        this.special = num2;
+         condition = str1;
+                this.result = str7;
+         condition2 = str2;
+         contype = (int) Hash.conditions[(object) str3];
+         contype2 = (int) Hash.conditions[(object) str3];
+         opreator = str4;
+         opreator2 = str5;
+         collector = str6;
+         change = num3;
+         changetype = (int) Hash.type[(object) str9];
+         changevalue = result;
+         changename = (int) Hash.results[(object) str8];
+         res = num1;
+         special = num2;
         if (strArray[0].Contains("+"))
-          this.rand = float.Parse(strArray[0].Split('+')[1]);
-        this.times = num4;
+           rand = float.Parse(strArray[0].Split('+')[1]);
+         times = num4;
         if (!strArray[2].Contains("("))
           return;
-        this.time = int.Parse(strArray[2].Split('(')[1].Split(')')[0]);
+         time = int.Parse(strArray[2].Split('(')[1].Split(')')[0]);
       }
       else if (eventString.Contains("恢复"))
       {
-        this.special = 1;
-        this.opreator = str4;
-        this.opreator2 = str5;
-        this.condition = str1;
-        this.condition2 = str2;
-        this.contype = (int) Hash.conditions[(object) str3];
-        this.contype2 = (int) Hash.conditions[(object) str3];
-        this.collector = str6;
+         special = 1;
+         opreator = str4;
+         opreator2 = str5;
+         condition = str1;
+         condition2 = str2;
+         contype = (int) Hash.conditions[(object) str3];
+         contype2 = (int) Hash.conditions[(object) str3];
+         collector = str6;
       }
       else if (eventString.Contains("发射"))
       {
-        this.special = 2;
-        this.opreator = str4;
-        this.opreator2 = str5;
-        this.condition = str1;
-        this.condition2 = str2;
-        this.contype = (int) Hash.conditions[(object) str3];
-        this.contype2 = (int) Hash.conditions[(object) str3];
-        this.collector = str6;
+         special = 2;
+         opreator = str4;
+         opreator2 = str5;
+         condition = str1;
+         condition2 = str2;
+         contype = (int) Hash.conditions[(object) str3];
+         contype2 = (int) Hash.conditions[(object) str3];
+         collector = str6;
       }
     }
 
     public void String2BulletEvent()
     {
-      string eventString = this.EventString;
+      string eventString =  EventString;
       string str1 = eventString.Split('：')[0];
       string str2 = "";
       string str3 = "";
@@ -332,26 +332,26 @@ namespace Shooting
           num1 = float.Parse(strArray[0].Replace("化到", ""));
         string str9 = strArray[1];
         int num5 = int.Parse(strArray[2].Split("帧".ToCharArray())[0]);
-        this.condition = str1;
-        this.result = str7;
-        this.condition2 = str2;
-        this.contype = (int) Hash.conditions2[(object) str3];
-        this.contype2 = (int) Hash.conditions2[(object) str3];
-        this.opreator = str4;
-        this.opreator2 = str5;
-        this.collector = str6;
-        this.change = num3;
-        this.changetype = (int) Hash.type[(object) str9];
-        this.changevalue = num4;
-        this.changename = (int) Hash.results2[(object) str8];
-        this.res = num1;
-        this.special = num2;
+         condition = str1;
+         result = str7;
+         condition2 = str2;
+         contype = (int) Hash.conditions2[(object) str3];
+         contype2 = (int) Hash.conditions2[(object) str3];
+         opreator = str4;
+         opreator2 = str5;
+         collector = str6;
+         change = num3;
+         changetype = (int) Hash.type[(object) str9];
+         changevalue = num4;
+         changename = (int) Hash.results2[(object) str8];
+         res = num1;
+         special = num2;
         if (strArray[0].Replace("化到", "").Contains("+"))
-          this.rand = float.Parse(strArray[0].Replace("化到", "").Split('+')[1]);
-        this.times = num5;
+           rand = float.Parse(strArray[0].Replace("化到", "").Split('+')[1]);
+         times = num5;
         if (!strArray[2].Contains("("))
           return;
-        this.time = int.Parse(strArray[2].Split('(')[1].Split(')')[0]);
+         time = int.Parse(strArray[2].Split('(')[1].Split(')')[0]);
       }
       else if (eventString.Contains("增加"))
       {
@@ -377,26 +377,26 @@ namespace Shooting
           num1 = float.Parse(strArray[0]);
         string str9 = strArray[1];
         int num5 = int.Parse(strArray[2].Split("帧".ToCharArray())[0]);
-        this.condition = str1;
-        this.result = str7;
-        this.condition2 = str2;
-        this.contype = (int) Hash.conditions2[(object) str3];
-        this.contype2 = (int) Hash.conditions2[(object) str3];
-        this.opreator = str4;
-        this.opreator2 = str5;
-        this.collector = str6;
-        this.change = num3;
-        this.changetype = (int) Hash.type[(object) str9];
-        this.changevalue = num4;
-        this.changename = (int) Hash.results2[(object) str8];
-        this.res = num1;
-        this.special = num2;
+         condition = str1;
+         result = str7;
+         condition2 = str2;
+         contype = (int) Hash.conditions2[(object) str3];
+         contype2 = (int) Hash.conditions2[(object) str3];
+         opreator = str4;
+         opreator2 = str5;
+         collector = str6;
+         change = num3;
+         changetype = (int) Hash.type[(object) str9];
+         changevalue = num4;
+         changename = (int) Hash.results2[(object) str8];
+         res = num1;
+         special = num2;
         if (strArray[0].Contains("+"))
-          this.rand = float.Parse(strArray[0].Split('+')[1]);
-        this.times = num5;
+           rand = float.Parse(strArray[0].Split('+')[1]);
+         times = num5;
         if (!strArray[2].Contains("("))
           return;
-        this.time = int.Parse(strArray[2].Split('(')[1].Split(')')[0]);
+         time = int.Parse(strArray[2].Split('(')[1].Split(')')[0]);
       }
       else if (eventString.Contains("减少"))
       {
@@ -421,54 +421,54 @@ namespace Shooting
           num1 = float.Parse(strArray[0]);
         string str9 = strArray[1];
         int num5 = int.Parse(strArray[2].Split("帧".ToCharArray())[0]);
-        this.condition = str1;
-        this.result = str7;
-        this.condition2 = str2;
-        this.contype = (int) Hash.conditions2[(object) str3];
-        this.contype2 = (int) Hash.conditions2[(object) str3];
-        this.opreator = str4;
-        this.opreator2 = str5;
-        this.collector = str6;
-        this.change = num3;
-        this.changetype = (int) Hash.type[(object) str9];
-        this.changevalue = num4;
-        this.changename = (int) Hash.results2[(object) str8];
-        this.res = num1;
-        this.special = num2;
+         condition = str1;
+         result = str7;
+         condition2 = str2;
+         contype = (int) Hash.conditions2[(object) str3];
+         contype2 = (int) Hash.conditions2[(object) str3];
+         opreator = str4;
+         opreator2 = str5;
+         collector = str6;
+         change = num3;
+         changetype = (int) Hash.type[(object) str9];
+         changevalue = num4;
+         changename = (int) Hash.results2[(object) str8];
+         res = num1;
+         special = num2;
         if (strArray[0].Contains("+"))
-          this.rand = float.Parse(strArray[0].Split('+')[1]);
-        this.times = num5;
+           rand = float.Parse(strArray[0].Split('+')[1]);
+         times = num5;
         if (!strArray[2].Contains("("))
           return;
-        this.time = int.Parse(strArray[2].Split('(')[1].Split(')')[0]);
+         time = int.Parse(strArray[2].Split('(')[1].Split(')')[0]);
       }
       else if (eventString.Contains("恢复"))
       {
-        this.special = 1;
-        this.opreator = str4;
-        this.opreator2 = str5;
-        this.condition = str1;
-        this.condition2 = str2;
-        this.contype = (int) Hash.conditions2[(object) str3];
-        this.contype2 = (int) Hash.conditions2[(object) str3];
-        this.collector = str6;
+         special = 1;
+         opreator = str4;
+         opreator2 = str5;
+         condition = str1;
+         condition2 = str2;
+         contype = (int) Hash.conditions2[(object) str3];
+         contype2 = (int) Hash.conditions2[(object) str3];
+         collector = str6;
       }
       else if (eventString.Contains("发射"))
       {
-        this.special = 2;
-        this.opreator = str4;
-        this.opreator2 = str5;
-        this.condition = str1;
-        this.condition2 = str2;
-        this.contype = (int) Hash.conditions2[(object) str3];
-        this.contype2 = (int) Hash.conditions2[(object) str3];
-        this.collector = str6;
+         special = 2;
+         opreator = str4;
+         opreator2 = str5;
+         condition = str1;
+         condition2 = str2;
+         contype = (int) Hash.conditions2[(object) str3];
+         contype2 = (int) Hash.conditions2[(object) str3];
+         collector = str6;
       }
     }
 
     public object Clone()
     {
-      return this.MemberwiseClone();
+      return  MemberwiseClone();
     }
   }
 }

@@ -32,10 +32,10 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrazyStorm\EmitterMode.cs" />
     <Compile Include="SourseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -493,7 +494,6 @@
     <Compile Include="Backgrounds\EnvironmentSSS01.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSS06_FSC03.cs" />
     <Compile Include="Planes\SpellCard\Spell_Sanae.cs" />
-    <Compile Include="Effects\EmitterMode.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSSEx_01.cs" />
     <Compile Include="Boss\Character\Boss_Tensei02.cs" />
     <Compile Include="Boss\BossSpellCard\SpellCard_SSS05_01.cs" />

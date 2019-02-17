@@ -1,4 +1,4 @@
-﻿ 
+﻿
 // Type: Shooting.BaseBullet_CS
 // Assembly: THSSS, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: 9501F839-8E36-4763-8C1B-4AB9B7BE2AA4
@@ -8,12 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace Shooting
-{
-  public class BaseBullet_CS : BaseBullet_Touhou
-  {
-    private readonly string[] BulletName = new string[229]
-    {
+namespace Shooting {
+    public class BaseBullet_CS:BaseBullet_Touhou {
+        private readonly string[] BulletName = new string[229]
+        {
       null,
       "bullet1_1",
       "bullet1_3",
@@ -243,296 +241,284 @@ namespace Shooting
       "bullet50_2",
       "bullet50_7",
       "bullet50_3"
-    };
-    private readonly byte[] BulletColorType = new byte[229]
-    {
-      (byte) 0,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 11,
-      (byte) 13,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 15,
-      (byte) 1,
-      (byte) 3,
-      (byte) 5,
-      (byte) 7,
-      (byte) 9,
-      (byte) 13,
-      (byte) 14,
-      (byte) 1,
-      (byte) 5,
-      (byte) 3,
-      (byte) 9,
-      (byte) 13,
-      (byte) 0,
-      (byte) 0,
-      (byte) 6,
-      (byte) 1,
-      (byte) 3,
-      (byte) 7,
-      (byte) 6,
-      (byte) 13,
-      (byte) 15,
-      (byte) 11,
-      (byte) 1,
-      (byte) 5,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 0,
-      (byte) 7,
-      (byte) 0,
-      (byte) 9,
-      (byte) 1,
-      (byte) 13,
-      (byte) 3,
-      (byte) 15,
-      (byte) 5
-    };
-
-    public override int Type
-    {
-      get
-      {
-        return this.type;
-      }
-      set
-      {
-        this.type = value;
-        if (value < 0 || value >= this.BulletName.Length)
-          return;
-        string textureName = this.BulletName[this.type];
-        this.ColorType = this.BulletColorType[this.type];
-        if (textureName != null)
+        };
+        private readonly byte[] BulletColorType = new byte[229]
         {
-          this.TxtureObject = this.TextureObjectDictionary[textureName];
-          this.GhostingColor = Color.White;
-          this.SizeValue = 32;
-          this.Region = 2;
-          this.SetRegion(textureName);
+        0,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        15,
+        1,
+        3,
+        5,
+        7,
+        9,
+        13,
+        14,
+        1,
+        5,
+        3,
+        9,
+        13,
+        0,
+        0,
+        6,
+        1,
+        3,
+        7,
+        6,
+        13,
+        15,
+        11,
+        1,
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        7,
+        0,
+        9,
+        1,
+        13,
+        3,
+        15,
+        5
+        };
+
+        public override int Type {
+            get {
+                return type;
+            }
+            set {
+                type=value;
+                if(value<0||value>=BulletName.Length)
+                    return;
+                string textureName = BulletName[type];
+                ColorType=BulletColorType[type];
+                if(textureName!=null) {
+                    TxtureObject=TextureObjectDictionary[textureName];
+                    GhostingColor=Color.White;
+                    SizeValue=32;
+                    Region=2;
+                    SetRegion(textureName);
+                } else
+                    Region=-100;
+            }
         }
-        else
-          this.Region = -100;
-      }
-    }
 
-    public BaseBullet_CS(StageDataPackage StageData)
-      : base(StageData)
-    {
-      this.EventGroupList = new List<EventGroup>();
-      this.EventsExecutionList = new List<Execution>();
-    }
+        public BaseBullet_CS(StageDataPackage StageData) : base(StageData) {
+            EventGroupList=new List<EventGroup>();
+            EventsExecutionList=new List<Execution>();
+        }
 
-    public override void Ctrl()
-    {
-      base.Ctrl();
-      if (this.Type == 181 || this.Type == 185)
-        this.TxtureObject = this.TextureObjectDictionary["bullet66_" + (object) (this.Time % 16 / 4)];
-      else if (this.Type == 182)
-        this.TxtureObject = this.TextureObjectDictionary["bullet64_" + (object) (this.Time % 16 / 4)];
-      else if (this.Type == 183)
-      {
-        this.TxtureObject = this.TextureObjectDictionary["bullet65_" + (object) (this.Time % 16 / 4)];
-      }
-      else
-      {
-        if (this.Type != 184)
-          return;
-        this.TxtureObject = this.TextureObjectDictionary["bullet18-" + (object) (this.Time % 16 / 4)];
-      }
-    }
+        public override void Ctrl() {
+            base.Ctrl();
+            if(Type==181||Type==185)
+                TxtureObject=TextureObjectDictionary["bullet66_"+(Time%16/4)];
+            else if(Type==182)
+                TxtureObject=TextureObjectDictionary["bullet64_"+(Time%16/4)];
+            else if(Type==183) {
+                TxtureObject=TextureObjectDictionary["bullet65_"+(Time%16/4)];
+            } else {
+                if(Type!=184)
+                    return;
+                TxtureObject=TextureObjectDictionary["bullet18-"+(Time%16/4)];
+            }
+        }
 
-    public override void EventCtrl()
-    {
-      this.EventGroupList.ForEach((Action<EventGroup>) (a => a.Update((BaseObject_CS) this)));
-      this.EventsExecutionList.ForEach((Action<Execution>) (a => a.Update((BaseObject_CS) this)));
+        public override void EventCtrl() {
+            EventGroupList.ForEach(a => a.Update(this));
+            EventsExecutionList.ForEach(a => a.Update(this));
+        }
     }
-  }
 }

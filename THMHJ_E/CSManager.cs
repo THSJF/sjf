@@ -214,11 +214,13 @@ namespace THMHJ
         barrageType.origin = new Vector2((float) int.Parse(str.Split('_')[5]), (float) int.Parse(str.Split('_')[6]));
         barrageType.origin0 = new Vector2((float) int.Parse(str.Split('_')[5]), (float) int.Parse(str.Split('_')[6]));
         barrageType.pdr0 = (float) int.Parse(str.Split('_')[7]);
-        if (str.Split('_')[8] != "")
-          barrageType.color = int.Parse(str.Split('_')[8]);
-        else
-          barrageType.color = -1;
-        this.bgset.Add(barrageType);
+        if (str.Split('_')[8] != "") {
+                    barrageType.color = int.Parse(str.Split('_')[8]);
+                } else {
+                    barrageType.color = -1;
+                }
+
+                this.bgset.Add(barrageType);
       }
       streamReader.Close();
     }

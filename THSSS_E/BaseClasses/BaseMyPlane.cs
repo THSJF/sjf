@@ -709,8 +709,7 @@ namespace Shooting {
             } else { 
                 Emitter emitter = new Emitter(StageData,MyPlane.Position);
                 StageData.SoundPlay("se_pldead00.wav",OriginalPosition.X/BoundRect.Width);
-                DeadTime=Time+20;
-                SpellShoot();
+                DeadTime=Time+20; 
             }
         }
 

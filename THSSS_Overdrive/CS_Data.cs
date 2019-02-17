@@ -23,53 +23,53 @@ namespace Shooting {
         }
 
         public CS_Data(string FileName) {
-            this.MBGtext=File.ReadAllLines(FileName,Encoding.UTF8);
-            this.EmitterList=new List<BaseEmitter_CS>();
+            MBGtext=File.ReadAllLines(FileName,Encoding.UTF8);
+            EmitterList=new List<BaseEmitter_CS>();
         }
 
         public void String2Data(StageDataPackage StageData) {
-            this.EmitterList.Clear();
+            EmitterList.Clear();
             int num1 = 0;
-            string[] mbGtext1 = this.MBGtext;
+            string[] mbGtext1 = MBGtext;
             int index1 = num1;
             int num2 = index1+1;
             if(mbGtext1[index1]!="Crazy Storm Data 1.01") {
                 int num3 = (int)MessageBox.Show("当前暂不支持除1.01以外的数据格式","错误",MessageBoxButtons.OK,MessageBoxIcon.Hand);
             } else {
-                string[] mbGtext2 = this.MBGtext;
+                string[] mbGtext2 = MBGtext;
                 int index2 = num2;
                 int num4 = index2+1;
                 string str1 = mbGtext2[index2];
                 if(str1.Contains("Types")) {
                     int num5 = int.Parse(str1.Split(' ')[0]);
                     for(int index3 = 0;index3<num5;++index3)
-                        this.MBGtext[num4++].Split('_');
-                    str1=this.MBGtext[num4++];
+                        MBGtext[num4++].Split('_');
+                    str1=MBGtext[num4++];
                 }
                 if(str1.Contains("GlobalEvents")) {
                     int num5 = int.Parse(str1.Split(' ')[0]);
                     for(int index3 = 0;index3<num5;++index3) {
-                        string str2 = this.MBGtext[num4++];
+                        string str2 = MBGtext[num4++];
                     }
-                    str1=this.MBGtext[num4++];
+                    str1=MBGtext[num4++];
                 }
                 if(str1.Contains("Sounds")) {
                     int num5 = int.Parse(str1.Split(' ')[0]);
                     for(int index3 = 0;index3<num5;++index3) {
-                        string str2 = this.MBGtext[num4++];
+                        string str2 = MBGtext[num4++];
                     }
-                    string str3 = this.MBGtext[num4++];
+                    string str3 = MBGtext[num4++];
                 }
-                string[] mbGtext3 = this.MBGtext;
+                string[] mbGtext3 = MBGtext;
                 int index4 = num4;
                 int num6 = index4+1;
-                this.TimeTotal=int.Parse(mbGtext3[index4].Split(':')[1]);
+                TimeTotal=int.Parse(mbGtext3[index4].Split(':')[1]);
                 for(int index3 = 0;index3<4;++index3) {
-                    string str2 = this.MBGtext[num6++];
+                    string str2 = MBGtext[num6++];
                     if(str2.Split(':')[1].Split(',')[0]!="empty") {
                         int num5 = int.Parse(str2.Split(':')[1].Split(',')[3]);
                         for(int index5 = 0;index5<num5;++index5) {
-                            string[] strArray = this.MBGtext[num6++].Split(',');
+                            string[] strArray = MBGtext[num6++].Split(',');
                             EmitterMode EmitterMode = EmitterMode.Bullet;
                             if(strArray.Length>91) {
                                 if(bool.Parse(strArray[81]))
@@ -78,17 +78,18 @@ namespace Shooting {
                                     EmitterMode=EmitterMode.Effect;
                             }
                             BaseEmitter_CS baseEmitterCs = new BaseEmitter_CS(StageData,this,EmitterMode);
-                            if(baseEmitterCs.EmitterMode==EmitterMode.Enemy)
-                                baseEmitterCs.SubBullet=(BaseObject_CS)new EnemyFactory(strArray[82]) {
-                                    HealthPoint=int.Parse(strArray[83]),
-                                    RedCount=int.Parse(strArray[84]),
-                                    BlueCount=int.Parse(strArray[85]),
-                                    ColorType=byte.Parse(strArray[86]),
-                                    BackFire=bool.Parse(strArray[87]),
-                                    ClearRadius=int.Parse(strArray[88]),
-                                    GreenCount=int.Parse(strArray[89]),
-                                    StarFall=(strArray[90]!="0")
-                                }.GenerateEnemy(StageData);
+                            if(baseEmitterCs.EmitterMode==EmitterMode.Enemy) {
+                                EnemyFactory ef = new EnemyFactory(strArray[82]);
+                                ef.HealthPoint=int.Parse(strArray[83]);
+                                ef.RedCount=int.Parse(strArray[84]);
+                                ef.BlueCount=int.Parse(strArray[85]);
+                                ef.ColorType=byte.Parse(strArray[86]);
+                                ef.BackFire=bool.Parse(strArray[87]);
+                                ef.ClearRadius=int.Parse(strArray[88]);
+                                ef.GreenCount=int.Parse(strArray[89]);
+                                ef.StarFall=(strArray[90]!="0");
+                                baseEmitterCs.SubBullet=ef.GenerateEnemy(StageData);
+                            }
                             baseEmitterCs.ID=int.Parse(strArray[0]);
                             baseEmitterCs.LayerID=int.Parse(strArray[1]);
                             baseEmitterCs.BindingState=bool.Parse(strArray[2]);
@@ -232,22 +233,29 @@ namespace Shooting {
                                 baseEmitterCs.DeltaV=float.Parse(strArray[95]);
                             }
                             if(strArray.Length>110) baseEmitterCs.RDirectionWithDirection=!(strArray[96]=="0");
-                            this.EmitterList.Add(baseEmitterCs);
-                                if(EmitterMode==EmitterMode.Bullet) {
-                                    BaseEmitter_CS b2 = new BaseEmitter_CS(StageData,this,EmitterMode);
-                                    b2=(BaseEmitter_CS)baseEmitterCs.Clone();
-                                    b2.SubBullet.Velocity=baseEmitterCs.SubBullet.Velocity*1.5f;
-                                    b2.SubBullet.AccelerateCS=baseEmitterCs.SubBullet.AccelerateCS*1.5f;
-                                    EmitterList.Add(b2);
+                            EmitterList.Add(baseEmitterCs);
+                            if(EmitterMode==EmitterMode.Bullet) {
+                                BaseEmitter_CS b2 = new BaseEmitter_CS(StageData,this,EmitterMode);
+                                b2=(BaseEmitter_CS)baseEmitterCs.Clone();
+                                b2.SubBullet.Velocity=baseEmitterCs.SubBullet.Velocity*1.5f;
+                                b2.SubBullet.AccelerateCS=baseEmitterCs.SubBullet.AccelerateCS*1.5f;
+                                EmitterList.Add(b2);
                             }
 
                         }
                         if(str2.Split(':')[1].Split(',').Length>=7) {
                             int num7 = int.Parse(str2.Split(':')[1].Split(',')[4]);
                             for(int index5 = 0;index5<num7;++index5) {
-                                string str3 = this.MBGtext[num6++];
+                                string str3 = MBGtext[num6++];
                                 string[] strArray = str3.Split(',');
-                                BaseEmitter_CS baseEmitterCs = !bool.Parse(strArray[29]) ? (strArray.Length<=61 ? new BaseEmitter_CS(StageData,this,EmitterMode.StraightLaser) : (!bool.Parse(strArray[61]) ? new BaseEmitter_CS(StageData,this,EmitterMode.StraightLaser) : new BaseEmitter_CS(StageData,this,EmitterMode.BendLaser))) : new BaseEmitter_CS(StageData,this,EmitterMode.RadialLaser);
+                                BaseEmitter_CS baseEmitterCs =
+                                    !bool.Parse(strArray[29]) ?
+                                         (strArray.Length<=61 ?
+                                             new BaseEmitter_CS(StageData,this,EmitterMode.StraightLaser) :
+                                             (!bool.Parse(strArray[61]) ?
+                                                    new BaseEmitter_CS(StageData,this,EmitterMode.StraightLaser) :
+                                                    new BaseEmitter_CS(StageData,this,EmitterMode.BendLaser))) :
+                                    new BaseEmitter_CS(StageData,this,EmitterMode.RadialLaser);
                                 baseEmitterCs.ID=int.Parse(strArray[0]);
                                 baseEmitterCs.LayerID=int.Parse(strArray[1]);
                                 baseEmitterCs.BindingState=bool.Parse(strArray[2]);
@@ -359,11 +367,11 @@ namespace Shooting {
                                     if(baseEmitterCs.EmitterMode==EmitterMode.StraightLaser)
                                         ((Bullet_StraightLaser)baseEmitterCs.SubBullet).LaserHead=(bool.Parse(str3.Split(',')[62]) ? 1 : 0)!=0;
                                 }
-                                this.EmitterList.Add(baseEmitterCs);
+                                EmitterList.Add(baseEmitterCs);
                             }
                             int num8 = int.Parse(str2.Split(':')[1].Split(',')[5]);
                             for(int index5 = 0;index5<num8;++index5) {
-                                string[] strArray = this.MBGtext[num6++].Split(',');
+                                string[] strArray = MBGtext[num6++].Split(',');
                                 BaseCover_CS baseCoverCs = new BaseCover_CS(StageData);
                                 baseCoverCs.MaxScale=1000f;
                                 baseCoverCs.ID=int.Parse(strArray[0]);
@@ -440,15 +448,15 @@ namespace Shooting {
                                     baseCoverCs.BindingID=int.Parse(strArray[23]);
                                 if(strArray.Length>=25&&strArray[24]!="")
                                     baseCoverCs.DeepBinding=bool.Parse(strArray[24]);
-                                this.EmitterList.Add((BaseEmitter_CS)baseCoverCs);
+                                EmitterList.Add((BaseEmitter_CS)baseCoverCs);
                             }
                             int num9 = int.Parse(str2.Split(':')[1].Split(',')[6]);
                             string str7;
                             for(int index5 = 0;index5<num9;++index5)
-                                str7=this.MBGtext[num6++];
+                                str7=MBGtext[num6++];
                             int num10 = int.Parse(str2.Split(':')[1].Split(',')[7]);
                             for(int index5 = 0;index5<num10;++index5)
-                                str7=this.MBGtext[num6++];
+                                str7=MBGtext[num6++];
                         }
                     }
                 }
@@ -456,7 +464,7 @@ namespace Shooting {
         }
 
         private void AddNode(int id,TreeNode treeNode) {
-            this.EmitterList.ForEach((Action<BaseEmitter_CS>)(b => {
+            EmitterList.ForEach((Action<BaseEmitter_CS>)(b => {
                 if(b.BindingID!=id)
                     return;
                 string str1 = !(b is BaseCover_CS) ? b.EmitterMode.ToString() : "Cover";
@@ -470,7 +478,7 @@ namespace Shooting {
                 string str3 = "ID："+id1.ToString()+"  "+str1;
                 treeNode3.Text=str3;
                 treeNode.Nodes.Add(treeNode1);
-                this.AddNode(b.ID,treeNode1);
+                AddNode(b.ID,treeNode1);
             }));
         }
     }

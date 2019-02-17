@@ -15,10 +15,8 @@ namespace THMHJ {
         public static string Vector;
 
         private static byte[][] Keys() {
-            return new byte[4][]
-            {
-        new byte[16]
-        {
+            return new byte[4][]{
+        new byte[16]    {
           (byte) 79,
           (byte) 14,
           (byte) 42,
@@ -36,8 +34,7 @@ namespace THMHJ {
           (byte) 5,
           (byte) 7
         },
-        new byte[16]
-        {
+        new byte[16] {
           (byte) 28,
           (byte) 91,
           (byte) 61,
@@ -55,8 +52,7 @@ namespace THMHJ {
           (byte) 242,
           (byte) 248
         },
-        new byte[16]
-        {
+        new byte[16]    {
           (byte) 204,
           (byte) 219,
           (byte) 153,
@@ -74,8 +70,7 @@ namespace THMHJ {
           (byte) 254,
           (byte) 250
         },
-        new byte[16]
-        {
+        new byte[16]   {
           (byte) 79,
           (byte) 145,
           (byte) 221,
