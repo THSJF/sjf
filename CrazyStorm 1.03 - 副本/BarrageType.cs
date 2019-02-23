@@ -25,6 +25,5 @@ namespace CrazyStorm_1._03
     public int interval;
     public int color;
     public Color pixels;
-    public Stream st;
   }
 }

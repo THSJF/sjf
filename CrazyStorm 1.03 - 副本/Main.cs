@@ -24,48 +24,24 @@ namespace CrazyStorm_1._03 {
         public static Hashtable cresults = new Hashtable();
         public static Hashtable lconditions = new Hashtable();
         public static Hashtable lresults = new Hashtable();
-        public static Hashtable lresults2 = new Hashtable();
-        public static int fpsrun = 0;
-        public static int fpss = 0;
-        public static int fps = 0;
+        public static Hashtable lresults2 = new Hashtable(); 
         public static List<BarrageType> bgset = new List<BarrageType>();
         public const string Title = "Crazy Storm 1.03I";
         private GraphicsDeviceManager graphics;
         public static GraphicsDevice gd;
-        private SpriteBatch spriteBatch;
-        public static SpriteFontX font;
+        private SpriteBatch spriteBatch; 
         public static Random rand;
         public static Vector2 display;
         public static bool Selecting;
-        public static int selects;
-        public static MouseState mousestate;
-        public static MouseState prostate;
+        public static int selects; 
         public static KeyboardState prekeyboard;
         public static KeyboardState keyboardstat;
-        public static string WindowTitle;
-        private Texture2D main;
-        private Texture2D mains;
-        private Texture2D mainn;
-        private Texture2D mainsn;
-        private Texture2D mainbutton;
-        public static Texture2D create;
-        public static Texture2D graduation;
-        public static Texture2D layercolor;
-        public static Texture2D aimed;
-        public static Texture2D center;
-        public static Texture2D item;
-        public static Texture2D selectbox;
+        public static string WindowTitle;   
         public static Texture2D barrages;
         public static Texture2D barrages2;
         public static Texture2D mist;
         public static Texture2D player;
-        public static Texture2D playerc;
-        public static Texture2D dis;
-        public static Texture2D line;
-        private float fadein;
-        public static bool Missable;
-        public static bool Tip;
-        public static string name;
+        public static Texture2D playerc;   
         public static bool Available;
 
         [DllImport("user32",EntryPoint = "GetForegroundWindow")]
@@ -73,8 +49,8 @@ namespace CrazyStorm_1._03 {
 
         public Main() {
             graphics=new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth=800;
-            graphics.PreferredBackBufferHeight=600;
+            graphics.PreferredBackBufferWidth=565;
+            graphics.PreferredBackBufferHeight=720;
             WindowTitle="Crazy Storm 1.03I";
         }
 
@@ -91,10 +67,8 @@ namespace CrazyStorm_1._03 {
         protected override void Initialize() {
             Available=false;
             rand=new Random();
-            registData=Application.StartupPath+"\\";
-            Missable=true;
-            WindowInputCapturer windowInputCapturer = new WindowInputCapturer(Program.game.Window.Handle,Program.game);
-            font=new SpriteFontX("宋体",9f,graphics,TextRenderingHint.ClearTypeGridFit);
+            registData=Application.StartupPath+"\\"; 
+            WindowInputCapturer windowInputCapturer = new WindowInputCapturer(Program.game.Window.Handle,Program.game); 
             type.Add("正比",0);
             type.Add("固定",1);
             type.Add("正弦",2);
@@ -241,38 +215,24 @@ namespace CrazyStorm_1._03 {
             lresults2.Add("出屏即消",12);
             lresults2.Add("无敌状态",13);
             base.Initialize();
-            Open(@"F:\腾讯文件\QQ\2856986197\FileRecv\里冬.mbg");
+            Open(@"D:\th902\th902-main\src\resources\Danmaku\里冬.mbg");
         }
 
         protected override void LoadContent() {
             gd=GraphicsDevice;
-            spriteBatch=new SpriteBatch(GraphicsDevice);
-            main=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/main.xna"));
-            mains=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/mains.xna"));
-            mainn=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/mainn.xna"));
-            mainsn=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/mainsn.xna"));
-            aimed=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/aimed.xna"));
-            mainbutton=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/mainbutton.xna"));
-            graduation=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/graduation.xna"));
-            layercolor=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/layercolor.xna"));
-            center=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/center.xna"));
-            create=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/create.xna"));
-            item=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/item.xna"));
-            selectbox=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/selectbox.xna"));
+            spriteBatch=new SpriteBatch(GraphicsDevice);  
             barrages=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Data/barrages.xna"));
             barrages2=Texture2D.FromFile(GraphicsDevice,registData+"Data/barrages.png");
             mist=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/mist.xna"));
             player=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/player.xna"));
-            playerc=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/playerc.xna"));
-            dis=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/dis.xna"));
-            line=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/line.xna"));
+            playerc=Texture2D.FromFile(GraphicsDevice,Cry.Decry(registData+"Content/Graphics/playerc.xna")); 
             StreamReader streamReader1 = new StreamReader(Cry.Decry(registData+"Data/set.xna"));
             for(int index = 0;index<228;++index) {
                 string str = streamReader1.ReadLine();
                 BarrageType barrageType = new BarrageType();
                 barrageType.rect=new Rectangle(int.Parse(str.Split('_')[1]),int.Parse(str.Split('_')[2]),int.Parse(str.Split('_')[3]),int.Parse(str.Split('_')[4]));
-                barrageType.origin=new Vector2(int.Parse(str.Split('_')[5]),int.Parse(str.Split('_')[6]));
-                barrageType.origin0=new Vector2(int.Parse(str.Split('_')[5]),int.Parse(str.Split('_')[6]));
+                barrageType.origin=new Microsoft.Xna.Framework.Vector2(int.Parse(str.Split('_')[5]),int.Parse(str.Split('_')[6]));
+                barrageType.origin0=new Microsoft.Xna.Framework.Vector2(int.Parse(str.Split('_')[5]),int.Parse(str.Split('_')[6]));
                 barrageType.pdr0=int.Parse(str.Split('_')[7]);
                 if(str.Split('_')[8]!="") {
                     barrageType.color=int.Parse(str.Split('_')[8]);
@@ -289,8 +249,8 @@ namespace CrazyStorm_1._03 {
                     BarrageType barrageType = new BarrageType();
                     barrageType.name=str.Split('_')[0];
                     barrageType.rect=new Rectangle(int.Parse(str.Split('_')[1]),int.Parse(str.Split('_')[2]),int.Parse(str.Split('_')[3]),int.Parse(str.Split('_')[4]));
-                    barrageType.origin=new Vector2(int.Parse(str.Split('_')[5]),int.Parse(str.Split('_')[6]));
-                    barrageType.origin0=new Vector2(int.Parse(str.Split('_')[5]),int.Parse(str.Split('_')[6]));
+                    barrageType.origin=new Microsoft.Xna.Framework.Vector2(int.Parse(str.Split('_')[5]),int.Parse(str.Split('_')[6]));
+                    barrageType.origin0=new Microsoft.Xna.Framework.Vector2(int.Parse(str.Split('_')[5]),int.Parse(str.Split('_')[6]));
                     barrageType.pdr0=int.Parse(str.Split('_')[7]);
                     if(str.Split('_')[8]!="") {
                         barrageType.color=int.Parse(str.Split('_')[8]);
@@ -307,14 +267,10 @@ namespace CrazyStorm_1._03 {
 
         protected override void Update(GameTime gameTime) {
             rand=new Random(Chaos_GetRandomSeed());
-            Window.Title=WindowTitle;
-            fadein=1;
-            if(GFW()==Window.Handle.ToInt32()) {
-                mousestate=Mouse.GetState();
-                display.X=(int)MathHelper.Clamp(mousestate.X,0.0f,800f);
-                display.Y=(int)MathHelper.Clamp(mousestate.Y,0.0f,600f);
+            Window.Title=WindowTitle; 
+            if(GFW()==Window.Handle.ToInt32()) { 
                 keyboardstat=Keyboard.GetState();
-            } 
+            }
             Time.Update();
             for(int index = 0;index<Layer.LayerArray.Count;++index) {
                 Layer.LayerArray[index].sort=index;
@@ -322,7 +278,6 @@ namespace CrazyStorm_1._03 {
             }
             Center.Update();
             Player.Update(); 
-            prostate=mousestate;
             prekeyboard=keyboardstat;
             base.Update(gameTime);
         }
@@ -334,36 +289,31 @@ namespace CrazyStorm_1._03 {
             for(int index1 = 0;index1<Layer.LayerArray.Count;++index1) {
                 if(Layer.LayerArray[index1].Visible&!Time.Playing) {
                     for(int index2 = 0;index2<Layer.LayerArray[index1].ForceArray.Count;++index2) {
-                        if(!Layer.LayerArray[index1].ForceArray[index2].NeedDelete) {
-                            Layer.LayerArray[index1].ForceArray[index2].Draw(spriteBatch);
+                        if(!Layer.LayerArray[index1].ForceArray[index2].NeedDelete) { 
                         } else {
                             Layer.LayerArray[index1].ForceArray.RemoveAt(index2);
                         }
                     }
                     for(int index2 = 0;index2<Layer.LayerArray[index1].ReboundArray.Count;++index2) {
-                        if(!Layer.LayerArray[index1].ReboundArray[index2].NeedDelete) {
-                            Layer.LayerArray[index1].ReboundArray[index2].Draw(spriteBatch);
+                        if(!Layer.LayerArray[index1].ReboundArray[index2].NeedDelete) { 
                         } else {
                             Layer.LayerArray[index1].ReboundArray.RemoveAt(index2);
                         }
                     }
                     for(int index2 = 0;index2<Layer.LayerArray[index1].CoverArray.Count;++index2) {
-                        if(!Layer.LayerArray[index1].CoverArray[index2].NeedDelete) {
-                            Layer.LayerArray[index1].CoverArray[index2].Draw(spriteBatch);
+                        if(!Layer.LayerArray[index1].CoverArray[index2].NeedDelete) { 
                         } else {
                             Layer.LayerArray[index1].CoverArray.RemoveAt(index2);
                         }
                     }
                     for(int index2 = 0;index2<Layer.LayerArray[index1].LaseArray.Count;++index2) {
-                        if(!Layer.LayerArray[index1].LaseArray[index2].NeedDelete) {
-                            Layer.LayerArray[index1].LaseArray[index2].Draw(spriteBatch);
+                        if(!Layer.LayerArray[index1].LaseArray[index2].NeedDelete) { 
                         } else {
                             Layer.LayerArray[index1].LaseArray.RemoveAt(index2);
                         }
                     }
                     for(int index2 = 0;index2<Layer.LayerArray[index1].BatchArray.Count;++index2) {
-                        if(!Layer.LayerArray[index1].BatchArray[index2].NeedDelete) {
-                            Layer.LayerArray[index1].BatchArray[index2].Draw(spriteBatch);
+                        if(!Layer.LayerArray[index1].BatchArray[index2].NeedDelete) { 
                         } else {
                             Layer.LayerArray[index1].BatchArray.RemoveAt(index2);
                         }
@@ -397,36 +347,15 @@ namespace CrazyStorm_1._03 {
                     }
                 }
             }
-            Player.Draw(spriteBatch);
-            Center.Draw(spriteBatch);
-            spriteBatch.Draw(mains,Vector2.Zero,new Rectangle?(),new Color(1f,1f,1f,fadein),0.0f,Vector2.Zero,1f,SpriteEffects.None,1f); 
-            for(int index = 0;index<Layer.LayerArray.Count;++index) {
-                if(!Layer.LayerArray[index].NeedDelete) {
-                    Layer.LayerArray[index].Draw(spriteBatch);
+            Player.Draw(spriteBatch); 
+               for(int index = 0;index<Layer.LayerArray.Count;++index) {
+                if(!Layer.LayerArray[index].NeedDelete) { 
                 } else {
                     Layer.LayerArray.RemoveAt(index);
                 }
             }
             Time.Draw(spriteBatch);
-            if(Available) {
-                font.Draw(spriteBatch,"X："+(display.X-170f).ToString()+"  Y："+(display.Y-22f).ToString(),new Vector2(14f,170f),Color.White);  
-            }
-            if(Time.Playing) {
-                font.Draw(spriteBatch,"FPS："+fps.ToString(),new Vector2(172f,24f),Color.White);
-                font.Draw(spriteBatch,"Bullets："+num.ToString(),new Vector2(172f,38f),Color.White);
-            }
-            spriteBatch.Draw(mainbutton,Vector2.Zero,new Rectangle?(),new Color(1f,1f,1f,fadein),0.0f,Vector2.Zero,1f,SpriteEffects.None,1f);
-            History.Draw(spriteBatch);
-            if(Center.Aim) {
-                font.Draw(spriteBatch,"中心管理",new Vector2(720f,508f),Color.White);
-            }
-            spriteBatch.End();
-            ++fpsrun;
-            if(gameTime.TotalRealTime.Seconds!=fpss) {
-                fps=fpsrun;
-                fpss=gameTime.TotalRealTime.Seconds;
-                fpsrun=1;
-            }
+              spriteBatch.End(); 
             base.Draw(gameTime);
         }
 
@@ -478,7 +407,6 @@ namespace CrazyStorm_1._03 {
             return GraphicsDevice;
         }
 
-
         public static void Open(string path) {
             StreamReader streamReader = new StreamReader(path);
             if(streamReader.ReadLine()=="Crazy Storm Data 1.01") {
@@ -486,9 +414,8 @@ namespace CrazyStorm_1._03 {
                 Main.WindowTitle="Crazy Storm 1.03I - "+Main.path;
                 Main.Available=true;
                 Layer.Clear();
-                Center.Clear();
-                History.Clear();
-                Time.Clear(); 
+                Center.Clear(); 
+                Time.Clear();
                 GC.Collect();
                 string source = streamReader.ReadLine();
                 if(source.Contains("Types")) {
@@ -497,15 +424,16 @@ namespace CrazyStorm_1._03 {
                         string str = streamReader.ReadLine();
                         BarrageType barrageType = new BarrageType();
                         barrageType.name=str.Split('_')[0];
-                        barrageType.rect=new Microsoft.Xna.Framework.Rectangle(int.Parse(str.Split('_')[1]),int.Parse(str.Split('_')[2]),int.Parse(str.Split('_')[3]),int.Parse(str.Split('_')[4]));
-                        barrageType.origin=new Vector2((float)int.Parse(str.Split('_')[5]),(float)int.Parse(str.Split('_')[6]));
-                        barrageType.origin0=new Vector2((float)int.Parse(str.Split('_')[5]),(float)int.Parse(str.Split('_')[6]));
+                        barrageType.rect=new Rectangle(int.Parse(str.Split('_')[1]),int.Parse(str.Split('_')[2]),int.Parse(str.Split('_')[3]),int.Parse(str.Split('_')[4]));
+                        barrageType.origin=new Vector2(int.Parse(str.Split('_')[5]),int.Parse(str.Split('_')[6]));
+                        barrageType.origin0=new Vector2(int.Parse(str.Split('_')[5]),int.Parse(str.Split('_')[6]));
                         barrageType.pdr0=(float)int.Parse(str.Split('_')[7]);
-                        if(str.Split('_')[8]!="")
+                        if(str.Split('_')[8]!="") {
                             barrageType.color=int.Parse(str.Split('_')[8]);
-                        else
+                        } else {
                             barrageType.color=-1;
-                        Main.bgset.Add(barrageType);
+                        }
+                        bgset.Add(barrageType);
                     }
                     source=streamReader.ReadLine();
                 }
@@ -513,26 +441,27 @@ namespace CrazyStorm_1._03 {
                     int num1 = int.Parse(source.Split(' ')[0]);
                     for(int index = 0;index<num1;++index) {
                         string str = streamReader.ReadLine();
-                        GlobalEvent globalEvent = new GlobalEvent();
                         Time.GEcount.Add(int.Parse(str.Split('_')[0])-1);
-                        globalEvent.gotocondition=int.Parse(str.Split('_')[1]);
-                        globalEvent.gotoopreator=str.Split('_')[2];
-                        globalEvent.gotocvalue=int.Parse(str.Split('_')[3]);
-                        globalEvent.isgoto=(bool.Parse(str.Split('_')[4]) ? 1 : 0)!=0;
-                        globalEvent.gototime=int.Parse(str.Split('_')[5]);
-                        globalEvent.gotowhere=int.Parse(str.Split('_')[6]);
-                        globalEvent.quakecondition=int.Parse(str.Split('_')[7]);
-                        globalEvent.quakeopreator=str.Split('_')[8];
-                        globalEvent.quakecvalue=int.Parse(str.Split('_')[9]);
-                        globalEvent.isquake=(bool.Parse(str.Split('_')[10]) ? 1 : 0)!=0;
-                        globalEvent.quaketime=int.Parse(str.Split('_')[11]);
-                        globalEvent.quakelevel=int.Parse(str.Split('_')[12]);
-                        globalEvent.stopcondition=int.Parse(str.Split('_')[13]);
-                        globalEvent.stopopreator=str.Split('_')[14];
-                        globalEvent.stopcvalue=int.Parse(str.Split('_')[15]);
-                        globalEvent.isstop=(bool.Parse(str.Split('_')[16]) ? 1 : 0)!=0;
-                        globalEvent.stoptime=int.Parse(str.Split('_')[17]);
-                        globalEvent.stoplevel=int.Parse(str.Split('_')[18]);
+                        GlobalEvent globalEvent = new GlobalEvent {
+                            gotocondition=int.Parse(str.Split('_')[1]),
+                            gotoopreator=str.Split('_')[2],
+                            gotocvalue=int.Parse(str.Split('_')[3]),
+                            isgoto=(bool.Parse(str.Split('_')[4]) ? 1 : 0)!=0,
+                            gototime=int.Parse(str.Split('_')[5]),
+                            gotowhere=int.Parse(str.Split('_')[6]),
+                            quakecondition=int.Parse(str.Split('_')[7]),
+                            quakeopreator=str.Split('_')[8],
+                            quakecvalue=int.Parse(str.Split('_')[9]),
+                            isquake=(bool.Parse(str.Split('_')[10]) ? 1 : 0)!=0,
+                            quaketime=int.Parse(str.Split('_')[11]),
+                            quakelevel=int.Parse(str.Split('_')[12]),
+                            stopcondition=int.Parse(str.Split('_')[13]),
+                            stopopreator=str.Split('_')[14],
+                            stopcvalue=int.Parse(str.Split('_')[15]),
+                            isstop=(bool.Parse(str.Split('_')[16]) ? 1 : 0)!=0,
+                            stoptime=int.Parse(str.Split('_')[17]),
+                            stoplevel=int.Parse(str.Split('_')[18])
+                        };
                         if(Time.GE.Count<int.Parse(str.Split('_')[0])) {
                             int num2 = 0;
                             while(true) {
@@ -544,8 +473,9 @@ namespace CrazyStorm_1._03 {
                                         stoplevel=-1
                                     });
                                     ++num2;
-                                } else
+                                } else {
                                     break;
+                                }
                             }
                         }
                         Time.GE[int.Parse(str.Split('_')[0])-1]=globalEvent;
@@ -553,17 +483,9 @@ namespace CrazyStorm_1._03 {
                     source=streamReader.ReadLine();
                 }
                 if(source.Contains("Sounds")) {
-                    for(int index = 0;index<Main.bgset.Count;++index) {
-                        if(Main.bgset[index].st!=null)
-                            Main.bgset[index].st.Close();
-                        Main.bgset[index].st=(Stream)null;
-                    }
                     int num = int.Parse(source.Split(' ')[0]);
                     for(int index = 0;index<num;++index) {
-                        string str = streamReader.ReadLine();
-                        if(Main.bgset[int.Parse(str.Split('_')[0])-1].st!=null)
-                            Main.bgset[int.Parse(str.Split('_')[0])-1].st.Close();
-                        Main.bgset[int.Parse(str.Split('_')[0])-1].st=(Stream)new FileStream(Main.registData+"Content/Sound/"+str.Split('_')[1],FileMode.Open);
+                        streamReader.ReadLine();
                     }
                     source=streamReader.ReadLine();
                 }

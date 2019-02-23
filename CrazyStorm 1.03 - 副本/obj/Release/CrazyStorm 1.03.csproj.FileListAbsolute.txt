@@ -27,9 +27,6 @@ F:\VS\CrazyStorm 1.03\bin\Release\Microsoft.DirectX.xml
 F:\VS\CrazyStorm 1.03\obj\Release\CrazyStorm 1.03.csproj.CopyComplete
 F:\VS\CrazyStorm 1.03\obj\Release\CrazyStorm 1.03.exe
 F:\VS\CrazyStorm 1.03\obj\Release\CrazyStorm 1.03.pdb
-F:\VS\CrazyStorm 1.03 - 副本\obj\Release\CrazyStorm_1._03.Batchmanager.resources
-F:\VS\CrazyStorm 1.03 - 副本\obj\Release\CrazyStorm_1._03.Centermanager.resources
-F:\VS\CrazyStorm 1.03 - 副本\obj\Release\CrazyStorm_1._03.Covermanager.resources
 F:\VS\CrazyStorm 1.03 - 副本\obj\Release\CrazyStorm_1._03.Properties.Resources.resources
 F:\VS\CrazyStorm 1.03 - 副本\obj\Release\CrazyStorm 1.03.csproj.GenerateResource.cache
 F:\VS\CrazyStorm 1.03 - 副本\obj\Release\CrazyStorm 1.03.csproj.CoreCompileInputs.cache
@@ -43,3 +40,4 @@ F:\VS\CrazyStorm 1.03 - 副本\bin\Release\Microsoft.DirectX.dll
 F:\VS\CrazyStorm 1.03 - 副本\bin\Release\Microsoft.DirectX.DirectSound.xml
 F:\VS\CrazyStorm 1.03 - 副本\bin\Release\Microsoft.DirectX.xml
 F:\VS\CrazyStorm 1.03 - 副本\obj\Release\CrazyStorm 1.03.csproj.CopyComplete
+F:\VS\CrazyStorm 1.03 - 副本\obj\Release\CrazyStorm 1.03.csprojResolveAssemblyReference.cache

@@ -49,8 +49,8 @@ namespace CrazyStorm_1._03 {
         public float sonaspeedd;
         public float fx;
         public float fy;
-        public Vector2 fdirections;
-        public Vector2 sonaspeedds;
+        public Microsoft.Xna.Framework.Vector2 fdirections;
+        public Microsoft.Xna.Framework.Vector2 sonaspeedds;
         public float randfdirection;
         public float randsonaspeedd;
         public int g;
@@ -761,7 +761,7 @@ namespace CrazyStorm_1._03 {
                             --index;
                         }
                     }
-                    if(Main.Missable&!this.Dis&!Player.Dis&(double)this.alpha>95.0&this.type>=0&&this.Judge(x1,y1,this.x,this.y,x2,y2,Player.position.X,Player.position.Y,this.wscale,this.hscale,Main.bgset[this.type].pdr0,this.head)) {
+                    if(!Dis&!Player.Dis&alpha>95.0&type>=0&&Judge(x1,y1,x,y,x2,y2,Player.position.X,Player.position.Y,wscale,hscale,Main.bgset[type].pdr0,head)) {
                         if(!this.Invincible) {
                             this.time=1+num1+this.life;
                             this.Dis=true;
@@ -770,7 +770,7 @@ namespace CrazyStorm_1._03 {
                         }
                         Player.Dis=true;
                     }
-                    if(Main.Missable&!this.Dis&&Math.Sqrt(((double)this.x-(double)Player.position.X)*((double)this.x-(double)Player.position.X)+((double)this.y-(double)Player.position.Y)*((double)this.y-(double)Player.position.Y))<(double)Math.Abs(Player.time*15)&&!this.Invincible) {
+                    if(!Dis&&Math.Sqrt((x-(double)Player.position.X)*(x-(double)Player.position.X)+(y-(double)Player.position.Y)*(y-(double)Player.position.Y))<Math.Abs(Player.time*15)&&!Invincible) {
                         this.time=1+num1+this.life;
                         this.Dis=true;
                         this.Blend=true;
@@ -829,35 +829,32 @@ namespace CrazyStorm_1._03 {
             if(this.time<=15&this.Mist) {
                 if(Main.bgset[this.type].rect.Width<=48) {
                     if(Main.bgset[this.type].color!=-1)
-                        s.Draw(Main.mist,new Vector2(170f+this.x+Time.quake.X,22f+this.y+Time.quake.Y),new Rectangle?(new Rectangle(Main.bgset[this.type].color*32,0,32,30)),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,(float)((double)this.time/15.0*((double)this.alpha/100.0))),0.0f,new Vector2(16f,15f),(float)((double)Main.bgset[this.type].rect.Width/30.0+1.5*(15.0-(double)this.time)/15.0),SpriteEffects.None,0.0f);
+                        s.Draw(Main.mist,new Microsoft.Xna.Framework.Vector2(x,y),new Rectangle?(new Rectangle(Main.bgset[this.type].color*32,0,32,30)),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,(float)((double)this.time/15.0*((double)this.alpha/100.0))),0.0f,new Microsoft.Xna.Framework.Vector2(16f,15f),(float)((double)Main.bgset[this.type].rect.Width/30.0+1.5*(15.0-(double)this.time)/15.0),SpriteEffects.None,0.0f);
                     else if(this.type<228)
-                        s.Draw(Main.barrages,new Vector2(170f+this.x+Time.quake.X,22f+this.y+Time.quake.Y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,(float)((double)this.time/15.0*((double)this.alpha/100.0))),MathHelper.ToRadians(this.head)+1.570796f,Main.bgset[this.type].origin,new Vector2(this.wscale,this.hscale),SpriteEffects.None,0.0f);
+                        s.Draw(Main.barrages,new Microsoft.Xna.Framework.Vector2(x,y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,(float)((double)this.time/15.0*((double)this.alpha/100.0))),MathHelper.ToRadians(this.head)+1.570796f,Main.bgset[this.type].origin,new Microsoft.Xna.Framework.Vector2(this.wscale,this.hscale),SpriteEffects.None,0.0f);
                     else
-                        s.Draw(Main.barrages2,new Vector2(170f+this.x+Time.quake.X,22f+this.y+Time.quake.Y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,(float)((double)this.time/15.0*((double)this.alpha/100.0))),MathHelper.ToRadians(this.head)+1.570796f,Main.bgset[this.type].origin,new Vector2(this.wscale,this.hscale),SpriteEffects.None,0.0f);
+                        s.Draw(Main.barrages2,new Microsoft.Xna.Framework.Vector2(x,y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,(float)((double)this.time/15.0*((double)this.alpha/100.0))),MathHelper.ToRadians(this.head)+1.570796f,Main.bgset[this.type].origin,new Microsoft.Xna.Framework.Vector2(this.wscale,this.hscale),SpriteEffects.None,0.0f);
                 } else if(this.type<228)
-                    s.Draw(Main.barrages,new Vector2(170f+this.x+Time.quake.X,22f+this.y+Time.quake.Y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,(float)((double)this.time/15.0*((double)this.alpha/100.0))),MathHelper.ToRadians(this.head)+1.570796f,Main.bgset[this.type].origin,new Vector2(this.wscale+(float)((15.0-(double)this.time)/15.0),this.hscale+(float)((15.0-(double)this.time)/15.0)),SpriteEffects.None,0.0f);
+                    s.Draw(Main.barrages,new Microsoft.Xna.Framework.Vector2(x,y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,(float)((double)this.time/15.0*((double)this.alpha/100.0))),MathHelper.ToRadians(this.head)+1.570796f,Main.bgset[this.type].origin,new Microsoft.Xna.Framework.Vector2(this.wscale+(float)((15.0-(double)this.time)/15.0),this.hscale+(float)((15.0-(double)this.time)/15.0)),SpriteEffects.None,0.0f);
                 else
-                    s.Draw(Main.barrages2,new Vector2(170f+this.x+Time.quake.X,22f+this.y+Time.quake.Y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,(float)((double)this.time/15.0*((double)this.alpha/100.0))),MathHelper.ToRadians(this.head)+1.570796f,Main.bgset[this.type].origin,new Vector2(this.wscale+(float)((15.0-(double)this.time)/15.0),this.hscale+(float)((15.0-(double)this.time)/15.0)),SpriteEffects.None,0.0f);
+                    s.Draw(Main.barrages2,new Microsoft.Xna.Framework.Vector2(x,y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,(float)((double)this.time/15.0*((double)this.alpha/100.0))),MathHelper.ToRadians(this.head)+1.570796f,Main.bgset[this.type].origin,new Microsoft.Xna.Framework.Vector2(this.wscale+(float)((15.0-(double)this.time)/15.0),this.hscale+(float)((15.0-(double)this.time)/15.0)),SpriteEffects.None,0.0f);
             } else {
                 if(this.type<228)
-                    s.Draw(Main.barrages,new Vector2(170f+this.x+Time.quake.X,22f+this.y+Time.quake.Y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,this.alpha/100f),MathHelper.ToRadians(this.head)+1.570796f,Main.bgset[this.type].origin,new Vector2(this.wscale,this.hscale),SpriteEffects.None,0.0f);
+                    s.Draw(Main.barrages,new Microsoft.Xna.Framework.Vector2(x,y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,this.alpha/100f),MathHelper.ToRadians(this.head)+1.570796f,Main.bgset[this.type].origin,new Microsoft.Xna.Framework.Vector2(this.wscale,this.hscale),SpriteEffects.None,0.0f);
                 else
-                    s.Draw(Main.barrages2,new Vector2(170f+this.x+Time.quake.X,22f+this.y+Time.quake.Y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,this.alpha/100f),MathHelper.ToRadians(this.head)+1.570796f,Main.bgset[this.type].origin,new Vector2(this.wscale,this.hscale),SpriteEffects.None,0.0f);
+                    s.Draw(Main.barrages2,new Microsoft.Xna.Framework.Vector2(x,y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,this.alpha/100f),MathHelper.ToRadians(this.head)+1.570796f,Main.bgset[this.type].origin,new Microsoft.Xna.Framework.Vector2(this.wscale,this.hscale),SpriteEffects.None,0.0f);
                 if(this.Afterimage) {
                     foreach(Shadows shadows in this.savesha) {
                         if((double)shadows.alpha>0.0) {
                             shadows.alpha-=0.02f;
                             if(this.type<228)
-                                s.Draw(Main.barrages,new Vector2(170f+shadows.x+Time.quake.X,22f+shadows.y+Time.quake.Y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,shadows.alpha),MathHelper.ToRadians(shadows.d)+1.570796f,Main.bgset[this.type].origin,new Vector2(this.wscale,this.hscale),SpriteEffects.None,0.0f);
+                                s.Draw(Main.barrages,new Microsoft.Xna.Framework.Vector2( shadows.x , shadows.y ),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,shadows.alpha),MathHelper.ToRadians(shadows.d)+1.570796f,Main.bgset[this.type].origin,new Microsoft.Xna.Framework.Vector2(this.wscale,this.hscale),SpriteEffects.None,0.0f);
                             else
-                                s.Draw(Main.barrages2,new Vector2(170f+shadows.x+Time.quake.X,22f+shadows.y+Time.quake.Y),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,shadows.alpha),MathHelper.ToRadians(shadows.d)+1.570796f,Main.bgset[this.type].origin,new Vector2(this.wscale,this.hscale),SpriteEffects.None,0.0f);
+                                s.Draw(Main.barrages2,new Microsoft.Xna.Framework.Vector2( shadows.x , shadows.y ),new Rectangle?(Main.bgset[this.type].rect),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,shadows.alpha),MathHelper.ToRadians(shadows.d)+1.570796f,Main.bgset[this.type].origin,new Microsoft.Xna.Framework.Vector2(this.wscale,this.hscale),SpriteEffects.None,0.0f);
                         }
                     }
                 }
-                if(!(this.Dis&Main.bgset[this.type].rect.Width<=48))
-                    return;
-                s.Draw(Main.dis,new Vector2(170f+this.x+Time.quake.X,22f+this.y+Time.quake.Y),new Rectangle?(new Rectangle(Main.bgset[this.type].color*32,0,32,32)),new Color(this.R/(float)byte.MaxValue,this.G/(float)byte.MaxValue,this.B/(float)byte.MaxValue,this.alpha/100f),this.randf,new Vector2(16f,16f),this.dscale,SpriteEffects.None,0.0f);
-            }
+               }
         }
 
         public void LUpdate() {
@@ -1483,7 +1480,7 @@ namespace CrazyStorm_1._03 {
                                 this.NeedDelete=true;
                             }
                         }
-                        if(Main.Missable&!Player.Dis&(double)this.alpha>95.0) {
+                        if( !Player.Dis&(double)this.alpha>95.0) {
                             float bx = (float)(((double)x1+(double)x1+(double)this.rlongs*Math.Cos((double)MathHelper.ToRadians(this.speedd)))/2.0);
                             float by = (float)(((double)y1+(double)y1+(double)this.rlongs*Math.Sin((double)MathHelper.ToRadians(this.speedd)))/2.0);
                             float x3 = (float)(((double)this.x+(double)this.x+(double)this.rlongs*Math.Cos((double)MathHelper.ToRadians(this.speedd)))/2.0);
@@ -1498,7 +1495,7 @@ namespace CrazyStorm_1._03 {
                                 Player.Dis=true;
                             }
                         }
-                        if(Main.Missable&!this.Dis&&Math.Sqrt(((double)this.x-(double)Player.position.X)*((double)this.x-(double)Player.position.X)+((double)this.y-(double)Player.position.Y)*((double)this.y-(double)Player.position.Y))<(double)Math.Abs(Player.time*15)&&!this.Invincible) {
+                        if( !this.Dis&&Math.Sqrt(((double)this.x-(double)Player.position.X)*((double)this.x-(double)Player.position.X)+((double)this.y-(double)Player.position.Y)*((double)this.y-(double)Player.position.Y))<(double)Math.Abs(Player.time*15)&&!this.Invincible) {
                             this.time=1+this.life;
                             this.Dis=true;
                             this.randf=10f*(float)Main.rand.NextDouble();
@@ -1510,7 +1507,7 @@ namespace CrazyStorm_1._03 {
                         this.speedy+=this.aspeedy*Time.stop;
                         this.x+=this.speedx*Time.stop;
                         this.y+=this.speedy*Time.stop;
-                        if(Main.Missable&!this.Dis&!Player.Dis&(double)this.alpha>95.0) {
+                        if( !Dis&!Player.Dis&alpha>95.0) {
                             float bx = (float)(((double)x1+(double)x1+(double)this.rlongs*Math.Cos((double)MathHelper.ToRadians(this.speedd)))/2.0);
                             float by = (float)(((double)y1+(double)y1+(double)this.rlongs*Math.Sin((double)MathHelper.ToRadians(this.speedd)))/2.0);
                             float x3 = (float)(((double)this.x+(double)this.x+(double)this.rlongs*Math.Cos((double)MathHelper.ToRadians(this.speedd)))/2.0);
@@ -1525,7 +1522,7 @@ namespace CrazyStorm_1._03 {
                                 Player.Dis=true;
                             }
                         }
-                        if(Main.Missable&!this.Dis&&Math.Sqrt(((double)this.x-(double)Player.position.X)*((double)this.x-(double)Player.position.X)+((double)this.y-(double)Player.position.Y)*((double)this.y-(double)Player.position.Y))<(double)Math.Abs(Player.time*15)&&!this.Invincible) {
+                        if( !this.Dis&&Math.Sqrt(((double)this.x-(double)Player.position.X)*((double)this.x-(double)Player.position.X)+((double)this.y-(double)Player.position.Y)*((double)this.y-(double)Player.position.Y))<(double)Math.Abs(Player.time*15)&&!this.Invincible) {
                             this.time=1+this.life;
                             this.Dis=true;
                             this.randf=10f*(float)Main.rand.NextDouble();
@@ -1572,8 +1569,8 @@ namespace CrazyStorm_1._03 {
             if(!(this.IsLase&this.type!=-1))
                 return;
             if(((this.time<=this.life ? 1 : 0)&((double)this.rlongs<(double)this.longs&!this.Alreadylong ? 1 : (this.IsRay ? 1 : 0)))!=0)
-                s.Draw(Main.mist,new Vector2(170f+this.x+Time.quake.X,22f+this.y+Time.quake.Y),new Rectangle?(new Rectangle(Main.bgset[32+this.type].color*32,0,32,30)),new Color(1f,1f,1f,0.8f),MathHelper.ToDegrees((float)(this.time*5)),new Vector2(16f,15f),1f,SpriteEffects.None,0.0f);
-            s.Draw(Main.barrages,new Vector2(170f+this.x+Time.quake.X,22f+this.y+Time.quake.Y),new Rectangle?(Main.bgset[32+this.type].rect),new Color(1f,1f,1f,this.alpha/100f),MathHelper.ToRadians(this.head)-1.570796f,new Vector2((float)(Main.bgset[32+this.type].rect.Width/2),0.0f),new Vector2(this.wscale,this.rlongs/(float)Main.bgset[32+this.type].rect.Height),SpriteEffects.None,0.0f);
+                s.Draw(Main.mist,new Microsoft.Xna.Framework.Vector2(x,y),new Rectangle?(new Rectangle(Main.bgset[32+this.type].color*32,0,32,30)),new Color(1f,1f,1f,0.8f),MathHelper.ToDegrees((float)(this.time*5)),new Microsoft.Xna.Framework.Vector2(16f,15f),1f,SpriteEffects.None,0.0f);
+            s.Draw(Main.barrages,new Microsoft.Xna.Framework.Vector2(x,y),new Rectangle?(Main.bgset[32+this.type].rect),new Color(1f,1f,1f,this.alpha/100f),MathHelper.ToRadians(this.head)-1.570796f,new Microsoft.Xna.Framework.Vector2((float)(Main.bgset[32+this.type].rect.Width/2),0.0f),new Microsoft.Xna.Framework.Vector2(this.wscale,this.rlongs/(float)Main.bgset[32+this.type].rect.Height),SpriteEffects.None,0.0f);
         }
 
         private bool Judge(

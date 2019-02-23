@@ -44,12 +44,12 @@ namespace CrazyStorm_1._03 {
         public float speedd;
         public float speedx;
         public float speedy;
-        public Vector2 speedds;
+        public Microsoft.Xna.Framework.Vector2 speedds;
         public float aspeed;
         public float aspeedx;
         public float aspeedy;
         public float aspeedd;
-        public Vector2 aspeedds;
+        public Microsoft.Xna.Framework.Vector2 aspeedds;
         public Cover rand;
         public List<Event> Parentevents;
         public List<COExecution> Eventsexe;
@@ -81,10 +81,7 @@ namespace CrazyStorm_1._03 {
             this.Circle=false;
         }
 
-        public void Update() {
-            int x = Main.mousestate.X;
-            int y = Main.mousestate.Y;
-            if(Main.mousestate.LeftButton==ButtonState.Pressed&Main.prostate.LeftButton!=ButtonState.Pressed) {
+        public void Update() {  
                 int num;
                 if((double)x>150.0+(double)this.x-(double)this.Searched&(double)x<150.0+(double)this.x+32.0+(double)this.Searched&(double)y>22.0+(double)this.y+(double)this.Searched&(double)y<22.0+(double)this.y+32.0+(double)this.Searched) {
                     if(!this.Selecting) {
@@ -125,9 +122,8 @@ namespace CrazyStorm_1._03 {
                 if((double)x>150.0+(double)this.x-(double)this.Searched&(double)x<150.0+(double)this.x+32.0+(double)this.Searched&(double)y>22.0+(double)this.y-(double)this.Searched&(double)y<22.0+(double)this.y+32.0+(double)this.Searched) {
                     this.clwait=0;
                     ++this.clcount; 
-                }
-            }
-            if(this.clcount==1) {
+                } 
+             if(this.clcount==1) {
                 ++this.clwait;
                 if(this.clwait>15) {
                     this.clwait=0;
@@ -145,7 +141,7 @@ namespace CrazyStorm_1._03 {
                         this.x=MathHelper.Clamp(this.x-1f,0.0f,640f);
                     if(Main.keyboardstat.IsKeyDown(Keys.Right)||Main.keyboardstat.IsKeyDown(Keys.D))
                         this.x=MathHelper.Clamp(this.x+1f,0.0f,640f);
-                Main.display=new Vector2((float)((double)this.x+170.0-4.0),(float)((double)this.y+22.0+16.0));
+                Main.display=new Microsoft.Xna.Framework.Vector2((float)((double)this.x+170.0-4.0),(float)((double)this.y+22.0+16.0));
             }
             if(!Time.Playing) {
                 this.childid=0;
@@ -923,27 +919,7 @@ namespace CrazyStorm_1._03 {
                 }
             }
         }
-
-        public void Draw(SpriteBatch s) {
-            if(this.Searched!=0)
-                s.Draw(Main.layercolor,new Vector2((float)(150.0+(double)this.x-1.0-4.0),(float)(22.0+(double)this.y-1.0-4.0)),new Rectangle?(new Rectangle(14*this.parentcolor,0,14,14)),Color.White,0.0f,Vector2.Zero,3f,SpriteEffects.None,1f);
-            else
-                s.Draw(Main.layercolor,new Vector2((float)(150.0+(double)this.x-1.0),(float)(22.0+(double)this.y-1.0)),new Rectangle?(new Rectangle(14*this.parentcolor,0,14,14)),Color.White,0.0f,Vector2.Zero,2.4f,SpriteEffects.None,1f);
-            s.Draw(Main.item,new Vector2((float)(150.0+(double)this.x+1.0),(float)(22.0+(double)this.y+1.0)),new Rectangle?(new Rectangle(60,0,30,30)),Color.White,0.0f,Vector2.Zero,1f,SpriteEffects.None,1f);
-            if(this.id<=8)
-                Main.font.Draw(s,"0"+(this.id+1).ToString(),new Vector2((float)(150.0+(double)this.x+18.0),(float)(22.0+(double)this.y+21.0)),Color.Black);
-            else
-                Main.font.Draw(s,(this.id+1).ToString(),new Vector2((float)(150.0+(double)this.x+18.0),(float)(22.0+(double)this.y+21.0)),Color.Black);
-            if(this.Selecting)
-                s.Draw(Main.create,new Vector2((float)(150.0+(double)this.x-1.0),(float)(22.0+(double)this.y-1.0)),Color.White);
-            Vector2 position = new Vector2((float)(150.0+(double)this.x+16.0)-(float)this.halfw,(float)(22.0+(double)this.y+16.0)-(float)this.halfh);
-            s.Draw(Main.line,position,new Rectangle?(),Color.Red,1.570796f,Vector2.Zero,new Vector2((float)((double)this.halfh*2.0/50.0),1f),SpriteEffects.None,0.0f);
-            s.Draw(Main.line,position,new Rectangle?(),Color.Red,0.0f,Vector2.Zero,new Vector2((float)((double)this.halfw*2.0/50.0),1f),SpriteEffects.None,0.0f);
-            position=new Vector2((float)(150.0+(double)this.x+16.0)+(float)this.halfw,(float)(22.0+(double)this.y+16.0)+(float)this.halfh);
-            s.Draw(Main.line,position,new Rectangle?(),Color.Red,-1.570796f,Vector2.Zero,new Vector2((float)((double)this.halfh*2.0/50.0),1f),SpriteEffects.None,0.0f);
-            s.Draw(Main.line,position,new Rectangle?(),Color.Red,3.141593f,Vector2.Zero,new Vector2((float)((double)this.halfw*2.0/50.0),1f),SpriteEffects.None,0.0f);
-        }
-
+          
         public Cover BindClone() {
             Cover cover = this.Copy() as Cover;
             cover.Parentevents=new List<Event>();

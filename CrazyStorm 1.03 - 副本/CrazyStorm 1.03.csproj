@@ -65,16 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Layer\Batch.cs" />
-    <Compile Include="Centermanager.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Player.cs" />
     <Compile Include="Encry.cs" />
     <Compile Include="Barrage.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="PointF.cs" />
     <Compile Include="Line.cs" />
-    <Compile Include="History.cs" />
     <Compile Include="IME.cs" />
     <Compile Include="1IME.cs" />
     <Compile Include="Layer\Force.cs" />
@@ -84,7 +80,6 @@
     <Compile Include="Layer\Rebound.cs" />
     <Compile Include="Layer.cs" />
     <Compile Include="Center.cs" />
-    <Compile Include="Timemanager.Designer.cs" />
     <Compile Include="Layer\Event.cs" />
     <Compile Include="Layer\EventRead.cs" />
     <Compile Include="Layer\Execution.cs" />
@@ -107,9 +102,6 @@
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Batchmanager.resx" />
-    <EmbeddedResource Include="Centermanager.resx" />
-    <EmbeddedResource Include="Covermanager.resx" />
     <EmbeddedResource Include="Microsoft\Xna\Framework.RuntimeProfile" />
     <EmbeddedResource Include="Properties\Resources.resx" />
   </ItemGroup>

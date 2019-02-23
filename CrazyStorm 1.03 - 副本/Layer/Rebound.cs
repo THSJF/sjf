@@ -8,10 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace CrazyStorm_1._03 {
     [Serializable]
-    public class Rebound:ICloneable {
-        private static int record;
-        private int clcount;
-        private int clwait;
+    public class Rebound:ICloneable { 
         public bool Selecting;
         public bool NeedDelete;
         public int Searched;
@@ -29,12 +26,12 @@ namespace CrazyStorm_1._03 {
         public float speedd;
         public float speedx;
         public float speedy;
-        public Vector2 speedds;
+        public Microsoft.Xna.Framework.Vector2 speedds;
         public float aspeed;
         public float aspeedx;
         public float aspeedy;
         public float aspeedd;
-        public Vector2 aspeedds;
+        public Microsoft.Xna.Framework.Vector2 aspeedds;
         public Rebound rand;
         public List<Event> Parentevents;
         public Rebound copys;
@@ -56,76 +53,6 @@ namespace CrazyStorm_1._03 {
         }
 
         public void Update() {
-            int x1 = Main.mousestate.X;
-            int y1 = Main.mousestate.Y;
-            if(Main.mousestate.LeftButton==ButtonState.Pressed&Main.prostate.LeftButton!=ButtonState.Pressed) {
-                if((double)x1>150.0+(double)this.x-(double)this.Searched&(double)x1<150.0+(double)this.x+32.0+(double)this.Searched&(double)y1>22.0+(double)this.y+(double)this.Searched&(double)y1<22.0+(double)this.y+32.0+(double)this.Searched) {
-                    if(!this.Selecting) {
-                        if(Rebound.record<Layer.LayerArray[this.parentid].ReboundArray.Count)
-                            Layer.LayerArray[this.parentid].ReboundArray[Rebound.record].Selecting=false;
-                        foreach(Layer layer in Layer.LayerArray) {
-                            for(int index = 0;index<layer.BatchArray.Count;++index)
-                                layer.BatchArray[index].Selecting=false;
-                            for(int index = 0;index<layer.LaseArray.Count;++index)
-                                layer.LaseArray[index].Selecting=false;
-                            for(int index = 0;index<layer.CoverArray.Count;++index)
-                                layer.CoverArray[index].Selecting=false;
-                            for(int index = 0;index<layer.ReboundArray.Count;++index) {
-                                if(layer.ReboundArray[index].parentid<this.parentid)
-                                    layer.ReboundArray[index].Selecting=false;
-                            }
-                            for(int index = 0;index<layer.ForceArray.Count;++index)
-                                layer.ForceArray[index].Selecting=false;
-                        }
-                        Rebound.record=this.id;
-                        this.Selecting=true; 
-                    } else if(Main.keyboardstat.IsKeyDown(Keys.LeftControl)||Main.keyboardstat.IsKeyDown(Keys.RightControl)) {
-                        this.Selecting=false;
-                        this.Searched=0;
-                    }
-                } else if(!Main.keyboardstat.IsKeyDown(Keys.LeftControl)&!Main.keyboardstat.IsKeyDown(Keys.RightControl)) {
-                    this.Selecting=false;
-                    this.Searched=0;
-                }
-                if((double)x1>150.0+(double)this.x-(double)this.Searched&(double)x1<150.0+(double)this.x+32.0+(double)this.Searched&(double)y1>22.0+(double)this.y-(double)this.Searched&(double)y1<22.0+(double)this.y+32.0+(double)this.Searched) {
-                    this.clwait=0;
-                    ++this.clcount;
-                    if(this.clcount==2&this.Selecting) {
-                        this.clcount=0;
-                        this.clwait=0; 
-                    }
-                }
-            }
-            if(this.clcount==1) {
-                ++this.clwait;
-                if(this.clwait>15) {
-                    this.clwait=0;
-                    this.clcount=0;
-                }
-            }
-            if(this.Selecting) {
-                if(Main.keyboardstat.IsKeyDown(Keys.Delete)&!Main.prekeyboard.IsKeyDown(Keys.Delete))
-                    this.NeedDelete=true;
-                    if(Main.keyboardstat.IsKeyDown(Keys.Up)||Main.keyboardstat.IsKeyDown(Keys.W))
-                        this.y=MathHelper.Clamp(this.y-1f,-16f,464f);
-                    if(Main.keyboardstat.IsKeyDown(Keys.Down)||Main.keyboardstat.IsKeyDown(Keys.S))
-                        this.y=MathHelper.Clamp(this.y+1f,-16f,464f);
-                    if(Main.keyboardstat.IsKeyDown(Keys.Left)||Main.keyboardstat.IsKeyDown(Keys.A))
-                        this.x=MathHelper.Clamp(this.x-1f,0.0f,640f);
-                    if(Main.keyboardstat.IsKeyDown(Keys.Right)||Main.keyboardstat.IsKeyDown(Keys.D))
-                        this.x=MathHelper.Clamp(this.x+1f,0.0f,640f);
-                Main.display=new Vector2((float)((double)this.x+170.0-4.0),(float)((double)this.y+22.0+16.0));
-            }
-            if(!Time.Playing) {
-                this.aspeedx=this.aspeed*(float)Math.Cos((double)MathHelper.ToRadians(this.aspeedd));
-                this.aspeedy=this.aspeed*(float)Math.Sin((double)MathHelper.ToRadians(this.aspeedd));
-                this.speedx=this.speed*(float)Math.Cos((double)MathHelper.ToRadians(this.speedd));
-                this.speedy=this.speed*(float)Math.Sin((double)MathHelper.ToRadians(this.speedd));
-                this.begin=(int)MathHelper.Clamp((float)this.begin,(float)Layer.LayerArray[this.parentid].begin,(float)(1+Layer.LayerArray[this.parentid].end-Layer.LayerArray[this.parentid].begin));
-                this.life=(int)MathHelper.Clamp((float)this.life,1f,(float)(Layer.LayerArray[this.parentid].end-Layer.LayerArray[this.parentid].begin+2-this.begin));
-            }
-            if(!Time.Playing||!(Time.now>=this.begin&Time.now<=this.begin+this.life-1))
-                return;
             int now = Time.now;
             this.speedx+=this.aspeedx;
             this.speedy+=this.aspeedy;
@@ -413,23 +340,7 @@ namespace CrazyStorm_1._03 {
                     }
                 }
             }
-        }
-
-        public void Draw(SpriteBatch s) {
-            if(this.Searched!=0)
-                s.Draw(Main.layercolor,new Vector2((float)(150.0+(double)this.x-1.0-4.0),(float)(22.0+(double)this.y-1.0-4.0)),new Rectangle?(new Rectangle(14*this.parentcolor,0,14,14)),Color.White,0.0f,Vector2.Zero,3f,SpriteEffects.None,1f);
-            else
-                s.Draw(Main.layercolor,new Vector2((float)(150.0+(double)this.x-1.0),(float)(22.0+(double)this.y-1.0)),new Rectangle?(new Rectangle(14*this.parentcolor,0,14,14)),Color.White,0.0f,Vector2.Zero,2.4f,SpriteEffects.None,1f);
-            s.Draw(Main.item,new Vector2((float)(150.0+(double)this.x+1.0),(float)(22.0+(double)this.y+1.0)),new Rectangle?(new Rectangle(90,0,30,30)),Color.White,0.0f,Vector2.Zero,1f,SpriteEffects.None,1f);
-            if(this.id<=8)
-                Main.font.Draw(s,"0"+(this.id+1).ToString(),new Vector2((float)(150.0+(double)this.x+18.0),(float)(22.0+(double)this.y+21.0)),Color.Black);
-            else
-                Main.font.Draw(s,(this.id+1).ToString(),new Vector2((float)(150.0+(double)this.x+18.0),(float)(22.0+(double)this.y+21.0)),Color.Black);
-            if(this.Selecting)
-                s.Draw(Main.create,new Vector2((float)(150.0+(double)this.x-1.0),(float)(22.0+(double)this.y-1.0)),Color.White);
-            Vector2 position = new Vector2((float)(150.0+(double)this.x+16.0),(float)(22.0+(double)this.y+16.0));
-            s.Draw(Main.line,position,new Rectangle?(),Color.Blue,MathHelper.ToRadians(this.angle),Vector2.Zero,new Vector2((float)this.longs/50f,1f),SpriteEffects.None,0.0f);
-        }
+        } 
 
         public object Clone() {
             MemoryStream memoryStream = new MemoryStream();

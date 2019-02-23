@@ -72,10 +72,7 @@ namespace CrazyStorm_1._03 {
             this.Circle=false;
         }
 
-        public void Update() {
-            int x = Main.mousestate.X;
-            int y = Main.mousestate.Y;
-            if(Main.mousestate.LeftButton==ButtonState.Pressed&Main.prostate.LeftButton!=ButtonState.Pressed) {
+        public void Update() {  
                 if((double)x>150.0+(double)this.x-(double)this.Searched&(double)x<150.0+(double)this.x+32.0+(double)this.Searched&(double)y>22.0+(double)this.y+(double)this.Searched&(double)y<22.0+(double)this.y+32.0+(double)this.Searched) {
                     if(!this.Selecting) {
                         if(Force.record<Layer.LayerArray[this.parentid].ForceArray.Count)
@@ -111,9 +108,8 @@ namespace CrazyStorm_1._03 {
                         this.clcount=0;
                         this.clwait=0; 
                     }
-                }
-            }
-            if(this.clcount==1) {
+                } 
+             if(this.clcount==1) {
                 ++this.clwait;
                 if(this.clwait>15) {
                     this.clwait=0;
@@ -131,7 +127,7 @@ namespace CrazyStorm_1._03 {
                         this.x=MathHelper.Clamp(this.x-1f,0.0f,640f);
                     if(Main.keyboardstat.IsKeyDown(Keys.Right)||Main.keyboardstat.IsKeyDown(Keys.D))
                         this.x=MathHelper.Clamp(this.x+1f,0.0f,640f);
-                Main.display=new Vector2((float)((double)this.x+170.0-4.0),(float)((double)this.y+22.0+16.0));
+                Main.display=new Microsoft.Xna.Framework.Vector2((float)((double)this.x+170.0-4.0),(float)((double)this.y+22.0+16.0));
             }
             if(!Time.Playing) {
                 this.aspeedx=this.aspeed*(float)Math.Cos((double)MathHelper.ToRadians(this.aspeedd));
@@ -256,27 +252,7 @@ namespace CrazyStorm_1._03 {
                     }
                 }
             }
-        }
-
-        public void Draw(SpriteBatch s) {
-            if(this.Searched!=0)
-                s.Draw(Main.layercolor,new Vector2((float)(150.0+(double)this.x-1.0-4.0),(float)(22.0+(double)this.y-1.0-4.0)),new Rectangle?(new Rectangle(14*this.parentcolor,0,14,14)),Color.White,0.0f,Vector2.Zero,3f,SpriteEffects.None,1f);
-            else
-                s.Draw(Main.layercolor,new Vector2((float)(150.0+(double)this.x-1.0),(float)(22.0+(double)this.y-1.0)),new Rectangle?(new Rectangle(14*this.parentcolor,0,14,14)),Color.White,0.0f,Vector2.Zero,2.4f,SpriteEffects.None,1f);
-            s.Draw(Main.item,new Vector2((float)(150.0+(double)this.x+1.0),(float)(22.0+(double)this.y+1.0)),new Rectangle?(new Rectangle(120,0,30,30)),Color.White,0.0f,Vector2.Zero,1f,SpriteEffects.None,1f);
-            if(this.id<=8)
-                Main.font.Draw(s,"0"+(this.id+1).ToString(),new Vector2((float)(150.0+(double)this.x+18.0),(float)(22.0+(double)this.y+21.0)),Color.Black);
-            else
-                Main.font.Draw(s,(this.id+1).ToString(),new Vector2((float)(150.0+(double)this.x+18.0),(float)(22.0+(double)this.y+21.0)),Color.Black);
-            if(this.Selecting)
-                s.Draw(Main.create,new Vector2((float)(150.0+(double)this.x-1.0),(float)(22.0+(double)this.y-1.0)),Color.White);
-            Vector2 position = new Vector2((float)(150.0+(double)this.x+16.0)-(float)this.halfw,(float)(22.0+(double)this.y+16.0)-(float)this.halfh);
-            s.Draw(Main.line,position,new Rectangle?(),Color.Yellow,1.570796f,Vector2.Zero,new Vector2((float)((double)this.halfh*2.0/50.0),1f),SpriteEffects.None,0.0f);
-            s.Draw(Main.line,position,new Rectangle?(),Color.Yellow,0.0f,Vector2.Zero,new Vector2((float)((double)this.halfw*2.0/50.0),1f),SpriteEffects.None,0.0f);
-            position=new Vector2((float)(150.0+(double)this.x+16.0)+(float)this.halfw,(float)(22.0+(double)this.y+16.0)+(float)this.halfh);
-            s.Draw(Main.line,position,new Rectangle?(),Color.Yellow,-1.570796f,Vector2.Zero,new Vector2((float)((double)this.halfh*2.0/50.0),1f),SpriteEffects.None,0.0f);
-            s.Draw(Main.line,position,new Rectangle?(),Color.Yellow,3.141593f,Vector2.Zero,new Vector2((float)((double)this.halfw*2.0/50.0),1f),SpriteEffects.None,0.0f);
-        }
+        } 
 
         public object Clone() {
             MemoryStream memoryStream = new MemoryStream();

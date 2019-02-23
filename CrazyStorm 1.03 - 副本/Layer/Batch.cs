@@ -1,10 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: CrazyStorm_1._03.Batch
-// Assembly: CrazyStorm 1.03, Version=1.0.0.3, Culture=neutral, PublicKeyToken=null
-// MVID: 84431CDC-1E34-49EF-A5C5-D546FEF5A655
-// Assembly location: E:\CrazyStorm 1.03I\CrazyStorm 1.03.exe
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -51,12 +45,12 @@ namespace CrazyStorm_1._03 {
         public float speedd;
         public float speedx;
         public float speedy;
-        public Vector2 speedds;
+        public Microsoft.Xna.Framework.Vector2 speedds;
         public float aspeed;
         public float aspeedx;
         public float aspeedy;
         public float aspeedd;
-        public Vector2 aspeedds;
+        public Microsoft.Xna.Framework.Vector2 aspeedds;
         public int sonlife;
         public float type;
         public float wscale;
@@ -70,11 +64,11 @@ namespace CrazyStorm_1._03 {
         public bool Withspeedd;
         public float sonspeed;
         public float sonspeedd;
-        public Vector2 sonspeedds;
+        public  Vector2 sonspeedds;
         public float sonaspeed;
         public float sonaspeedd;
         public float bsonaspeedd;
-        public Vector2 sonaspeedds;
+        public Microsoft.Xna.Framework.Vector2 sonaspeedds;
         public float xscale;
         public float yscale;
         public bool Mist;
@@ -144,10 +138,7 @@ namespace CrazyStorm_1._03 {
             this.Force=true;
         }
 
-        public void Update() {
-            int x = Main.mousestate.X;
-            int y = Main.mousestate.Y;
-            if(Main.mousestate.LeftButton==ButtonState.Pressed&Main.prostate.LeftButton!=ButtonState.Pressed) {
+        public void Update() {  
                 if((double)x>150.0+(double)this.x-(double)this.Searched&(double)x<150.0+(double)this.x+32.0+(double)this.Searched&(double)y>22.0+(double)this.y+(double)this.Searched&(double)y<22.0+(double)this.y+32.0+(double)this.Searched) {
                     if(!this.Selecting) {
                         if(Batch.record<Layer.LayerArray[this.parentid].BatchArray.Count)
@@ -183,9 +174,8 @@ namespace CrazyStorm_1._03 {
                         this.clcount=0;
                         this.clwait=0;     
                     }
-                }
-            }
-            if(this.clcount==1) {
+                } 
+             if(this.clcount==1) {
                 ++this.clwait;
                 if(this.clwait>15) {
                     this.clwait=0;
@@ -203,7 +193,7 @@ namespace CrazyStorm_1._03 {
                     this.x=MathHelper.Clamp(this.x-1f,0.0f,640f);
                 if(Main.keyboardstat.IsKeyDown(Keys.Right)||Main.keyboardstat.IsKeyDown(Keys.D))
                     this.x=MathHelper.Clamp(this.x+1f,0.0f,640f);
-                Main.display=new Vector2((float)((double)this.x+170.0-4.0),(float)((double)this.y+22.0+16.0));
+                Main.display=new Microsoft.Xna.Framework.Vector2((float)((double)this.x+170.0-4.0),(float)((double)this.y+22.0+16.0));
             }
             if(!Time.Playing) {
                 this.aspeedx=this.aspeed*(float)Math.Cos((double)MathHelper.ToRadians(this.aspeedd));
@@ -938,47 +928,50 @@ namespace CrazyStorm_1._03 {
             float val2 = MathHelper.Lerp(-this.rand.hscale,this.rand.hscale,(float)Main.rand.NextDouble());
             if(this.bindid==-1) {
                 for(int index1 = 0;index1<num1;++index1) {
-                    Barrage barrage = new Barrage();
-                    if((double)Layer.LayerArray[this.parentid].BatchArray[this.id].rdirection==-99999.0)
-                        this.rdirection=MathHelper.ToDegrees(Main.Twopointangle(Player.position.X,Player.position.Y,this.fx,this.fy));
-                    float degrees = this.rdirection+((float)index1-(float)(((double)num1-1.0)/2.0))*(float)(this.range+num7)/(float)num1+num5;
-                    barrage.x=this.fx+(float)(((double)this.r+(double)num4)*Math.Cos((double)MathHelper.ToRadians(degrees)))+num2+Center.ox-Center.x;
-                    barrage.y=this.fy+(float)(((double)this.r+(double)num4)*Math.Sin((double)MathHelper.ToRadians(degrees)))+num3+Center.oy-Center.y;
-                    barrage.life=this.sonlife;
-                    barrage.type=(int)this.type-1;
-                    barrage.wscale=this.wscale+Math.Max(val1,val2);
-                    barrage.hscale=this.hscale+Math.Max(val1,val2);
-                    barrage.head=this.head+num6;
-                    barrage.alpha=this.alpha;
-                    barrage.R=this.colorR;
-                    barrage.G=this.colorG;
-                    barrage.B=this.colorB;
-                    barrage.speed=this.sonspeed+num8;
-                    barrage.aspeed=this.sonaspeed+num10;
-                    barrage.fx=this.x-4f;
-                    barrage.fy=this.y+16f;
-                    barrage.fdirection=(double)this.bfdirection<-99997.0 ? this.bfdirection : this.fdirection;
-                    barrage.fdirections=this.fdirections;
-                    barrage.randfdirection=num9;
-                    barrage.g=index1;
-                    barrage.tiaos=num1;
-                    barrage.range=this.range;
-                    barrage.randrange=num7;
-                    barrage.sonaspeedd=(double)this.bsonaspeedd<-99997.0 ? this.bsonaspeedd : this.sonaspeedd;
-                    barrage.sonaspeedds=this.sonaspeedds;
-                    barrage.randsonaspeedd=num11;
-                    barrage.Withspeedd=this.Withspeedd;
-                    barrage.xscale=this.xscale;
-                    barrage.yscale=this.yscale;
-                    barrage.Mist=this.Mist;
-                    barrage.Dispel=this.Dispel;
-                    barrage.Blend=this.Blend;
-                    barrage.Outdispel=this.Outdispel;
-                    barrage.Afterimage=this.Afterimage;
-                    barrage.Invincible=this.Invincible;
-                    barrage.Cover=this.Cover;
-                    barrage.Rebound=this.Rebound;
-                    barrage.Force=this.Force;
+                    if(Layer.LayerArray[parentid].BatchArray[id].rdirection==-99999.0) {
+                        rdirection=MathHelper.ToDegrees(Main.Twopointangle(Player.position.X,Player.position.Y,fx,fy));
+                    }
+
+                    float degrees = rdirection+(index1-(float)((num1-1.0)/2.0))*(range+num7)/num1+num5;
+                    Barrage barrage = new Barrage {
+                        x=fx+(float)((r+(double)num4)*Math.Cos(MathHelper.ToRadians(degrees)))+num2+Center.ox-Center.x,
+                        y=fy+(float)((r+(double)num4)*Math.Sin(MathHelper.ToRadians(degrees)))+num3+Center.oy-Center.y,
+                        life=sonlife,
+                        type=(int)type-1,
+                        wscale=wscale+Math.Max(val1,val2),
+                        hscale=hscale+Math.Max(val1,val2),
+                        head=head+num6,
+                        alpha=alpha,
+                        R=colorR,
+                        G=colorG,
+                        B=colorB,
+                        speed=sonspeed+num8,
+                        aspeed=this.sonaspeed+num10,
+                        fx=this.x-4f,
+                        fy=this.y+16f,
+                        fdirection=(double)this.bfdirection<-99997.0 ? this.bfdirection : this.fdirection,
+                        fdirections=this.fdirections,
+                        randfdirection=num9,
+                        g=index1,
+                        tiaos=num1,
+                        range=this.range,
+                        randrange=num7,
+                        sonaspeedd=(double)this.bsonaspeedd<-99997.0 ? this.bsonaspeedd : this.sonaspeedd,
+                        sonaspeedds=this.sonaspeedds,
+                        randsonaspeedd=num11,
+                        Withspeedd=this.Withspeedd,
+                        xscale=this.xscale,
+                        yscale=this.yscale,
+                        Mist=this.Mist,
+                        Dispel=this.Dispel,
+                        Blend=this.Blend,
+                        Outdispel=this.Outdispel,
+                        Afterimage=this.Afterimage,
+                        Invincible=this.Invincible,
+                        Cover=this.Cover,
+                        Rebound=this.Rebound,
+                        Force=this.Force
+                    };
                     for(int idx = 0;idx<this.Sonevents.Count;++idx) {
                         Event @event = new Event(idx);
                         @event.t=this.Sonevents[idx].t;
@@ -1077,22 +1070,7 @@ namespace CrazyStorm_1._03 {
                 }
             }
         }
-
-        public void Draw(SpriteBatch s) {
-            if(this.Searched!=0)
-                s.Draw(Main.layercolor,new Vector2((float)(150.0+(double)this.x-1.0-4.0),(float)(22.0+(double)this.y-1.0-4.0)),new Rectangle?(new Rectangle(14*this.parentcolor,0,14,14)),Color.White,0.0f,Vector2.Zero,3f,SpriteEffects.None,1f);
-            else
-                s.Draw(Main.layercolor,new Vector2((float)(150.0+(double)this.x-1.0),(float)(22.0+(double)this.y-1.0)),new Rectangle?(new Rectangle(14*this.parentcolor,0,14,14)),Color.White,0.0f,Vector2.Zero,2.4f,SpriteEffects.None,1f);
-            s.Draw(Main.item,new Vector2((float)(150.0+(double)this.x+1.0),(float)(22.0+(double)this.y+1.0)),new Rectangle?(new Rectangle(0,0,30,30)),Color.White,0.0f,Vector2.Zero,1f,SpriteEffects.None,1f);
-            if(this.id<=8)
-                Main.font.Draw(s,"0"+(this.id+1).ToString(),new Vector2((float)(150.0+(double)this.x+18.0),(float)(22.0+(double)this.y+21.0)),Color.Black);
-            else
-                Main.font.Draw(s,(this.id+1).ToString(),new Vector2((float)(150.0+(double)this.x+18.0),(float)(22.0+(double)this.y+21.0)),Color.Black);
-            if(!this.Selecting)
-                return;
-            s.Draw(Main.create,new Vector2((float)(150.0+(double)this.x-1.0),(float)(22.0+(double)this.y-1.0)),Color.White);
-        }
-
+         
         public Batch BindClone() {
             Batch batch = this.Copy() as Batch;
             batch.Parentevents=new List<Event>();

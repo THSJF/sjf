@@ -14,9 +14,7 @@ namespace CrazyStorm_1._03 {
         public static List<Layer> LayerArray = new List<Layer>();
         public static int total = 0;
         public static int selection = 0;
-        public static int oldcolor = 0;
-        private static int clcount = 0;
-        private static int clwait = 0;
+        public static int oldcolor = 0; 
         public string name;
         public int sort;
         public bool Visible;
@@ -34,9 +32,7 @@ namespace CrazyStorm_1._03 {
         public static void Clear() {
             total=0;
             selection=0;
-            oldcolor=0;
-            clcount=0;
-            clwait=0;
+            oldcolor=0; 
             LayerArray.Clear();
         }
 
@@ -66,30 +62,7 @@ namespace CrazyStorm_1._03 {
         public void Update() {
             if(!Main.Available) {
                 return;
-            }
-            int x = Main.mousestate.X;
-            int y = Main.mousestate.Y;
-            if(x>=2&x<=16&y>=545+13*(LayerArray.Count-sort-1)&y<=545+13*(LayerArray.Count-sort-1)+14&&
-                Main.mousestate.LeftButton==Microsoft.Xna.Framework.Input.ButtonState.Pressed&
-                Main.prostate.LeftButton!=Microsoft.Xna.Framework.Input.ButtonState.Pressed&!Time.Playing) {
-                Visible=!Visible;
-            }
-            if(x>=16&x<=30&y>=545+13*(LayerArray.Count-sort-1)&y<=545+13*(LayerArray.Count-sort-1)+14&&
-                Main.mousestate.LeftButton==Microsoft.Xna.Framework.Input.ButtonState.Pressed&
-                Main.prostate.LeftButton!=Microsoft.Xna.Framework.Input.ButtonState.Pressed&!Time.Playing) {
-                ++color;
-                if(color>6) {
-                    color=0;
-                }
-                for(int index = 0;index<BatchArray.Count;++index) {
-                    BatchArray[index].parentcolor=color;
-                }
-            }
-            if(x>=30&x<=154&y>=545+13*(LayerArray.Count-sort-1)&y<=545+13*(LayerArray.Count-sort-1)+14&&
-                Main.mousestate.LeftButton==Microsoft.Xna.Framework.Input.ButtonState.Pressed&
-                Main.prostate.LeftButton!=Microsoft.Xna.Framework.Input.ButtonState.Pressed&!Time.Playing) {
-                selection=LayerArray.Count-sort-1;
-            }
+            }    
             if(!Visible) {
                 return;
             }
@@ -146,38 +119,6 @@ namespace CrazyStorm_1._03 {
                 Barrages[index].Update();
                 Barrages[index].LUpdate();
             }
-        }
-
-        public void Draw(SpriteBatch s) {
-            if(!Main.Available) {
-                return;
-            }
-            Main.font.Draw(s,name.ToCharArray(),new Vector2(35f,546+13*(LayerArray.Count-sort-1)),Color.White);
-            s.Draw(Main.layercolor,new Vector2(16f,545+13*(LayerArray.Count-sort-1)),new Rectangle?(new Rectangle(14*color,0,14,14)),Color.White);
-            if(Visible) {
-                s.Draw(Main.layercolor,new Vector2(2f,545+13*(LayerArray.Count-sort-1)),new Rectangle?(new Rectangle(0,14,14,14)),Color.White);
-            }
-            if(169+(begin-Time.left)*6>=169&169+(end-Time.left)*6<=800) {
-                s.Draw(Main.layercolor,
-                    new Vector2(MathHelper.Clamp(169+(begin-Time.left)*6,169f,800f),545+13*(LayerArray.Count-sort-1)),
-                    new Rectangle?(new Rectangle(14*color,0,14,14)),
-                    Color.White,
-                    0.0f,
-                    Vector2.Zero,
-                    new Vector2((float)(MathHelper.Clamp(end-begin+1,0.0f,106f)*6.0/14.0),1f),
-                    SpriteEffects.None,
-                    1f);
-            } else {
-                s.Draw(Main.layercolor,
-                    new Vector2(MathHelper.Clamp(169+(begin-Time.left)*6,169f,800f),545+13*(LayerArray.Count-sort-1)),
-                    new Rectangle?(new Rectangle(14*color,0,14,14)),
-                    Color.White,
-                    0.0f,
-                    Vector2.Zero,
-                    new Vector2((float)(MathHelper.Clamp(end-Time.left+1,0.0f,106f)*6.0/14.0),1f),
-                    SpriteEffects.None,
-                    1f);
-            }
-        }
+        } 
     }
 }
